@@ -207,7 +207,7 @@ class Music:
         count = 0
         embed = discord.Embed(title=server.name, description="Playlist", color=0x191970)
         
-        youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
+        youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=str(os.environ.get('DEV_KEY')))
         search_response = youtube.search().list(
             q=key,
             part="id,snippet",
