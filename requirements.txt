@@ -3,6 +3,7 @@ discord
 discord.py[voice] ~= 0.16.0
 asyncio
 youtube-dl
+colorlog
 safygiphy
 PixivPy
 oauth2client
