@@ -4,4 +4,4 @@ libopus-dev
 libssl-dev
 libffi-dev
 libsodium-dev
-ppa:mc3man/xerus-media -y
+:repo:ppa:mc3man/xerus-media -y
