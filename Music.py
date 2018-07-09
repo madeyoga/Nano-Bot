@@ -9,8 +9,7 @@ import youtube_dl
 import simplejson
 import lxml
 from lxml import etree
-from apiclient.discovery import build
-from apiclient.errors import HttpError
+from googleapiclient.discovery import build
 from oauth2client.tools import argparser
 import os
 if not discord.opus.is_loaded():
@@ -281,8 +280,6 @@ class Music:
             await self.create_voice_client(channel)
         except discord.ClientException:
             await self.bot.say('Already in a voice channel...')
-        except discord.InvalidArgument:
-            await self.bot.say('This is not a voice channel...')
         else:
             await self.bot.say('Ready to play audio in **' + channel.name)
 
