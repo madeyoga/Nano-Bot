@@ -1,6 +1,6 @@
 pip
 discord
-discord.py[voice] ~= 0.16.0
+discord.py[voice]
 asyncio
 youtube-dl
 colorlog
