@@ -17,7 +17,7 @@ if not discord.opus.is_loaded():
     
     discord.opus.load_opus('opus')
 
-DEVELOPER_KEY = os.environ.get('DEV_KEY')
+DEVELOPER_KEY = str(os.environ.get('DEV_KEY'))
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
