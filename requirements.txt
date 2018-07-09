@@ -1,0 +1,13 @@
+discordpy
+discord.py[music]
+asyncio
+youtube-dl
+safygiphy
+PixivPy
+oauth2client
+google-api-python-client
+google-auth
+google-auth-httplib2
+requests
+lxml
+urllib
