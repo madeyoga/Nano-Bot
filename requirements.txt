@@ -10,5 +10,5 @@ google-auth
 google-auth-httplib2
 requests
 lxml
-urllib
+urllib3
 simplejson
