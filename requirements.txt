@@ -1,5 +1,5 @@
 discord
-discord.py[music]
+discord[music]
 asyncio
 youtube-dl
 safygiphy
