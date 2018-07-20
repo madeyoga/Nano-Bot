@@ -1,5 +1,8 @@
 pip
 requests
+lxml
+urllib3
+simplejson
 discord
 discord.py[voice]
 asyncio
@@ -11,6 +14,3 @@ oauth2client
 google-api-python-client
 google-auth
 google-auth-httplib2
-lxml
-urllib3
-simplejson
