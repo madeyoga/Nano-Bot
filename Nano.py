@@ -20,7 +20,7 @@ description = """ General """
 startup_extensions = ["Music"]
 
 # DISCORD CLIENT #
-bot = commands.Bot(command_prefix='-', description = "General")
+bot = commands.Bot(command_prefix='.', description = "General")
 
 # GIPHY #
 giphy = safygiphy.Giphy()
@@ -32,7 +32,7 @@ api.login( str(os.environ.get('PIXIV_MAIL')), str(os.environ.get('PIXIV_PASS')) 
 @bot.event
 async def on_ready():
     print ('Bot online')
-    await bot.change_presence(game=discord.Game(name='-help'))
+    await bot.change_presence(game=discord.Game(name='.help'))
 
 @bot.event
 async def on_member_join(member):
