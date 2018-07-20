@@ -14,7 +14,7 @@ from oauth2client.tools import argparser
 import os
 if not discord.opus.is_loaded():
     
-    discord.opus.load_opus()
+    discord.opus.load_opus('opus')
 
 DEVELOPER_KEY = str(os.environ.get('DEV_KEY'))
 YOUTUBE_API_SERVICE_NAME = "youtube"
