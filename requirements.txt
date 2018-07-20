@@ -7,7 +7,6 @@ aiohttp
 websockets
 chardet
 PyNaCl
-libffi-dev
 discord
 discord.py[voice]
 asyncio
