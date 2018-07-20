@@ -3,6 +3,11 @@ requests
 lxml
 urllib3
 simplejson
+aiohttp
+websockets
+chardet
+PyNaCl
+libffi-dev
 discord
 discord.py[voice]
 asyncio
@@ -14,4 +19,4 @@ oauth2client
 google-api-python-client
 google-auth
 google-auth-httplib2
-opus
+libopus
