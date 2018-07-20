@@ -15,22 +15,6 @@ lxml
 urllib3
 simplejson
 
-libaom
-libass
-libvpx
-libvmaf
-libx264
-libx265
-libxvid
-libwebp
-libzimg
-libgnutls
-libtheora
-libfrei0r
-libvidstab
-libfreetype
-libopenjpeg
-
 libalsa
 libsoxr
 libopus
