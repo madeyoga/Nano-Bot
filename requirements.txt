@@ -14,14 +14,3 @@ google-auth-httplib2
 lxml
 urllib3
 simplejson
-
-libalsa
-libsoxr
-libopus
-libspeex
-libvorbis
-libmp3lame
-librubberband
-libvo-amrwbenc
-libopencore-amrnb
-libopencore-amrwb
