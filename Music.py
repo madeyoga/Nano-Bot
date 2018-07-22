@@ -30,11 +30,11 @@ class VoiceEntry:
         self.player = player
 
     def __str__(self):
-        fmt = ' {0.title}\nuploaded by {0.uploader}\nrequested by {1.display_name}'
+        fmt = ' {0.title}'
         duration = self.player.duration
         if duration:
             fmt = fmt + ' [length: {0[0]}m {0[1]}s]'.format(divmod(duration, 60))
-        return fmt.format(self.player, self.requester)
+        return fmt.format(self.player)
 
 class VoiceState:
     def __init__(self, bot):
@@ -325,16 +325,18 @@ class Music:
             await self.bot.say(':musical_note: Enqueued ' + str(entry))
             await state.songs.put(entry)
 
-    #@commands.command(pass_context=True, no_pm=True)
-    #async def queue(self, ctx):
-    #    """ Songs Queue """
-    #    state = self.get_voice_state(ctx.message.server)
-    #    embed = discord.Embed(title="Queue", description="", color=0x00ff00)
-    #    #while not songsList.empty():
-    #    songs = state.songs
-    #    entry = await state.songs.get()
-    #    #embed.add_field(name = "{}".format(state.songs.qsize()), value=entry, inline=True)
-    #    await self.bot.say("")
+    @commands.command(pass_context=True, no_pm=True)
+    async def queue(self, ctx):
+       """ Songs Queue """
+       state = self.get_voice_state(ctx.message.server)
+       embed = discord.Embed(title="Queue", description="waiting player", color=0x00ff00)
+       
+       for idx in range(0, len(state.queue)):
+            song_duration = "[length: {0[0]}m {0[1]}s]".format(divmod(state.queue[idx].player.duration, 60))
+            song_title = "{0}".format(state.queue[idx].player.title)
+            embed.add_field(name=song_title + " " + song_duration, value="Requested by " + state.queue[idx].requester.display_name, inline=True)
+
+       await self.bot.say(embed=embed)
         
     @commands.command(pass_context=True, no_pm=True)
     async def volume(self, ctx, value : int):
