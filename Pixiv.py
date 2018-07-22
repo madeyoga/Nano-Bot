@@ -13,7 +13,7 @@ import re
 from pathlib import Path
 
 PIXIV_MAIL = str(os.environ.get('PIXIV_MAIL'))
-PIXIV_PASS = str(os.environ.get('PIXIV_PASS')
+PIXIV_PASS = str(os.environ.get('PIXIV_PASS'))
 
 # PIXIV #
 api = AppPixivAPI()
