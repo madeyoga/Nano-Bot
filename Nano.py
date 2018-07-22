@@ -25,10 +25,6 @@ bot = commands.Bot(command_prefix='.', description = "General")
 # GIPHY #
 giphy = safygiphy.Giphy()
 
-# PIXIV #
-api = AppPixivAPI()
-api.login( str(os.environ.get('PIXIV_MAIL')), str(os.environ.get('PIXIV_PASS')) )
-
 @bot.event
 async def on_ready():
     print ('Bot online')
