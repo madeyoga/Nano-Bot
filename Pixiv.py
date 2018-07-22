@@ -2,12 +2,15 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
 import asyncio
+import requests
 from pixivpy3 import *
 import random
-import requests
+import io
 import os
 import urllib.request
 import urllib.parse
+import re
+from pathlib import Path
 
 PIXIV_MAIL = str(os.environ.get('PIXIV_MAIL'))
 PIXIV_PASS = str(os.environ.get('PIXIV_PASS')
