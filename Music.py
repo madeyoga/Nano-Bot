@@ -187,7 +187,7 @@ class Music:
             else:
                 player.volume = 0.6
                 entry = VoiceEntry(reaction.message, player)
-                embed = discord.Embed(title=':musical_note: Enqueued' + str(self.entry), color=0x191970)
+                embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
                 await self.bot.send_message(reaction.message.channel, ':musical_note: Enqueued ' + str(entry), embed=embed)
                 await state.songs.put(entry)
             
