@@ -5,10 +5,10 @@ import asyncio
 from pixivpy3 import *
 import random
 import requests
-from config import config
+import os
 
-PIXIV_MAIL = config.PIXIV_MAIL
-PIXIV_PASS = config.PIXIV_PASS
+PIXIV_MAIL = str(os.environ.get('PIXIV_MAIL'))
+PIXIV_PASS = str(os.environ.get('pixiv_PASS'))
 
 # PIXIV #
 api = AppPixivAPI()
