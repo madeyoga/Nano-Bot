@@ -48,6 +48,7 @@ class VoiceState:
         self.list_url = []
         self.list_title = []
         self.active_message = None
+        self.queue = []
         
     def is_playing(self):
         if self.voice is None or self.current is None:
@@ -260,7 +261,7 @@ class Music:
             entry = VoiceEntry(ctx.message, player)
             #await self.bot.say(':musical_note: Enqueued ' + str(entry))
             embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
-            await self.bot.send_message(reaction.message.channel, embed=embed)
+            await self.bot.say(embed=embed)
             await state.songs.put(entry)
             
     @commands.command(pass_context=True, no_pm=True)
@@ -328,7 +329,7 @@ class Music:
             entry = VoiceEntry(ctx.message, player)
             #await self.bot.say(':musical_note: Enqueued ' + str(entry))
             embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
-            await self.bot.send_message(reaction.message.channel, embed=embed)
+            await self.bot.send_message(ctx.message.channel, embed=embed)
             await state.songs.put(entry)
 
     @commands.command(pass_context=True, no_pm=True)
