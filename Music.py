@@ -73,6 +73,7 @@ class VoiceState:
         while True:
             self.play_next_song.clear()
             self.current = await self.songs.get() ## get queue front 
+            self.queue.remove(0)
             embed = discord.Embed(title=':musical_note: Now playing' + str(self.current), color=0x191970)
             await self.bot.send_message(self.current.channel, embed=embed)
             self.current.player.start()
@@ -191,6 +192,7 @@ class Music:
                 embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
                 await self.bot.send_message(reaction.message.channel, embed=embed)
                 await state.songs.put(entry)
+                state.queue.append(entry)
             
 
     @commands.command(pass_context=True, no_pm=True)
@@ -263,6 +265,7 @@ class Music:
             embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
             await self.bot.say(embed=embed)
             await state.songs.put(entry)
+            state.queue.append(entry)
             
     @commands.command(pass_context=True, no_pm=True)
     async def playlist(self, ctx):
@@ -331,12 +334,14 @@ class Music:
             embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
             await self.bot.send_message(ctx.message.channel, embed=embed)
             await state.songs.put(entry)
+            state.queue.append(entry)
 
     @commands.command(pass_context=True, no_pm=True)
     async def queue(self, ctx):
        """ Songs Queue """
        state = self.get_voice_state(ctx.message.server)
-       embed = discord.Embed(title="Queue", description="waiting player", color=0x00ff00)
+       skip_count = len(state.skip_votes)
+       embed = discord.Embed(title='{} [skips: {}/3]'.format(state.current.player.title, skip_count), description=":musical_note: Now playing", color=0x00ff00)
        
        for idx in range(0, len(state.queue)):
             song_duration = "[length: {0[0]}m {0[1]}s]".format(divmod(state.queue[idx].player.duration, 60))
@@ -426,6 +431,8 @@ class Music:
         else:
             skip_count = len(state.skip_votes)
             embed = discord.Embed(title=':musical_note: Now playing {} [skips: {}/3]'.format(state.current.player.title, skip_count), color=0x000000)
+            embed.add_field(name="Requester", value=state.queue[0].requester.display_name, inline=True)
+            embed.add_field(name="Duration", value='[length: {0[0]}m {0[1]}s]'.format(divmod(state.queue[0].player.duration, 60)), inline=True)
             await self.bot.say(embed=embed)
             #':musical_note: Now playing {} [skips: {}/3]'.format(state.current.player.title, skip_count)
 
