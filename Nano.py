@@ -17,7 +17,7 @@ from pathlib import Path
 
 description = """ General """
 
-startup_extensions = ["Music", "Moderation", "Info", "Pixiv"]
+startup_extensions = ["Music", "Moderation", "Info"]
 
 # DISCORD CLIENT #
 bot = commands.Bot(command_prefix='.', description = "General")
