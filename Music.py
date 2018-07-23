@@ -189,7 +189,7 @@ class Music:
                 fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
                 await self.bot.send_message(reaction.message.channel, fmt.format(type(e).__name__, e))
             else:
-                player.volume = 0.6
+                #player.volume = 0.6
                 entry = VoiceEntry(reaction.message, player)
                 state.queue.append(entry)
                 embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
@@ -261,7 +261,7 @@ class Music:
             fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
             await self.bot.send_message(ctx.message.channel, fmt.format(type(e).__name__, e))
         else:
-            player.volume = 0.6
+            #player.volume = 0.6
             entry = VoiceEntry(ctx.message, player)
             #await self.bot.say(':musical_note: Enqueued ' + str(entry))
             embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
@@ -330,7 +330,7 @@ class Music:
             fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
             await self.bot.send_message(ctx.message.channel, fmt.format(type(e).__name__, e))
         else:
-            player.volume = 0.6
+            #player.volume = 0.6
             entry = VoiceEntry(ctx.message, player)
             #await self.bot.say(':musical_note: Enqueued ' + str(entry))
             embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)

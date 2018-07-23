@@ -56,7 +56,15 @@ async def gif(ctx, key : str):
         await bot.say("couldn't find " + gif_tag)
         return
     await bot.send_file(ctx.message.channel, io.BytesIO(response.raw.read()), filename='video.gif')
-    
+
+@bot.command()
+async def status(*args):
+    stat=""
+    for word in args:
+        stat+=word
+        stat+=" "
+    await bot.change_presence(game=discord.Game(name=stat))
+
 if __name__ == '__main__':
     for extension in startup_extensions:
         try:
