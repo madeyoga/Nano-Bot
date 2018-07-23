@@ -73,11 +73,11 @@ class VoiceState:
         while True:
             self.play_next_song.clear()
             self.current = await self.songs.get() ## get queue front 
-            #sself.queue.remove(0)
             embed = discord.Embed(title=':musical_note: Now playing' + str(self.current), color=0x191970)
             await self.bot.send_message(self.current.channel, embed=embed)
             self.current.player.start()
             await self.play_next_song.wait()
+            #self.queue.remove(0)
 
 class Music:
     """Voice related commands.
@@ -189,10 +189,10 @@ class Music:
             else:
                 player.volume = 0.6
                 entry = VoiceEntry(reaction.message, player)
+                state.queue.append(entry)
                 embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
                 await self.bot.send_message(reaction.message.channel, embed=embed)
                 await state.songs.put(entry)
-                state.queue.append(entry)
             
 
     @commands.command(pass_context=True, no_pm=True)
@@ -263,9 +263,9 @@ class Music:
             entry = VoiceEntry(ctx.message, player)
             #await self.bot.say(':musical_note: Enqueued ' + str(entry))
             embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
+            state.queue.append(entry)
             await self.bot.say(embed=embed)
             await state.songs.put(entry)
-            state.queue.append(entry)
             
     @commands.command(pass_context=True, no_pm=True)
     async def playlist(self, ctx):
@@ -332,9 +332,9 @@ class Music:
             entry = VoiceEntry(ctx.message, player)
             #await self.bot.say(':musical_note: Enqueued ' + str(entry))
             embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
+            state.queue.append(entry)
             await self.bot.send_message(ctx.message.channel, embed=embed)
             await state.songs.put(entry)
-            state.queue.append(entry)
 
     @commands.command(pass_context=True, no_pm=True)
     async def queue(self, ctx):
@@ -401,7 +401,6 @@ class Music:
         The song requester can automatically skip.
         3 skip votes are needed for the song to be skipped.
         """
-
         state = self.get_voice_state(ctx.message.server)
         if not state.is_playing():
             await self.bot.say('Not playing any music right now...')
@@ -435,7 +434,6 @@ class Music:
             embed.add_field(name="Duration", value='[length: {0[0]}m {0[1]}s]'.format(divmod(state.queue[0].player.duration, 60)), inline=True)
             await self.bot.say(embed=embed)
             #':musical_note: Now playing {} [skips: {}/3]'.format(state.current.player.title, skip_count)
-
 
 def setup(bot):
     bot.add_cog(Music(bot))
