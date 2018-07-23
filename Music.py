@@ -73,7 +73,7 @@ class VoiceState:
         while True:
             self.play_next_song.clear()
             self.current = await self.songs.get() ## get queue front 
-            self.queue.remove(0)
+            #sself.queue.remove(0)
             embed = discord.Embed(title=':musical_note: Now playing' + str(self.current), color=0x191970)
             await self.bot.send_message(self.current.channel, embed=embed)
             self.current.player.start()
