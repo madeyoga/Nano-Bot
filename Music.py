@@ -49,6 +49,7 @@ class VoiceState:
         self.list_title = []
         self.active_message = None
         self.queue = []
+        self.volume = 0.25
         
     def is_playing(self):
         if self.voice is None or self.current is None:
@@ -75,6 +76,7 @@ class VoiceState:
             self.current = await self.songs.get() ## get queue front 
             embed = discord.Embed(title=':musical_note: Now playing' + str(self.current), color=0x191970)
             await self.bot.send_message(self.current.channel, embed=embed)
+            self.current.player.volume = self.volume
             self.current.player.start()
             await self.play_next_song.wait()
             #self.queue.remove(0)
@@ -357,6 +359,7 @@ class Music:
         if state.is_playing():
             player = state.player
             player.volume = value / 100
+            state.volume = value / 100
             await self.bot.say('Set the volume to {:.0%}'.format(player.volume))
             
     @commands.command(pass_context=True, no_pm=True)
