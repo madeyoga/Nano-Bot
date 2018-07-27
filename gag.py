@@ -1,4 +1,4 @@
-from nineapi.client import  Client, APIException
+from nineapi.nineapi.client import  Client, APIException
 import os
 import sys
 import random
