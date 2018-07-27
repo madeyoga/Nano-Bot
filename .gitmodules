@@ -1,0 +1,3 @@
+[submodule "nineapi"]
+	path = nineapi
+	url = https://github.com/and3rson/nineapi.git
