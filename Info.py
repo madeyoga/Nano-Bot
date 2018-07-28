@@ -14,13 +14,15 @@ class Info:
 
     @commands.command(pass_context=True)
     async def ping(self, ctx):
+        """
+            checkin nano-bot's ping
+        """
         channel = ctx.message.channel
         now = time.perf_counter()
         await self.bot.send_typing(channel)
         then = time.perf_counter()
-        embed = discord.Embed(title="{}'s ping".format(ctx.message.author.name), color=0x000000)
+        embed = discord.Embed(title="Nano-bot's ping".format(ctx.message.author.name), color=0x000000)
         embed.add_field(name=":hourglass_flowing_sand:{}ms".format(round((then-now)*1000)), value="ping test")
-        #await self.bot.say("ping: {}ms".format(round((then-now)*1000)))
         await self.bot.say(embed=embed)
         
     @commands.command(pass_context=True)
@@ -54,6 +56,27 @@ class Info:
         embed.set_thumbnail(url=ctx.message.server.icon_url)
         await self.bot.say(embed=embed)
 
+    @commands.command(pass_context=True)
+    async def servers(self, ctx):
+        if ctx.message.author.id == "213866895806300161":
+            servers = self.bot.servers
+            embed = discord.Embed(
+                color=0x0000ff
+            )
+            embed.set_author(name="Servers")
+            count=0
+            for server in servers:
+                count+=1
+                members=""
+                for member in server.members:
+                    members+=member.name + ","
+                embed.add_field(name=str(count) + ". " + server.name, value=members, inline=True)
+            await self.bot.say(embed=embed)
+        else:
+            embed = discord.Embed(color=0x0000ff)
+            embed.set_image(url="http://i.imgur.com/aF13v7A.gif)
+            await bot.say(embed=embed)
+    
 def setup(bot):
     bot.add_cog(Info(bot))
     print('Info is loaded')

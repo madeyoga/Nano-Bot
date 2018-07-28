@@ -15,12 +15,11 @@ import urllib.parse
 import re
 from pathlib import Path
 
-description = """ General """
-
 startup_extensions = ["Music", "Moderation", "Info", "gag"]
 
 # DISCORD CLIENT #
 bot = commands.Bot(command_prefix='.', description = "General")
+bot.remove_command('help')
 
 # GIPHY #
 giphy = safygiphy.Giphy()
@@ -35,6 +34,25 @@ async def on_member_join(member):
    role = discord.utils.get(member.server.roles, name='New Member')
    await bot.add_roles(member, role)
 
+@bot.command(pass_context=True)
+async def help(ctx, cmd = None):
+    if cmd is None or cmd == "":
+        author = ctx.message.author
+        embed = discord.Embed(
+            color=0x0000ff
+            )
+        embed.set_author(name=".help <command>")
+        
+        embed.add_field(name="Info", value="info, ping, serverinfo", inline=False)
+        embed.add_field(name="Moderation", value="clear, kick", inline=False)
+        embed.add_field(name="Music", value="join, p, pause, play, playing, playlist, queue, resume, s, skip, stop, summon, volume", inline=False)
+        embed.add_field(name="9gag", value="anime, comic, cosplay, kpop, savage, wtf", inline=False)
+        embed.add_field(name="No Category", value="help, echo, gif, status", inline=False)
+        
+        await bot.say(embed=embed)
+    else:
+        await bot.say("'i promise i will add this feature soon..' - dev")
+    
 @bot.command()
 async def echo(*args):
     output=""
@@ -57,13 +75,19 @@ async def gif(ctx, key : str):
         return
     await bot.send_file(ctx.message.channel, io.BytesIO(response.raw.read()), filename='video.gif')
 
-@bot.command()
-async def status(*args):
-    stat=""
-    for word in args:
-        stat+=word
-        stat+=" "
-    await bot.change_presence(game=discord.Game(name=stat))
+@bot.command(pass_context=True)
+async def status(ctx, *args):
+    if ctx.message.author.id == "213866895806300161":
+        stat=""
+        for word in args:
+            stat+=word
+            stat+=" "
+        await bot.change_presence(game=discord.Game(name=stat))
+        await bot.say("Hay Master! i have changed my status to " + stat)
+    else:
+        embed = discord.Embed(color=0x0000ff)
+        embed.set_image(url="http://i.imgur.com/aF13v7A.gif")
+        await bot.say(embed=embed)
 
 if __name__ == '__main__':
     for extension in startup_extensions:
