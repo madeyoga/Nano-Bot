@@ -74,7 +74,7 @@ class Info:
             await self.bot.say(embed=embed)
         else:
             embed = discord.Embed(color=0x0000ff)
-            embed.set_image(url="http://i.imgur.com/aF13v7A.gif)
+            embed.set_image(url="http://i.imgur.com/aF13v7A.gif")
             await bot.say(embed=embed)
     
 def setup(bot):
