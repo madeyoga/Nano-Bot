@@ -7,8 +7,6 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
 
-client = Client()
-client.log_in(str( os.environ.get('GAG_USERNAME')), str(os.environ.get('GAG_PASSWORD')) )
 
 class GagState:
     def __init__(self, bot):
@@ -21,6 +19,11 @@ class NineGag:
         self.bot = bot
         self.gag_states = {}
 
+    def get_gag_client(self):
+        client = Client()
+        client.log_in(str( os.environ.get('GAG_USERNAME')), str(os.environ.get('GAG_PASSWORD')) )
+        return client
+    
     def get_gag_state(self, server):
         state = self.gag_states.get(server.id)
         if state is None:
@@ -29,6 +32,9 @@ class NineGag:
         return state
 
     def get_embedded_gag(self, group_id, state):
+        
+        client = self.get_gag_client()
+        
         if not state.current_group_id == group_id:
             state.current_group = group_id
             state.current_post_list.clear()
