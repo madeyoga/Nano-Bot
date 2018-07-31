@@ -33,9 +33,10 @@ class NineGag:
 
     def get_embedded_gag(self, group_id, state):
         
-        client = self.get_gag_client()
-        
-        if not state.current_group_id == group_id:
+        if not state.current_group_id == group_id:    
+            
+            client = self.get_gag_client()
+            
             state.current_group = group_id
             state.current_post_list.clear()
             posts = client.get_posts(group=group_id, count=50, type_='hot', entry_types=['photo'])
@@ -45,6 +46,7 @@ class NineGag:
             embed = discord.Embed(title=posts[rand_numb].title, description="powered by nineapi", color=0x000000)
             embed.set_image(url=posts[rand_numb].get_media_url())
             return embed
+        
         else:
             rand_numb = random.randint(0, len(state.current_post_list) - 1)
             embed = discord.Embed(title=state.current_post_list[rand_numb].title, description="powered by nineapi", color=0x000000)
