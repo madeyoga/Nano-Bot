@@ -29,11 +29,6 @@ async def on_ready():
     print ('Bot online')
     await bot.change_presence(game=discord.Game(name='.help'))
 
-@bot.event
-async def on_member_join(member):
-   role = discord.utils.get(member.server.roles, name='New Member')
-   await bot.add_roles(member, role)
-
 @bot.command(pass_context=True)
 async def help(ctx, cmd = None):
     if cmd is None or cmd == "":
