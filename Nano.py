@@ -51,7 +51,51 @@ async def help(ctx, cmd = None):
         
         await bot.say(embed=embed)
     else:
-        await bot.say("'i promise i will add this feature soon..' - dev")
+        example = "usage: "
+        if cmd == "info":
+            example+=".info @user"
+        elif cmd == "ping":
+            example+=".ping"
+        elif cmd == "serverinfo":
+            example+=".serverinfo"
+        elif cmd == "clear":
+            example+=".clear / .clear 100"
+        elif cmd == "kick":
+            example+=""
+        elif cmd == "join":
+            example+=".join <server's name>"
+        elif cmd == "p":
+            example+=".p 4 ,picks index 4 from playlist"
+        elif cmd == "pause":
+            example+=".pause"
+        elif cmd == "play":
+            example+=".play music"
+        elif cmd == "playing":
+            example+=".playing ,shows currently playing song's info"
+        elif cmd == "s":
+            example+=".s anime ,search anime from youtube\nresults will be stored to playlist"
+        elif cmd == "skip":
+            example+=".skip\n"
+            example+="requester can immediately skips the song"
+        elif cmd == "playlist":
+            example+=".playlist"
+        elif cmd == "anime":
+            example+=".anime"
+        elif cmd == "wtf":
+            example+=".wtf"
+        elif cmd == "savage":
+            example+=".savage"
+        elif cmd == "kpop":
+            example+=".kpop"
+        elif cmd == "comic":
+            example+=".comic"
+        elif cmd == "cosplay":
+            example+=".cosplay"
+        elif cmd == "help":
+            example+=".help"
+        elif cmd == "echo":
+            example+=".echo hello world"
+        await bot.say(example)
     
 @bot.command()
 async def echo(*args):
