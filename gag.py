@@ -55,36 +55,48 @@ class NineGag:
     
     @commands.command(pass_context=True)
     async def anime(self, ctx):
+        if ctx.message.author.bot:
+            return
         state = self.get_gag_state(ctx.message.server)
         embed = self.get_embedded_gag(32, state)    
         await self.bot.say(embed=embed)
 
     @commands.command(pass_context=True)
     async def wtf(self, ctx):
+        if ctx.message.author.bot:
+            return
         state = self.get_gag_state(ctx.message.server)
         embed = self.get_embedded_gag(4, state)
         await self.bot.say(embed=embed)
 
     @commands.command(pass_context=True)
     async def savage(self, ctx):
+        if ctx.message.author.bot:
+            return
         state = self.get_gag_state(ctx.message.server)
         embed = self.get_embedded_gag(45, state)
         await self.bot.say(embed=embed)
 
     @commands.command(pass_context=True)
     async def kpop(self, ctx):
+        if ctx.message.author.bot:
+            return
         state = self.get_gag_state(ctx.message.server)
         embed = self.get_embedded_gag(34, state)
         await self.bot.say(embed=embed)
 
     @commands.command(pass_context=True)
     async def cosplay(self, ctx):
+        if ctx.message.author.bot:
+            return
         state = self.get_gag_state(ctx.message.server)
         embed = self.get_embedded_gag(11, state)
         await self.bot.say(embed=embed)
 
     @commands.command(pass_context=True)
     async def comic(self, ctx):
+        if ctx.message.author.bot:
+            return
         state = self.get_gag_state(ctx.message.server)
         embed = self.get_embedded_gag(17, state)
         await self.bot.say(embed=embed)

@@ -31,6 +31,8 @@ async def on_ready():
 
 @bot.command(pass_context=True)
 async def help(ctx, cmd = None):
+    if ctx.message.author.bot:
+        return
     if cmd is None or cmd == "":
         author = ctx.message.author
         embed = discord.Embed(
@@ -94,6 +96,8 @@ async def help(ctx, cmd = None):
     
 @bot.command()
 async def echo(*args):
+    if ctx.message.author.bot:
+        return
     output=""
     for word in args:
         output += word
@@ -103,7 +107,8 @@ async def echo(*args):
 @bot.command(pass_context=True)
 async def gif(ctx, key : str):
     """ Replies a gif from giphy, <prefix>gif <args> """
-
+    if ctx.message.author.bot:
+        return
     gif_tag = key
     random_gif = giphy.random(tag=str(gif_tag))
     response = requests.get(

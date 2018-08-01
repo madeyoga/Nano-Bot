@@ -17,6 +17,8 @@ class Info:
         """
             checkin nano-bot's ping
         """
+        if ctx.message.author.bot:
+            return
         channel = ctx.message.channel
         now = time.perf_counter()
         await self.bot.send_typing(channel)
@@ -27,6 +29,8 @@ class Info:
         
     @commands.command(pass_context=True)
     async def info(self, ctx, user: discord.Member):
+        if ctx.message.author.bot:
+            return
         embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what i could find.", color=0x00ff00)
         embed.add_field(name="Name", value=user.name, inline=True)
         embed.add_field(name="ID", value=user.id, inline=True)
@@ -39,6 +43,8 @@ class Info:
     @commands.command(pass_context=True)
     async def fact(self, ctx, user: discord.Member):
         """Some Text Response"""
+        if ctx.message.author.bot:
+            return
         if user.name == "SomeLikeItHot" and not user.bot:
             await self.bot.say("HoT!")
         elif user.bot:
@@ -48,6 +54,8 @@ class Info:
 
     @commands.command(pass_context=True)
     async def serverinfo(self, ctx):
+        if ctx.message.author.bot:
+            return
         embed = discord.Embed(title="{}'s info".format(ctx.message.server.name), description="Here's what i could find", color=0x00ff00)
         embed.add_field(name="Name", value=ctx.message.server.name, inline=True)
         embed.add_field(name="ID", value=ctx.message.server.id, inline=True)
