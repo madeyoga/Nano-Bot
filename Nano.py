@@ -94,8 +94,8 @@ async def help(ctx, cmd = None):
             example+=".echo hello world"
         await bot.say(example)
     
-@bot.command()
-async def echo(*args):
+@bot.command(pass_context=True)
+async def echo(ctx, *args):
     if ctx.message.author.bot:
         return
     output=""
