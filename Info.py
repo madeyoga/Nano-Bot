@@ -21,7 +21,7 @@ class Info:
         now = time.perf_counter()
         await self.bot.send_typing(channel)
         then = time.perf_counter()
-        embed = discord.Embed(title="Nano-bot's ping".format(ctx.message.author.name), color=0x000000)
+        embed = discord.Embed(title="Nano-bot's ping", color=0x000000)
         embed.add_field(name=":hourglass_flowing_sand:{}ms".format(round((then-now)*1000)), value="ping test")
         await self.bot.say(embed=embed)
         
