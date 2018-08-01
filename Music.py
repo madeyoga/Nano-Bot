@@ -356,9 +356,9 @@ class Music:
 
     @commands.command(pass_context=True, no_pm=True)
     async def queue(self, ctx):
-        if ctx.message.author.bot:
-            return
        """ Songs Queue """
+       if ctx.message.author.bot:
+            return
        state = self.get_voice_state(ctx.message.server)
        skip_count = len(state.skip_votes)
        embed = discord.Embed(title='{} [skips: {}/3]'.format(state.current.player.title, skip_count), description=":musical_note: Now playing", color=0x00ff00)
