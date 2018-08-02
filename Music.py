@@ -408,8 +408,7 @@ class Music:
         """Stops playing audio and leaves the voice channel.
         This also clears the queue.
         """
-        if ctx.message.author.bot:
-            return
+        
         server = ctx.message.server
         state = self.get_voice_state(server)
         
