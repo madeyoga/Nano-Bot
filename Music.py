@@ -112,12 +112,13 @@ class Music:
                 pass
 
     async def on_reaction_add(self, reaction, user):
-        if reaction.message.author.bot:
-            return
 
         server = reaction.message.server
         state = self.get_voice_state(server)
-
+        
+        if not state.active_message.author.id == user.id:
+            return
+        
         if state.active_message and state.active_message.id == reaction.message.id and reaction.emoji == "➕":
 
             if state.list_title.count == 0:
