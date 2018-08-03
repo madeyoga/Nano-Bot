@@ -9,7 +9,7 @@ import youtube_dl
 import simplejson
 import lxml
 from lxml import etree
-from googleapiclient.discovery import build
+from apiclient.discovery import build
 from oauth2client.tools import argparser
 import os
 if not discord.opus.is_loaded():
@@ -79,7 +79,6 @@ class VoiceState:
             self.current.player.volume = self.volume
             self.current.player.start()
             await self.play_next_song.wait()
-            #self.queue.remove(0)
 
 class Music:
     """Voice related commands.
@@ -189,9 +188,8 @@ class Music:
                 fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
                 await self.bot.send_message(reaction.message.channel, fmt.format(type(e).__name__, e))
             else:
-                player.volume = 0.6
+                #player.volume = 0.6
                 entry = VoiceEntry(reaction.message, player)
-                state.queue.append(entry)
                 embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
                 await self.bot.send_message(reaction.message.channel, embed=embed)
                 await state.songs.put(entry)
@@ -214,7 +212,7 @@ class Music:
         count = 0
         embed = discord.Embed(title=server.name, description="Playlist", color=0x191970)
         
-        youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=str(os.environ.get('DEV_KEY')))
+        youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
         search_response = youtube.search().list(
             q=key,
             part="id,snippet",
@@ -261,11 +259,9 @@ class Music:
             fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
             await self.bot.send_message(ctx.message.channel, fmt.format(type(e).__name__, e))
         else:
-            player.volume = 0.6
+            #player.volume = 0.6
             entry = VoiceEntry(ctx.message, player)
-            #await self.bot.say(':musical_note: Enqueued ' + str(entry))
             embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
-            state.queue.append(entry)
             await self.bot.say(embed=embed)
             await state.songs.put(entry)
             
@@ -281,6 +277,8 @@ class Music:
         for url in urls:
             embed.add_field(name=str(count + 1) + ". " + titles[count], value=url, inline=True)
             count += 1
+        
+        embed.set_footer(text="use .p command to picks the song ' .p 1 '")
         await self.bot.say(embed=embed)
         
     @commands.command(pass_context=True, no_pm=True)
@@ -330,27 +328,11 @@ class Music:
             fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
             await self.bot.send_message(ctx.message.channel, fmt.format(type(e).__name__, e))
         else:
-            #player.volume = 0.6
+            player.volume = 0.6
             entry = VoiceEntry(ctx.message, player)
-            #await self.bot.say(':musical_note: Enqueued ' + str(entry))
-            embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
-            state.queue.append(entry)
-            await self.bot.send_message(ctx.message.channel, embed=embed)
+            await self.bot.say(':musical_note: Enqueued ' + str(entry))
             await state.songs.put(entry)
 
-    @commands.command(pass_context=True, no_pm=True)
-    async def queue(self, ctx):
-       """ Songs Queue """
-       state = self.get_voice_state(ctx.message.server)
-       skip_count = len(state.skip_votes)
-       embed = discord.Embed(title='{} [skips: {}/3]'.format(state.current.player.title, skip_count), description=":musical_note: Now playing", color=0x00ff00)
-       
-       for idx in range(0, len(state.queue)):
-            song_duration = "[length: {0[0]}m {0[1]}s]".format(divmod(state.queue[idx].player.duration, 60))
-            song_title = "{0}".format(state.queue[idx].player.title)
-            embed.add_field(name=song_title + " " + song_duration, value="Requested by " + state.queue[idx].requester.display_name, inline=True)
-
-       await self.bot.say(embed=embed)
         
     @commands.command(pass_context=True, no_pm=True)
     async def volume(self, ctx, value : int):
@@ -359,7 +341,6 @@ class Music:
         if state.is_playing():
             player = state.player
             player.volume = value / 100
-            state.volume = value / 100
             await self.bot.say('Set the volume to {:.0%}'.format(player.volume))
             
     @commands.command(pass_context=True, no_pm=True)
@@ -392,19 +373,18 @@ class Music:
 
         try:
             state.audio_player.cancel()
-            await state.voice.disconnect()
             del self.voice_states[server.id]
+            await state.voice.disconnect()
             await self.bot.say("Cleared the queue and disconnected from voice channel ")
         except:
-            print("errrorr")
             pass
 
     @commands.command(pass_context=True, no_pm=True)
     async def skip(self, ctx):
-        """Vote to skip a song. 
-        The song requester can automatically skip.
+        """Vote to skip a song. The song requester can automatically skip.
         3 skip votes are needed for the song to be skipped.
         """
+
         state = self.get_voice_state(ctx.message.server)
         if not state.is_playing():
             await self.bot.say('Not playing any music right now...')
@@ -434,10 +414,10 @@ class Music:
         else:
             skip_count = len(state.skip_votes)
             embed = discord.Embed(title=':musical_note: Now playing {} [skips: {}/3]'.format(state.current.player.title, skip_count), color=0x000000)
-            embed.add_field(name="Requester", value=state.queue[0].requester.display_name, inline=True)
-            embed.add_field(name="Duration", value='[length: {0[0]}m {0[1]}s]'.format(divmod(state.queue[0].player.duration, 60)), inline=True)
+            embed.add_field(name="Requester", value=state.current.requester, inline=True)
+            embed.add_field(name="Duration", value='[length: {0[0]}m {0[1]}s]'.format(divmod(state.current.player.duration, 60)), inline=True)
             await self.bot.say(embed=embed)
-            #':musical_note: Now playing {} [skips: {}/3]'.format(state.current.player.title, skip_count)
+
 
 def setup(bot):
     bot.add_cog(Music(bot))
