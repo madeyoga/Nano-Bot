@@ -4,7 +4,7 @@ lxml
 urllib3
 simplejson
 aiohttp
-websockets
+websockets==3.4
 chardet
 PyNaCl
 discord.py==0.16.12
