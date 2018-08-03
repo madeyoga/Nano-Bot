@@ -7,7 +7,7 @@ aiohttp
 websockets
 chardet
 PyNaCl
-discord
+discord.py==0.16.12
 discord.py[voice]
 asyncio
 youtube-dl
