@@ -74,7 +74,6 @@ class VoiceState:
         while True:
             self.play_next_song.clear()
             self.current = await self.songs.get() ## get queue front 
-            self.queue.pop(0)
             embed = discord.Embed(title=':musical_note: Now playing' + str(self.current), color=0x191970)
             await self.bot.send_message(self.current.channel, embed=embed)
             self.current.player.volume = self.volume
@@ -112,10 +111,9 @@ class Music:
                 pass
 
     async def on_reaction_add(self, reaction, user):
-
         server = reaction.message.server
         state = self.get_voice_state(server)
-        
+
         if state.active_message and state.active_message.id == reaction.message.id and reaction.emoji == "➕":
 
             if state.list_title.count == 0:
@@ -191,7 +189,7 @@ class Music:
                 fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
                 await self.bot.send_message(reaction.message.channel, fmt.format(type(e).__name__, e))
             else:
-                #player.volume = 0.6
+                player.volume = 0.6
                 entry = VoiceEntry(reaction.message, player)
                 state.queue.append(entry)
                 embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
@@ -202,8 +200,6 @@ class Music:
     @commands.command(pass_context=True, no_pm=True)
     async def s(self, ctx, *args):
         """ Search Song. """
-        if ctx.message.author.bot:
-            return
         key = ""
         for word in args:
             key += word
@@ -252,8 +248,6 @@ class Music:
     @commands.command(pass_context=True, no_pm=True)
     async def p(self, ctx, index : int):
         """ Picks Song from Playlist. """
-        if ctx.message.author.bot:
-            return
         server = ctx.message.server
         state = self.get_voice_state(server)
         if state.voice is None:
@@ -267,7 +261,7 @@ class Music:
             fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
             await self.bot.send_message(ctx.message.channel, fmt.format(type(e).__name__, e))
         else:
-            #player.volume = 0.6
+            player.volume = 0.6
             entry = VoiceEntry(ctx.message, player)
             #await self.bot.say(':musical_note: Enqueued ' + str(entry))
             embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
@@ -278,8 +272,6 @@ class Music:
     @commands.command(pass_context=True, no_pm=True)
     async def playlist(self, ctx):
         """ Shows playlist """
-        if ctx.message.author.bot:
-            return
         server = ctx.message.server
         state = self.get_voice_state(server)
         embed = discord.Embed(title=server.name, description="Playlist", color=0x191970)
@@ -294,8 +286,6 @@ class Music:
     @commands.command(pass_context=True, no_pm=True)
     async def join(self, ctx, *, channel : discord.Channel):
         """Joins a voice channel."""
-        if ctx.message.author.bot:
-            return
         try:
             await self.create_voice_client(channel)
         except discord.ClientException:
@@ -306,8 +296,6 @@ class Music:
     @commands.command(pass_context=True, no_pm=True)
     async def summon(self, ctx):
         """Summons the bot to join your voice channel."""
-        if ctx.message.author.bot:
-            return  
         summoned_channel = ctx.message.author.voice_channel
         if summoned_channel is None:
             await self.bot.say('Are you sure you are in a channel?')
@@ -324,8 +312,6 @@ class Music:
     @commands.command(pass_context=True, no_pm=True)
     async def play(self, ctx, *, song : str):
         """Plays a song. Search automatically """
-        if ctx.message.author.bot:
-            return
         state = self.get_voice_state(ctx.message.server)
         opts = {
             'default_search': 'auto',
@@ -344,7 +330,7 @@ class Music:
             fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
             await self.bot.send_message(ctx.message.channel, fmt.format(type(e).__name__, e))
         else:
-            #player.volume = 0.6
+            player.volume = 0.6
             entry = VoiceEntry(ctx.message, player)
             #await self.bot.say(':musical_note: Enqueued ' + str(entry))
             embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
@@ -355,8 +341,6 @@ class Music:
     @commands.command(pass_context=True, no_pm=True)
     async def queue(self, ctx):
        """ Songs Queue """
-       if ctx.message.author.bot:
-            return
        state = self.get_voice_state(ctx.message.server)
        skip_count = len(state.skip_votes)
        embed = discord.Embed(title='{} [skips: {}/3]'.format(state.current.player.title, skip_count), description=":musical_note: Now playing", color=0x00ff00)
@@ -371,8 +355,6 @@ class Music:
     @commands.command(pass_context=True, no_pm=True)
     async def volume(self, ctx, value : int):
         """Sets the volume of the currently playing song."""
-        if ctx.message.author.bot:
-            return
         state = self.get_voice_state(ctx.message.server)
         if state.is_playing():
             player = state.player
@@ -383,8 +365,6 @@ class Music:
     @commands.command(pass_context=True, no_pm=True)
     async def resume(self, ctx):
         """Resumes the currently played song."""
-        if ctx.message.author.bot:
-            return
         state = self.get_voice_state(ctx.message.server)
         if state.is_playing():
             player = state.player
@@ -393,8 +373,6 @@ class Music:
     @commands.command(pass_context=True, no_pm=True)
     async def pause(self, ctx):
         """Pause the currently played song."""
-        if ctx.message.author.bot:
-            return
         state = self.get_voice_state(ctx.message.server)
         if state.is_playing():
             player = state.player
@@ -405,7 +383,6 @@ class Music:
         """Stops playing audio and leaves the voice channel.
         This also clears the queue.
         """
-        
         server = ctx.message.server
         state = self.get_voice_state(server)
         
@@ -427,8 +404,6 @@ class Music:
         The song requester can automatically skip.
         3 skip votes are needed for the song to be skipped.
         """
-        if ctx.message.author.bot:
-            return
         state = self.get_voice_state(ctx.message.server)
         if not state.is_playing():
             await self.bot.say('Not playing any music right now...')
@@ -452,8 +427,6 @@ class Music:
     @commands.command(pass_context=True, no_pm=True)
     async def playing(self, ctx):
         """Shows info about the currently played song."""
-        if ctx.message.author.bot:
-            return
         state = self.get_voice_state(ctx.message.server)
         if state.current is None:
             await self.bot.say('Not playing anything.')
