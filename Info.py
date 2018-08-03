@@ -75,10 +75,7 @@ class Info:
             count=0
             for server in servers:
                 count+=1
-                members=""
-                #for member in server.members:
-                #    members+=member.name + ","
-                embed.add_field(name=str(count) + ". " + server.name, value=len(server.members), inline=True)
+                embed.add_field(name=str(count) + ". " + server.name, value="Member count: " + str(len(server.members)), inline=False)
             await self.bot.say(embed=embed)
         else:
             embed = discord.Embed(color=0x0000ff)

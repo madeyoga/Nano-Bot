@@ -330,7 +330,7 @@ class Music:
             fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
             await self.bot.send_message(ctx.message.channel, fmt.format(type(e).__name__, e))
         else:
-            player.volume = 0.6
+            #player.volume = 0.6
             entry = VoiceEntry(ctx.message, player)
             #await self.bot.say(':musical_note: Enqueued ' + str(entry))
             embed = discord.Embed(title=':musical_note: Enqueued' + str(entry), color=0x191970)
@@ -392,10 +392,11 @@ class Music:
 
         try:
             state.audio_player.cancel()
-            del self.voice_states[server.id]
             await state.voice.disconnect()
+            del self.voice_states[server.id]
             await self.bot.say("Cleared the queue and disconnected from voice channel ")
         except:
+            print("errrorr")
             pass
 
     @commands.command(pass_context=True, no_pm=True)
