@@ -461,7 +461,7 @@ class Music:
         else:
             skip_count = len(state.skip_votes)
             embed = discord.Embed(title=':musical_note: Now playing {} [skips: {}/3]'.format(state.current.player.title, skip_count), color=0x000000)
-             embed.add_field(name="Requester", value=state.current.requester, inline=True)
+            embed.add_field(name="Requester", value=state.current.requester, inline=True)
             embed.add_field(name="Duration", value='[length: {0[0]}m {0[1]}s]'.format(divmod(state.current.player.duration, 60)), inline=True)
             await self.bot.say(embed=embed)
             #':musical_note: Now playing {} [skips: {}/3]'.format(state.current.player.title, skip_count)
