@@ -13,6 +13,7 @@ import random
 import urllib.request
 import urllib.parse
 import re
+import aiohttp
 from pathlib import Path
 
 startup_extensions = ["Music", "Moderation", "Info", "gag"]
@@ -21,6 +22,10 @@ startup_extensions = ["Music", "Moderation", "Info", "gag"]
 bot = commands.Bot(command_prefix='.', description = "General")
 bot.remove_command('help')
 
+dbltoken = str(os.environ.get('DBL_TOKEN'))
+url = "https://discordbots.org/api/bots/" + bot.user.id + "/stats"
+headers = {"Authorization" : dbltoken}
+
 # GIPHY #
 giphy = safygiphy.Giphy()
 
@@ -28,6 +33,22 @@ giphy = safygiphy.Giphy()
 async def on_ready():
     print ('Bot online')
     await bot.change_presence(game=discord.Game(name='.help'))
+    
+    payload = {"server_count"  : len(bot.servers)}
+    async with aiohttp.ClientSession() as aioclient:
+        await aioclient.post(url, data=payload, headers=headers)
+            
+@bot.event
+async def on_server_join(server):
+    payload = {"server_count"  : len(bot.servers)}
+    async with aiohttp.ClientSession() as aioclient:
+        await aioclient.post(url, data=payload, headers=headers)
+        
+@bot.event
+async def on_server_remove(server):
+    payload = {"server_count"  : len(bot.servers)}
+    async with aiohttp.ClientSession() as aioclient:
+        await aioclient.post(url, data=payload, headers=headers)
 
 @bot.command(pass_context=True)
 async def help(ctx, cmd = None):
