@@ -23,7 +23,7 @@ bot = commands.Bot(command_prefix='.', description = "General")
 bot.remove_command('help')
 
 dbltoken = str(os.environ.get('DBL_TOKEN'))
-url = "https://discordbots.org/api/bots/" + bot.user.id + "/stats"
+url = "https://discordbots.org/api/bots/458298539517411328/stats"
 headers = {"Authorization" : dbltoken}
 
 # GIPHY #
