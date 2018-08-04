@@ -126,6 +126,12 @@ async def echo(ctx, *args):
     await bot.say(output)
 
 @bot.command(pass_context=True)
+async def support(ctx):
+    if ctx.message.author.bot:
+        return
+    await bot.say("https://discordbots.org/bot/458298539517411328/vote")
+    
+@bot.command(pass_context=True)
 async def gif(ctx, key : str):
     """ Replies a gif from giphy, <prefix>gif <args> """
     if ctx.message.author.bot:
