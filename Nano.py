@@ -65,8 +65,9 @@ async def help(ctx, cmd = None):
         embed.add_field(name="Moderation", value="clear, kick", inline=False)
         embed.add_field(name="Music", value="!p, !play, !np, !playlist, !queue, !s, !skip, !leave, !summon, !volume, !music_prefix", inline=False)
         embed.add_field(name="9gag", value="anime, comic, cosplay, kpop, savage, wtf", inline=False)
+        embed.add_field(name="Translator", value="translate, translate_to", inline=False)
         embed.add_field(name="No Category", value="help, echo, gif, status", inline=False)
-        
+        embed.add_field(name="Full Info", value="https://discordbots.org/bot/458298539517411328", inline=False)
         await bot.say(embed=embed)
     else:
         example = "usage: "
