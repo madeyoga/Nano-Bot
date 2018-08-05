@@ -325,7 +325,7 @@ class Music:
                 return
 
         try:
-            player = await state.voice.create_ytdl_player(state.list_url[index - 1], after=lambda: state.next())
+            player = await state.voice.create_ytdl_player(song, ytdl_options=opts, after=lambda: state.next())
         except Exception as e:
             fmt = 'An error occurred while processing this request: ```py\n{}: {}\n```'
             await self.bot.send_message(ctx.message.channel, fmt.format(type(e).__name__, e))

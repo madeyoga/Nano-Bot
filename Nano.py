@@ -16,7 +16,7 @@ import re
 import aiohttp
 from pathlib import Path
 
-startup_extensions = ["Music", "Moderation", "Info", "gag", "Translator"]
+startup_extensions = ["Moderation", "Info", "gag", "Translator"]
 
 # DISCORD CLIENT #
 bot = commands.Bot(command_prefix='.', description = "General")
@@ -63,7 +63,7 @@ async def help(ctx, cmd = None):
         
         embed.add_field(name="Info", value="info, ping, serverinfo", inline=False)
         embed.add_field(name="Moderation", value="clear, kick", inline=False)
-        embed.add_field(name="Music", value="join, p, pause, play, playing, playlist, queue, resume, s, skip, stop, summon, volume", inline=False)
+        embed.add_field(name="Music", value="!p, !play, !np, !playlist, !queue, !s, !skip, !leave, !summon, !volume, !music_prefix", inline=False)
         embed.add_field(name="9gag", value="anime, comic, cosplay, kpop, savage, wtf", inline=False)
         embed.add_field(name="No Category", value="help, echo, gif, status", inline=False)
         
