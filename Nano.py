@@ -78,7 +78,7 @@ async def help(ctx, cmd = None):
         elif cmd == "serverinfo":
             example+=".serverinfo"
         elif cmd == "clear":
-            example+=".clear / .clear 100"
+            example+=".clear / .clear 100\nCan only delete messages in the range of [2 - 100]"
         elif cmd == "kick":
             example+=""
         elif cmd == "join":
