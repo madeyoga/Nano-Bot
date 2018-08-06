@@ -1,3 +1,6 @@
 [submodule "nineapi"]
 	path = nineapi
 	url = https://github.com/and3rson/nineapi.git
+[submodule "osuapi"]
+	path = osuapi
+	url = https://github.com/khazhyk/osuapi.git
