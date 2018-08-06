@@ -67,7 +67,8 @@ async def help(ctx, cmd = None):
         embed.add_field(name="9gag's sections", value=".anime, .comic, .cosplay, .kpop, .savage, .wtf", inline=False)
         embed.add_field(name="Translator", value=".translate, .translate_to", inline=False)
         embed.add_field(name="No Category", value=".help, .echo, .gif, .support", inline=False)
-        embed.add_field(name="Full Info", value="https://discordbots.org/bot/458298539517411328", inline=False)
+        embed.add_field(name="Full Commands Info", value="https://discordbots.org/bot/458298539517411328", inline=False)
+        embed.add_field(name="Support", value="use .support to get vote link")
         await bot.say(embed=embed)
     else:
         example = "usage: "
