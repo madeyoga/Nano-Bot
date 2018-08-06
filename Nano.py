@@ -59,14 +59,14 @@ async def help(ctx, cmd = None):
         embed = discord.Embed(
             color=0x0000ff
             )
-        embed.set_author(name=".help <command>")
+        embed.set_author(name=".help <command>, to get command's detail")
         
-        embed.add_field(name="Info", value="info, ping, serverinfo", inline=False)
-        embed.add_field(name="Moderation", value="clear, kick", inline=False)
-        embed.add_field(name="Music", value="!p, !play, !np, !playlist, !queue, !s, !skip, !leave, !summon, !volume, !music_prefix", inline=False)
-        embed.add_field(name="9gag", value="anime, comic, cosplay, kpop, savage, wtf", inline=False)
-        embed.add_field(name="Translator", value="translate, translate_to", inline=False)
-        embed.add_field(name="No Category", value="help, echo, gif, status", inline=False)
+        embed.add_field(name="Info", value=".info, .ping, .serverinfo", inline=False)
+        embed.add_field(name="Moderation", value=".clear, .kick", inline=False)
+        embed.add_field(name="Music, use !help to see more", value="!p, !play, !np, !playlist, !queue, !s, !skip, !leave, !summon, !volume, !music_prefix", inline=False)
+        embed.add_field(name="9gag's sections", value=".anime, .comic, .cosplay, .kpop, .savage, .wtf", inline=False)
+        embed.add_field(name="Translator", value=".translate, .translate_to", inline=False)
+        embed.add_field(name="No Category", value=".help, .echo, .gif, .support", inline=False)
         embed.add_field(name="Full Info", value="https://discordbots.org/bot/458298539517411328", inline=False)
         await bot.say(embed=embed)
     else:
@@ -84,20 +84,20 @@ async def help(ctx, cmd = None):
         elif cmd == "join":
             example+=".join <server's name>"
         elif cmd == "p":
-            example+=".p 4 ,picks index 4 from playlist"
+            example+="!p 4 ,picks index 4 from playlist"
         elif cmd == "pause":
             example+=".pause"
         elif cmd == "play":
-            example+=".play music"
-        elif cmd == "playing":
-            example+=".playing ,shows currently playing song's info"
+            example+="!play music"
+        elif cmd == "np":
+            example+="!playing ,shows currently playing song's info"
         elif cmd == "s":
-            example+=".s anime ,search anime from youtube\nresults will be stored to playlist"
+            example+="!s anime ,search anime from youtube\nresults will be stored to playlist"
         elif cmd == "skip":
-            example+=".skip\n"
+            example+="!skip\n"
             example+="requester can immediately skips the song"
         elif cmd == "playlist":
-            example+=".playlist"
+            example+="!playlist"
         elif cmd == "anime":
             example+=".anime"
         elif cmd == "wtf":
@@ -115,7 +115,7 @@ async def help(ctx, cmd = None):
         elif cmd == "echo":
             example+=".echo hello world"
         await bot.say(example)
-    
+
 @bot.command(pass_context=True)
 async def echo(ctx, *args):
     if ctx.message.author.bot:

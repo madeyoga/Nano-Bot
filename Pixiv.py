@@ -33,7 +33,7 @@ class Pixiv:
         
         json_result = api.search_illust(key, search_target='partial_match_for_tags')
         if len(json_result.illusts) == 0:
-            await bot.say("Couldn't find " + key)
+            await self.bot.say("Couldn't find " + key)
             return
         random_number = random.randint(0, len(json_result.illusts) - 1)
         illust = json_result.illusts[random_number]

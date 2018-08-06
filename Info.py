@@ -71,16 +71,21 @@ class Info:
             embed = discord.Embed(
                 color=0x0000ff
             )
-            embed.set_author(name="Servers")
+            embed.set_author(name="I'm working for:")
             count=0
+            count2=0
+            embed.add_field(name="Servers count", value=str(len(servers)), inline=False)
             for server in servers:
-                count+=1
-                embed.add_field(name=str(count) + ". " + server.name, value="Member count: " + str(len(server.members)), inline=False)
+                count+=len(server.members)
+                count2+=len(server.channels)
+                #embed.add_field(name=str(count) + ". " + server.name, value="Member count: " + str(len(server.members)), inline=False)
+            embed.add_field(name="Total Members count", value=str(count), inline=False)
+            embed.add_field(name="Total Channels count", value=str(count2), inline=False)
             await self.bot.say(embed=embed)
         else:
             embed = discord.Embed(color=0x0000ff)
             embed.set_image(url="http://i.imgur.com/aF13v7A.gif")
-            await bot.say(embed=embed)
+            await self.bot.say(embed=embed)
     
 def setup(bot):
     bot.add_cog(Info(bot))
