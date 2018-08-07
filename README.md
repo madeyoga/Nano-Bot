@@ -7,6 +7,6 @@ Deployed on <a href="https://www.heroku.com">Heroku</a><br>
   <img src="https://discordbots.org/api/widget/458298539517411328.svg" alt="Nano" />
 </a>
 <br>
-update 05/08/2018: <a href="https://discordapp.com/oauth2/authorize?client_id=458298539517411328&permissions=8&scope=bot">Music commands</a> using JDA
+update 05/08/2018: <a href="https://github.com/MadeYoga/San">Music commands</a> using JDA
 
 <div>Add my discord: SomeLikeItHot#8195</div>
