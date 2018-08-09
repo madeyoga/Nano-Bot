@@ -28,8 +28,10 @@ class Moderation:
         messages=[]
         async for message in self.bot.logs_from(channel, limit=int(amount)):
             messages.append(message)
-
-        await self.bot.delete_messages(messages)
+        try:
+            await self.bot.delete_messages(messages)
+        except Exception as e:
+            await self.bot.say(e)
         
         await self.bot.say('Messages deleted')
 
