@@ -61,61 +61,17 @@ async def help(ctx, cmd = None):
             )
         embed.set_author(name=".help <command>, to get command's detail")
         
-        embed.add_field(name="Info", value=".info, .ping, .serverinfo", inline=False)
-        embed.add_field(name="Moderation", value=".clear, .kick", inline=False)
-        embed.add_field(name="Music, use !help to see more", value="!p, !play, !np, !playlist, !queue, !s, !skip, !leave, !summon, !volume, !music_prefix", inline=False)
-        embed.add_field(name="9gag's sections", value=".anime, .comic, .cosplay, .kpop, .savage, .wtf", inline=False)
-        embed.add_field(name="Translator", value=".translate, .translate_to", inline=False)
-        embed.add_field(name="No Category", value=".help, .echo, .gif, .support", inline=False)
+        embed.add_field(name="Info", value="info, ping, serverinfo", inline=False)
+        embed.add_field(name="Moderation", value="clear, kick", inline=False)
+        embed.add_field(name="Music, use !help to see more", value="p, play, np, playlist, queue, s, skip, leave, summon, volume, music_prefix", inline=False)
+        embed.add_field(name="9gag's sections", value="anime, comic, cosplay, kpop, savage, wtf", inline=False)
+        embed.add_field(name="Translator", value="translate, translate_to", inline=False)
+        embed.add_field(name="No Category", value="help, echo, gif, support", inline=False)
         embed.add_field(name="Full Commands Info", value="https://discordbots.org/bot/458298539517411328", inline=False)
-        embed.add_field(name="Support", value="use .support to get vote link")
+        embed.add_field(name="Support", value="use n>support to get vote link")
         await bot.say(embed=embed)
     else:
-        example = "usage: "
-        if cmd == "info":
-            example+=".info @user"
-        elif cmd == "ping":
-            example+=".ping"
-        elif cmd == "serverinfo":
-            example+=".serverinfo"
-        elif cmd == "clear":
-            example+=".clear / .clear 100\nCan only delete messages in the range of [2 - 100]"
-        elif cmd == "kick":
-            example+=""
-        elif cmd == "join":
-            example+=".join <server's name>"
-        elif cmd == "p":
-            example+="!p 4 ,picks index 4 from playlist"
-        elif cmd == "pause":
-            example+=".pause"
-        elif cmd == "play":
-            example+="!play music"
-        elif cmd == "np":
-            example+="!playing ,shows currently playing song's info"
-        elif cmd == "s":
-            example+="!s anime ,search anime from youtube\nresults will be stored to playlist"
-        elif cmd == "skip":
-            example+="!skip\n"
-            example+="requester can immediately skips the song"
-        elif cmd == "playlist":
-            example+="!playlist"
-        elif cmd == "anime":
-            example+=".anime"
-        elif cmd == "wtf":
-            example+=".wtf"
-        elif cmd == "savage":
-            example+=".savage"
-        elif cmd == "kpop":
-            example+=".kpop"
-        elif cmd == "comic":
-            example+=".comic"
-        elif cmd == "cosplay":
-            example+=".cosplay"
-        elif cmd == "help":
-            example+=".help"
-        elif cmd == "echo":
-            example+=".echo hello world"
-        await bot.say(example)
+        await bot.say("https://discordbots.org/bot/458298539517411328")
 
 @bot.command(pass_context=True)
 async def echo(ctx, *args):
