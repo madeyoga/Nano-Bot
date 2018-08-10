@@ -19,7 +19,7 @@ from pathlib import Path
 startup_extensions = ["Moderation", "Info", "gag", "Translator"]
 
 # DISCORD CLIENT #
-bot = commands.Bot(command_prefix='.', description = "General")
+bot = commands.Bot(command_prefix='n>', description = "General")
 bot.remove_command('help')
 
 dbltoken = str(os.environ.get('DBL_TOKEN'))
