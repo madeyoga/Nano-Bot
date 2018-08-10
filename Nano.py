@@ -59,16 +59,16 @@ async def help(ctx, cmd = None):
         embed = discord.Embed(
             color=0x0000ff
             )
-        embed.set_author(name=".help <command>, to get command's detail")
-        
-        embed.add_field(name="Info", value="info, ping, serverinfo", inline=False)
-        embed.add_field(name="Moderation", value="clear, kick", inline=False)
-        embed.add_field(name="Music, use !help to see more", value="p, play, np, playlist, queue, s, skip, leave, summon, volume, music_prefix", inline=False)
-        embed.add_field(name="9gag's sections", value="anime, comic, cosplay, kpop, savage, wtf", inline=False)
-        embed.add_field(name="Translator", value="translate, translate_to", inline=False)
-        embed.add_field(name="No Category", value="help, echo, gif, support", inline=False)
-        embed.add_field(name="Full Commands Info", value="https://discordbots.org/bot/458298539517411328", inline=False)
-        embed.add_field(name="Support", value="use n>support to get vote link")
+        #embed.set_author(name=".help <command>, to get command's detail")
+        embed.set_author(name="https://github.com/MadeYoga/Nano-Bot/wiki")
+        #embed.add_field(name="Info", value="info, ping, serverinfo", inline=False)
+        #embed.add_field(name="Moderation", value="clear, kick", inline=False)
+        #embed.add_field(name="Music, use !help to see more", value="p, play, np, playlist, queue, s, skip, leave, summon, volume, music_prefix", inline=False)
+        #embed.add_field(name="9gag's sections", value="anime, comic, cosplay, kpop, savage, wtf", inline=False)
+        #embed.add_field(name="Translator", value="translate, translate_to", inline=False)
+        #embed.add_field(name="No Category", value="help, echo, gif, support", inline=False)
+        #embed.add_field(name="Full Commands Info", value="https://discordbots.org/bot/458298539517411328", inline=False)
+        #embed.add_field(name="Support", value="use n>support to get vote link")
         await bot.say(embed=embed)
     else:
         await bot.say("https://discordbots.org/bot/458298539517411328")
