@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Update *12*/08/2018 
+## Update *12*/08/2018 (feature would be added on 13/08/2018)
 - pick many entries at once<br>
   - ex. `n>play 1 2 4 3`, to pick entry number 1, 2, 4 and 3
   - ex. `n>p 3 4 6 1`, to pick entry number 3, 4, 6, and 1
