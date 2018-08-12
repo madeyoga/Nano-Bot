@@ -4,3 +4,6 @@
 [submodule "osuapi"]
 	path = osuapi
 	url = https://github.com/khazhyk/osuapi.git
+[submodule "pixiv"]
+	path = pixiv
+	url = https://github.com/MadeYoga/pixiv.git
