@@ -32,7 +32,7 @@ giphy = safygiphy.Giphy()
 @bot.event
 async def on_ready():
     print ('Bot online')
-    await bot.change_presence(game=discord.Game(name='.help'))
+    await bot.change_presence(game=discord.Game(name='n>help'))
     
     payload = {"server_count"  : len(bot.servers)}
     async with aiohttp.ClientSession() as aioclient:
