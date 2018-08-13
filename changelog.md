@@ -13,10 +13,10 @@ All notable changes to this project will be documented in this file.
   - `add_role` and `rm_role`
     
     example usage: `n>add_role @role3 @user1 @user2 @role1`<br>
-      adds role1, role2, and role3 to user1 and user2, it takes `min` 1 mentioned `role` and 1 mentioned `user`
+      adds role1 and role3 to user1 and user2, it takes `min` 1 mentioned `role` and 1 mentioned `user`
       
     example usage: `n>rm_role @role3 @user1 @user2 @role1`<br>
-      removes role1, role2, and role3 from user1 and user2, it takes `min` 1 mentioned `role` and 1 mentioned `user`
+      removes role1, and role3 from user1 and user2, it takes `min` 1 mentioned `role` and 1 mentioned `user`
       
   - `c_category`, `c_text`, and `c_voice`
   
