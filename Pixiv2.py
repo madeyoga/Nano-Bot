@@ -16,9 +16,10 @@ from itertools import cycle
 import io
 import requests
 import random
+import os
 
 auth = OAuthHandler()
-auth.login("vngla21@gmail.com", "mym12345")
+auth.login(os.environ.get('PIXIV_MAIL'), os.environ.get('PIXIV_PASS'))
 aapi = AppPixivAPI(auth)
 
 # class MyThread(Thread):
