@@ -16,7 +16,7 @@ import re
 import aiohttp
 from pathlib import Path
 
-startup_extensions = ["Moderation", "Info", "gag", "Translator", "Pixiv2"]
+startup_extensions = ["Moderation", "Info", "gag", "Translator"]
 
 # DISCORD CLIENT #
 bot = commands.Bot(command_prefix='n>', description = "General")
