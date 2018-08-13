@@ -54,7 +54,11 @@ async def on_server_remove(server):
 async def help(ctx, cmd = None):
     if ctx.message.author.bot:
         return
-    await bot.say("https://github.com/MadeYoga/Nano-Bot/wiki")
+    embed = discord.Embed(
+        color=0x0000ff
+    )
+    embed.add_field(name="Check wiki for Commands guide\n", value="[Wiki](https://github.com/MadeYoga/Nano-Bot/wiki)\n[Change Log](https://github.com/MadeYoga/Nano-Bot/blob/master/changelog.md)", inline=False)
+    await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
 async def echo(ctx, *args):
