@@ -11,6 +11,7 @@ import urllib.request
 import urllib.parse
 import re
 from pathlib import Path
+import sched, time
 
 PIXIV_MAIL = str(os.environ.get('PIXIV_MAIL'))
 PIXIV_PASS = str(os.environ.get('PIXIV_PASS'))
@@ -19,9 +20,15 @@ PIXIV_PASS = str(os.environ.get('PIXIV_PASS'))
 api = AppPixivAPI()
 api.login(PIXIV_MAIL, PIXIV_PASS)
 
+def login():
+    api = AppPixivAPI()
+    api.login(PIXIV_MAIL, PIXIV_PASS)
+
 class Pixiv:
     def __init__(self, bot):
         self.bot = bot
+        self.s = sched.scheduler(time.time, time.sleep)
+        self.s.enter(900, 1, login, (self.s,))
 
     @commands.command(pass_context=True)
     async def pixiv(self, ctx, *args):

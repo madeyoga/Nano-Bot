@@ -8,7 +8,7 @@ class SourceState:
     def __init__(self, bot):
         self.bot = bot
         self.source_id = ""
-        self.dest_id = "ja"
+        self.dest_id = "en"
         self.translator = Translator()
         self.active_message = None
         self.is_dest=True
