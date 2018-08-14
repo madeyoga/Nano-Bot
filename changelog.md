@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 - Fixes Bug on command `volume`
 - Added new [Pixiv](https://www.pixiv.net) commands
   - pxv <br>
-    search illustrations from pixiv 
+    search illustrations from pixiv <br>
     usage: `n>pxv anime`<br>
     search `anime` from pixiv, response would be a link
   - pxv_user
