@@ -1,7 +1,40 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Update *12*/08/2018 (feature would be added on 13/08/2018)
+## Update 14/08/2018
+- Fixes Bug on command `volume`
+- Added new [Pixiv](https://www.pixiv.net) commands
+  - pxv <br>
+    search illustrations from pixiv 
+    usage: `n>pxv anime`<br>
+    search `anime` from pixiv, response would be a link
+  - pxv_user
+  
+    search Pixiv's users. 
+    
+    will response max 7 users. choose 1 user by typing the user's entry number to get the users detail.
+    
+    usage: `n>pxv_user chrome`<br>
+    search pixiv's users named 'chrome'<br>
+    [example](https://raw.githubusercontent.com/MadeYoga/San/master/img/pxv_user.PNG)
+  
+  - fgo
+    
+    usage: `n>fgo`
+    
+  - illust
+    
+    usage: `n>illust`
+    
+  - manga
+  
+    usage: `n>manga`
+  
+  - novel
+  
+    usage: `n>novel`
+
+## Update 13/08/2018
 - pick many entries at once<br>
   - ex. `n>play 1 2 4 3`, to pick entry number 1, 2, 4 and 3
   - ex. `n>p 3 4 6 1`, to pick entry number 3, 4, 6, and 1
