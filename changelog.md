@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ## Update 14/08/2018
-- Fixes Bug on command `volume`
+- Fixes Bug on command `volume`, error after change `music_prefix`
 - Added new [Pixiv](https://www.pixiv.net) commands
   - pxv <br>
     search illustrations from pixiv <br>
