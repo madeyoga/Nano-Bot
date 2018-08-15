@@ -16,7 +16,7 @@ import re
 import aiohttp
 from pathlib import Path
 
-startup_extensions = ["Moderation", "Info", "gag", "Translator"]
+startup_extensions = ["Moderation", "Info", "gag", "Translator", "Reddit"]
 
 # DISCORD CLIENT #
 bot = commands.Bot(command_prefix='n>', description = "General")
@@ -57,7 +57,9 @@ async def help(ctx, cmd = None):
     embed = discord.Embed(
         color=0x0000ff
     )
-    embed.add_field(name="Check wiki for Commands guide\n", value="[Wiki](https://github.com/MadeYoga/Nano-Bot/wiki)\n[Change Log](https://github.com/MadeYoga/Nano-Bot/blob/master/changelog.md)", inline=False)
+    embed.add_field(name=":bookmark: **Check wiki for Commands guide**\n", value="[Wiki](https://github.com/MadeYoga/Nano-Bot/wiki/Welcome-to-the-Nano-Bot-wiki!)\n[Change Log](https://github.com/MadeYoga/Nano-Bot/blob/master/changelog.md)", inline=False)
+    embed.add_field(name=":tools: **Support Dev**", value="Report bug, [Join Nano Support Server (Soon)]()\nDon't forget to **[Vote](https://discordbots.org/bot/458298539517411328/vote)** Nano-Bot :hearts:")
+    
     await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
