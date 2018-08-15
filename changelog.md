@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Update 15/08/2018
+- Added new [reddit](https://reddit.com) commands
+  - [memes](reddit.com/r/memes)<br>
+    Usage: `n>memes`
+  - [rwtf](reddit.com/r/wtf)<br>
+    Usage: `n>rwtf`
+
 ## Update 14/08/2018
 - Fixes Bug on command `volume`, error after change `music_prefix`
 - Added new [Pixiv](https://www.pixiv.net) commands
