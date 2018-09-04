@@ -22,24 +22,6 @@ auth = OAuthHandler()
 auth.login(os.environ.get('PIXIV_MAIL'), os.environ.get('PIXIV_PASS'))
 aapi = AppPixivAPI(auth)
 
-# class MyThread(Thread):
-#     def __init__(self, event, aapi2):
-#         Thread.__init__(self)
-#         self.stopped = event
-#         self.aapi2 = aapi2
-
-#     def run(self):
-#         while not self.stopped.wait(5):
-#             print("Login")
-#             auth = OAuthHandler()
-#             auth.login("vngla21@gmail.com", "mym12345")
-#             self.aapi2 = AppPixivAPI(auth)
-#             # call a function
-
-# stopFlag = Event()
-# thread = MyThread(stopFlag, aapi)
-#thread.start()
-
 class PixivState:
     def __init__(self, bot):
         self.bot = bot
@@ -157,7 +139,7 @@ class PixivListener:
         await self.bot.say("`n>translate <text>` to translate\n\nhttps://www.pixiv.net/novel/show.php?id=" + str(illust.id))
 
     @commands.command(pass_context = True)
-    async def fgo(self, ctx):
+    async def pfgo(self, ctx):
         pixvdl = PixivDownload()
         illusts = self.aapi.search_illust( word = "fgo" )
         while True:

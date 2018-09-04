@@ -54,7 +54,7 @@ class NineGag:
             return embed
     
     @commands.command(pass_context=True)
-    async def anime(self, ctx):
+    async def anime9(self, ctx):
         if ctx.message.author.bot:
             return
         state = self.get_gag_state(ctx.message.server)
