@@ -14,7 +14,6 @@ class RedditListener:
         self.bot = bot
         self.reddit = Reddit()
 
-
     @commands.command(pass_context=True)
     async def memes(self, ctx):
         submission = self.reddit.get_submission(subreddits.MEMES)
@@ -78,15 +77,6 @@ class RedditListener:
         embed.set_image(url=submission.url)
         await self.bot.say(embed=embed)
 
-    @commands.command(pass_context=True)
-    async def fgoart(self, ctx):
-        submission = self.reddit.get_submission(subreddits.FGOFANART)
-        embed = discord.Embed(
-            color = 0x0000ff
-        )
-        embed.set_image(url=submission.url)
-        await self.bot.say(embed=embed)
-    
     @commands.command(pass_context=True)
     async def fgoart(self, ctx):
         submission = self.reddit.get_submission(subreddits.FGOFANART)

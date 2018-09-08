@@ -105,6 +105,14 @@ async def status(ctx, *args):
         embed.set_image(url="http://i.imgur.com/aF13v7A.gif")
         await bot.say(embed=embed)
 
+@bot.command()
+async def eva(*args):
+    try:
+        res = eval(str(args))
+    except e:
+        await bot.say("invalid syntax")
+    await bot.say(res)
+
 if __name__ == '__main__':
     for extension in startup_extensions:
         try:
