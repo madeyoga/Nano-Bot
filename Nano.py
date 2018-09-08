@@ -107,6 +107,10 @@ async def status(ctx, *args):
 
 @bot.command()
 async def eva(*args):
+    expression = ""
+    for arg in args:
+        expression += arg + " "
+        
     try:
         res = eval(str(args))
     except e:
