@@ -110,9 +110,9 @@ async def eva(*args):
     expression = ""
     for arg in args:
         expression += arg + " "
-        
+
     try:
-        res = eval(str(args))
+        res = eval(expression)
     except e:
         await bot.say("invalid syntax")
     await bot.say(res)
