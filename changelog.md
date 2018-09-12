@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file.
   Master's experience would increase every time you sent a message on server wherever nano is in it<br>
   leveling system is not fixed yet.
   
-  and that being said, you can play anywhere as long as nano is in the server.
+  and that being said, you can play anywhere as long as nano was in the server.
   
   your profile(level/spirit_origin) is also the same wherever you play.
   
