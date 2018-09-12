@@ -1,13 +1,58 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Update 12/09/2018
+- TURNED OFF FOR A WHILE COMMANDS :
+  - PIXIV
+  - FGO GAME
+- Added new mini game FGO Mini (roll simulator)
+  - roll1
+    usage: `n>roll1`   -> roll 1 times, requires 3 SaintQuartz 
+  - roll10
+    usage: `n>roll10`  -> roll 10 times, requires 30 SaintQuartz to roll
+  - my_room
+    usage: `n>my_room` -> to check master's profile or spirit origin list<br>
+  
+  Master's experience would increase every time you sent a message on server wherever nano is in it<br>
+  leveling system is not fixed yet.
+  
+  and that being said, you can play anywhere as long as nano is in the server.
+  
+  your profile(level/spirit_origin) is also the same wherever you play.
+  
+  Upcoming game updates:
+  - daily -> to get free Saint_Quartz
+  - rich embed
+  
+- Added new [reddit](https://reddit.com) commands
+  - fgo
+    usage: `n>fgo`
+  - fgoart
+    usage: `n>fgoart` -> fgo's fan art
+  - anime
+    usage: `n>anime` 
+  - scathach
+    usage: `n>scathach`
+  - animeme
+    usage: `n>animeme`
+  - dank
+    usage: `n>dank`
+  - [moescape](https://reddit.com/r/moescape)
+    usage: `n>moescape`
+  - aniwallp
+    usage: `n>aniwallp`
+  - tsun
+    usage: `n>tsun`
+  - waifu
+    usage: `n>waifu` -> picks random waifu
+
 ## Update 15/08/2018
 - Added new [reddit](https://reddit.com) commands
   - [memes](https://reddit.com/r/memes)<br>
     Usage: `n>memes`
   - [rwtf](https://reddit.com/r/wtf)<br>
     Usage: `n>rwtf`
-
+  
 ## Update 14/08/2018
 - Fixes Bug on command `volume`, error after change `music_prefix`
 - Added new [Pixiv](https://www.pixiv.net) commands
@@ -24,10 +69,6 @@ All notable changes to this project will be documented in this file.
     usage: `n>pxv_user chrome`<br>
     search pixiv's users named 'chrome'<br>
     [example](https://raw.githubusercontent.com/MadeYoga/San/master/img/pxv_user.PNG)
-  
-  - fgo
-    
-    usage: `n>fgo`
     
   - illust
     
