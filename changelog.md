@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ## Update 12/09/2018
-- TURNED OFF FOR A WHILE COMMANDS :
+- TURNED OFF FOR A WHILE :
   - PIXIV
   - FGO GAME
 - Added new mini game FGO Mini (roll simulator)
