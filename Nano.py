@@ -14,6 +14,8 @@ import re
 import aiohttp
 from pathlib import Path
 
+from datetime import date
+
 startup_extensions = ["Moderation", "Info", "gag", "Translator", "Reddit"]
 
 commands_string = "**Image**\n`memes` `dank` `anime` `animeme` `anime9` `waifu` `tsun` `aniwallp` `moescape` `fgo` `fgoart` `cosplay` `comic` `rwtf` `wtf` `kpop` `savage`\n"
