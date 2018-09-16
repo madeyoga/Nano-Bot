@@ -56,6 +56,8 @@ class Translators:
 
     @commands.command(pass_context=True)
     async def translate_to(self, ctx):
+        if ctx.message.author.bot:
+            return
         state = self.get_source_state(ctx.message.server)
         state.is_dest=True
         msg = await self.bot.say(embed=self.get_embedded_options(True))
@@ -67,6 +69,8 @@ class Translators:
 
     @commands.command(pass_context=True)
     async def translate_from(self, ctx):
+        if ctx.message.author.bot:
+            return
         state = self.get_source_state(ctx.message.server)
         state.is_dest=False
         msg = await self.bot.say(embed=self.get_embedded_options(False))
@@ -79,6 +83,8 @@ class Translators:
 
     @commands.command(pass_context=True)
     async def translate(self, ctx, *args):
+        if ctx.message.author.bot:
+            return
         state = self.get_source_state(ctx.message.server)
         words = ""
         for word in args:
