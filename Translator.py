@@ -90,6 +90,11 @@ class Translators:
         for word in args:
             words+=word
             words+=" "
+        if words.isspace():
+            return
+        # print("Translating: " + words)
+        if len(words) > 1024:
+            return
         if state.source_id != "":
             result = state.translator.translate(words, dest=state.dest_id, src=state.source_id).text
         else:
