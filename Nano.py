@@ -16,6 +16,12 @@ from pathlib import Path
 
 startup_extensions = ["Moderation", "Info", "gag", "Translator", "Reddit"]
 
+commands_string = "**Image**\n`memes` `dank` `anime` `animeme` `anime9` `waifu` `tsun` `aniwallp` `moescape` `fgo` `fgoart` `cosplay` `comic` `rwtf` `wtf` `kpop` `savage`\n"
+commands_string += "**Music**\n`play` `p` `search` `s` `s_limit` `volume` `skip` `pause` `resume` `leave` `repeat` `np` `queue`\n"
+commands_string += "**Manage**\n`kick` `add_role` `ban` `c_text` `c_voice` `c_category` `rm_role`\n"
+commands_string += "**Translate**\n`translate` `translate_to` `translate_from`\n"
+commands_string += "**Other**\n`lenny` `flip` `avatar` `eva`"
+
 # DISCORD CLIENT #
 bot = commands.Bot(command_prefix='n>', description = "General")
 bot.remove_command('help')
@@ -55,9 +61,12 @@ async def help(ctx, cmd = None):
     embed = discord.Embed(
         color=0x0000ff
     )
+
     embed.add_field(name=":bookmark: **Check wiki for Commands guide**\n", value="[Wiki](https://github.com/MadeYoga/Nano-Bot/wiki/Welcome-to-the-Nano-Bot-wiki!)\n[Change Log](https://github.com/MadeYoga/Nano-Bot/blob/master/changelog.md)", inline=False)
-    embed.add_field(name=":tools: **Support Dev**", value="Report bug, [Join Nano Support Server (Soon)]()\nDon't forget to **[Vote](https://discordbots.org/bot/458298539517411328/vote)** Nano-Bot :hearts:")
-    
+    embed.add_field(name=":tools: **Support Dev**", value="Report bug, [Join Nano Support Server](https://discord.gg/Y8sB4ay)\nDon't forget to **[Vote](https://discordbots.org/bot/458298539517411328/vote)** Nano-Bot :hearts:")
+    embed.add_field(name=":books: **Commands**", value=commands_string, inline=False)
+    embed.set_footer(text="Nano-bot " + str(date.today()))
+    embed.set_thumbnail(url=bot.user.avatar_url)
     await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
