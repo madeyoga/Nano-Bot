@@ -64,9 +64,20 @@ async def help(ctx, cmd = None):
         color=0x0000ff
     )
 
-    embed.add_field(name=":bookmark: **Check wiki for Commands guide**\n", value="[Wiki](https://github.com/MadeYoga/Nano-Bot/wiki/Welcome-to-the-Nano-Bot-wiki!)\n[Change Log](https://github.com/MadeYoga/Nano-Bot/blob/master/changelog.md)", inline=False)
-    embed.add_field(name=":tools: **Support Dev**", value="Report bug, [Join Nano Support Server](https://discord.gg/Y8sB4ay)\nDon't forget to **[Vote](https://discordbots.org/bot/458298539517411328/vote)** Nano-Bot :hearts:")
-    embed.add_field(name=":books: **Commands**", value=commands_string, inline=False)
+    embed.add_field(
+        name=":bookmark: **Check wiki for Commands guide**\n",
+        value="[Wiki](https://github.com/MadeYoga/Nano-Bot/wiki/Welcome-to-the-Nano-Bot-wiki!)\n[Change Log](https://github.com/MadeYoga/Nano-Bot/blob/master/changelog.md)",
+        inline=False
+        )
+    embed.add_field(
+        name=":tools: **Support Dev**",
+        value="Report bug, [Join Nano Support Server](https://discord.gg/Y8sB4ay)\nDon't forget to **[Vote](https://discordbots.org/bot/458298539517411328/vote)** Nano-Bot :hearts:"
+        )
+    embed.add_field(
+        name=":books: **Commands** | Prefix: **n>**",
+        value=commands_string,
+        inline=False
+        )
     embed.set_footer(text="Nano-bot " + str(date.today()))
     embed.set_thumbnail(url=bot.user.avatar_url)
     await bot.say(embed=embed)
