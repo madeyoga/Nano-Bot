@@ -1,6 +1,6 @@
 # Nano-Bot
 ![Discord Badge](https://discordapp.com/api/guilds/458296099049046018/embed.png)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/MadeYoga/Nano-Bot/issues)
 [![Build Status](https://travis-ci.org/MadeYoga/Nano-Bot.png?branch=master)](https://travis-ci.org/MadeYoga/Nano-Bot)
 [![CodeFactor](https://www.codefactor.io/repository/github/madeyoga/nano-bot/badge)](https://www.codefactor.io/repository/github/madeyoga/nano-bot)
 
