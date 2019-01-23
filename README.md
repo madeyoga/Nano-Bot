@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.org/MadeYoga/Nano-Bot.png?branch=master)](https://travis-ci.org/MadeYoga/Nano-Bot)
 [![CodeFactor](https://www.codefactor.io/repository/github/madeyoga/nano-bot/badge)](https://www.codefactor.io/repository/github/madeyoga/nano-bot)
 
+[Nano-Bot-Rewrite](https://github.com/MadeYoga/Nano-Rewrite)
+
 <a href="https://discordbots.org/bot/458298539517411328" >
   <img src="https://discordbots.org/api/widget/458298539517411328.svg" alt="Nano" />
 </a>
@@ -15,6 +17,8 @@ Deployed on <a href="https://www.heroku.com">Heroku</a>
 update 05/08/2018: <a href="https://github.com/MadeYoga/San">Music commands</a> using JDA
 
 <div>Add my discord: SomeLikeItHot#8195</div>
+
+
 
 # Nano-Bot - Music
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
