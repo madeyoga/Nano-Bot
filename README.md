@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/MadeYoga/Nano-Bot.png?branch=master)](https://travis-ci.org/MadeYoga/Nano-Bot)
 [![CodeFactor](https://www.codefactor.io/repository/github/madeyoga/nano-bot/badge)](https://www.codefactor.io/repository/github/madeyoga/nano-bot)
 
-[Nano-Bot-Rewrite](https://github.com/MadeYoga/Nano-Rewrite)
+[Migrating Nano-Bot to Rewrite](https://github.com/MadeYoga/Nano-Rewrite)
 
 <a href="https://discordbots.org/bot/458298539517411328" >
   <img src="https://discordbots.org/api/widget/458298539517411328.svg" alt="Nano" />
