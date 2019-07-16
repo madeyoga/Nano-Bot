@@ -16,7 +16,7 @@ from pathlib import Path
 
 from datetime import date
 
-startup_extensions = ["Moderation", "Info", "gag", "Translator", "Reddit", "Pixiv"]
+startup_extensions = ["Moderation", "Info", "gag", "Translator", "Reddit", "Pixiv2"]
 
 commands_string = "**Image**\n`memes` `dank` `anime` `animeme` `anime9` `waifu` `tsun` `aniwallp` `moescape` `fgo` `fgoart` `cosplay` `comic` `rwtf` `wtf` `kpop` `savage`\n"
 commands_string += "**Music**\n`play` `p` `search` `s` `s_limit` `volume` `skip` `pause` `resume` `leave` `repeat` `np` `queue`\n"
