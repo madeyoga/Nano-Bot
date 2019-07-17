@@ -66,14 +66,15 @@ class PixivListener:
                 return
             entry = state.entries[int(message.content) - 1]
             detail = self.aapi.user_detail( user_id = entry.user.id )
+            print(str(detail))
             msg1 = "**" + detail.user.comment + "**\nRegion: **" + detail.profile.region + "**\n"
             embed = discord.Embed(title="**" + entry.user.name + "**", description=msg1, color=0x9999ff)
             #embed.set_image(url=entry.user.profile_image_urls['medium'])
             embed.add_field(name="**ID**", value=entry.user.id, inline=True)
             embed.add_field(name="**Account**", value="**["+entry.user.account+"](https://www.pixiv.net/member.php?id="+str(entry.user.id)+")**", inline=True)
             embed.add_field(name="**Birthday**", value=detail.profile.birth_day, inline=True)
-            embed.add_field(name="**Total Following**", value=str(detail.profile.total_follow_users), inline=True)
-            
+            # embed.add_field(name="**Total Following**", value=str(detail.profile.total_follow_users), inline=True)
+            embed.add_field(name="**Total Following**", value=str("XXX"), inline=True)
 
             msg2 = "Illustrations:\t" + str(detail.profile.total_illusts) + "\nMangas:\t" + str(detail.profile.total_manga) + "\n"
             msg2+= "Novels:\t" + str(detail.profile.total_novels) + "" 
