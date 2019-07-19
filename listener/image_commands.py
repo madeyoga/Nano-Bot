@@ -5,7 +5,7 @@ from .core.image import Reddit, Subreddits, Gag, Sections
 subreddits = Subreddits()
 sections = Sections()
 
-class ImageListener:
+class ImageListener(commands.Cog):
     """Image listener cogs"""
 
     def __init__(self, client):
