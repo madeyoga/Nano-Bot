@@ -19,8 +19,9 @@ class NanoClient(commands.Bot):
         print('Logged on as {0}!'.format(self.user))
 
     async def on_message(self, message):
-        if message.author.bot:
-            return
-        print('Message from {0.author}: {0.content}'.format(message))
-        ctx = await self.get_context(message, cls=NanoContext)
-        await self.invoke(ctx)
+        return
+#         if message.author.bot:
+#             return
+#         print('Message from {0.author}: {0.content}'.format(message))
+#         ctx = await self.get_context(message, cls=NanoContext)
+#         await self.invoke(ctx)
