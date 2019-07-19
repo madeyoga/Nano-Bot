@@ -10,7 +10,7 @@ from .core.ytpy.ytpy.youtube import YoutubeService, YoutubeVideo
 
 ys = YoutubeService()
 
-class Music:
+class Music(commands.Cog):
     def __init__(self, bot):
         self.client = bot
         self.guild_states = {}
