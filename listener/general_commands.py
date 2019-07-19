@@ -4,7 +4,7 @@ from discord.ext import commands
 commands_string = "**Music**\n`play`, `p`, `search`, `s`, `volume`, `queue`, `q`, `skip`, `stop`, `now_playing`, `now_play`, `nowplay`, `np`, `pause`, `resume`, `repeat`, `loop`, `shuffle`\n"
 commands_string += "**Image**\n`meme` `dank` `anime` `animeme` `anime9` `waifu` `tsun` `aniwallp` `moescape` `fgo` `fgoart` `cosplay` `comic` `rwtf` `wtf` `kpop` `savage`\n"
 
-class GeneralListener:
+class GeneralListener(commands.Cog):
 
     def __init__(self, client):
         self.client = client
