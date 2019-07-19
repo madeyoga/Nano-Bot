@@ -1,1 +1,1 @@
-worker: python Nano.py
+worker: python main.py
