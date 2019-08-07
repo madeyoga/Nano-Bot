@@ -1,8 +1,10 @@
-discord.py==1.0.0
+discord.py
 discord.py[voice]
 google-api-python-client
 google-auth
 google-auth-httplib2
+oauth2client
+pynacl
 youtube-dl
 asyncio
 praw

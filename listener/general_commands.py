@@ -24,7 +24,7 @@ class GeneralListener(commands.Cog):
             value=commands_string,
             inline=False
             )
-        nano_bot = await self.client.get_user_info(self.client.id)
+        nano_bot = self.client.get_user(self.client.user.id)
         embed.set_thumbnail(url=nano_bot.avatar_url)
         await ctx.send(embed=embed)
 

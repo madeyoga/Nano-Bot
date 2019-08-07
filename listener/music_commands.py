@@ -262,11 +262,6 @@ class Music(commands.Cog):
         """
 
         return
-        # state = self.get_guild_state(ctx.guild.id)
-        # if ctx.author.voice:
-        #     state.voice_client = await ctx.author.voice.channel.connect()
-        # else:
-        #     await ctx.send("You are not connected to a voice channel.")
 
     @commands.command(name='np', aliases=['now_play', 'nowplay', 'now_playing'])
     async def now_playing_(self, ctx):
@@ -372,7 +367,6 @@ class Music(commands.Cog):
     async def ensure_voice(self, ctx):
         """Do this before invoke commands"""
 
-        self.get_guild_state(ctx.guild.id)
         # check author voice state
         if ctx.voice_client is None:
             if ctx.author.voice:

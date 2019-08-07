@@ -6,10 +6,10 @@ startup_extensions = [
     'listener.general_commands',
     'listener.image_commands',
     'listener.music_commands',
-    'listener.gacha_commands'
+    #'listener.gacha_commands'
 ]
 
-client = Client(command_prefix='n>')
+client = Client(command_prefix='do.')
 client.remove_command('help')
 
 if __name__ == '__main__':
