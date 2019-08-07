@@ -9,7 +9,7 @@ startup_extensions = [
     #'listener.gacha_commands'
 ]
 
-client = Client(command_prefix='do.')
+client = Client(command_prefix='n>')
 client.remove_command('help')
 
 if __name__ == '__main__':
