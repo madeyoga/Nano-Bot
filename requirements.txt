@@ -1,10 +1,10 @@
-discord.py
+discord.py==1.2.3
 discord.py[voice]
 google-api-python-client
 google-auth
 google-auth-httplib2
 oauth2client
 pynacl
-youtube-dl
+youtube_dl
 asyncio
 praw
