@@ -20,7 +20,7 @@ class GeneralListener(commands.Cog):
             value="Feedback/Report bug, [Join Nano Support Server](https://discord.gg/Y8sB4ay)\nDon't forget to **[Vote]** Nano-Bot :hearts:"
             )
         embed.add_field(
-            name=":books: **Commands** | Prefix: **do.**",
+            name=":books: **Commands** | Prefix: **n>**",
             value=commands_string,
             inline=False
             )
