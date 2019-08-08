@@ -9,7 +9,7 @@ from .core.music import YTDLSource, GuildVoiceState, VoiceEntry
 from .core.ytpy.ytpy.youtube import YoutubeService, YoutubeVideo
 
 if not discord.opus.is_loaded():
-    discord.opus.load_opus('libopus.so')
+    discord.opus.load_opus('opus')
 
 ys = YoutubeService()
 
