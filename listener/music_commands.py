@@ -372,6 +372,7 @@ class Music(commands.Cog):
     async def ensure_voice(self, ctx):
         """Do this before invoke commands"""
 
+        self.get_guild_state(ctx.guild.id)
         # check author voice state
         if ctx.voice_client is None:
             if ctx.author.voice:
