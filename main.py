@@ -4,7 +4,7 @@ from listener.core import config
 
 startup_extensions = [
     'listener.general_commands',
-    #'listener.image_commands',
+    'listener.image_commands',
     'listener.music_commands',
     #'listener.gacha_commands'
 ]
