@@ -198,6 +198,11 @@ class Music(commands.Cog):
 
         await ctx.send('Now playing: {}'.format(query))
 
+    @commands.command(name="playlist", aliases=['pl', 'play_list'])
+    async def play_list(self, ctx, *, url):
+        """Handles playlist input"""
+        return
+
     @commands.command()
     async def yt(self, ctx, *, url):
         """Plays from a url (almost anything youtube_dl supports)"""

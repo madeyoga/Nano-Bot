@@ -23,7 +23,7 @@ ytdl_format_options = {
 
 ffmpeg_options = {
     'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
-    'options': '-vn'
+    'options': '-vn -nostats -loglevel 0'
 }
 
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
@@ -84,7 +84,7 @@ class GuildVoiceState:
         self.current = None # current voice_entry
         self.voice_client = None
         self.queue = [] # voice entries
-        self.volume = 0.25
+        self.volume = 0.05
         self.search_result = None
         self.channel = None
         self.skip_votes = set()
