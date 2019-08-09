@@ -60,6 +60,11 @@ class Subreddits:
     TSUNDERES       = "Tsunderes"
     ANIMEWALLPAPER  = "Animewallpaper"  # ANIME WALLPAPER ARTS
     MOESCAPE        = "Moescape"        # ANIME WALLPAPER ARTS
+    MAMARAIKOU      = "MamaRaikou"
+    SABER           = "Saber"
+    FGOCOMICS       = "FGOcomics"
+    FATEPRISMAILLYA = "FatePrismaIllya"
+    ILLYASVIEL      = "Illyasviel"
 
 class Reddit:
     def __init__(self):
@@ -77,6 +82,13 @@ class Reddit:
                 break
         return submission
 
-class Pixiv:
-    def __init__(self):
-        self.pixivpy = 0
+    def search_post(self, keyword):
+        return self.reddit.subreddit('all').search(keyword)
+        
+    def search_get_post(self, keyword):
+        submissions = list(self.reddit.subreddit('all').search(keyword))
+        while True:
+            submission = random.choice(submissions)
+            if not submission.stickied and '.' in str(submission.url)[-5:]:
+                break
+        return submission

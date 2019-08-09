@@ -31,6 +31,14 @@ class ImageListener(commands.Cog):
         embed.set_image(url=submission.url)
         return embed
 
+    async def get_embedded_search_post(self, keywords):
+        """Search & get submission from subreddit"""
+
+        submission = await self.client.loop.run_in_executor(None, lambda: self.reddit.search_get_post(keywords))
+        embed = discord.Embed(color = discord.Colour(value=11735575).orange())
+        embed.set_image(url=submission.url)
+        return embed
+
     @commands.command(name='kpop', aliases=['KPOP'])
     async def kpop_(self, ctx):
         await ctx.send(embed=self.get_embedded_gag(sections.KPOP))
@@ -121,6 +129,30 @@ class ImageListener(commands.Cog):
     async def moescape(self, ctx):
         await ctx.send(
             embed=await self.get_embedded_submission(subreddits.MOESCAPE)
+            )
+    
+    @commands.command()
+    async def saber(self, ctx):
+        await ctx.send(
+            embed=await self.get_embedded_submission(subreddits.SABER)
+            )
+
+    @commands.command()
+    async def raikou(self, ctx):
+        await ctx.send(
+            embed=await self.get_embedded_submission(subreddits.MAMARAIKOU)
+            )
+            
+    @commands.command()
+    async def abby(self, ctx):
+        await ctx.send(
+            embed=await self.get_embedded_search_post("fate abby")
+            )
+    
+    @commands.command(aliases=['r/', 'search_reddit', 'reddit'])
+    async def search_get_reddit(self, ctx, keywords):
+        await ctx.send(
+            embed=await self.get_embedded_search_post(keywords)
             )
 
 def setup(client):
