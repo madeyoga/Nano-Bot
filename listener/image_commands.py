@@ -149,10 +149,10 @@ class ImageListener(commands.Cog):
             embed=await self.get_embedded_search_post("fate abby")
             )
     
-    @commands.command(aliases=['r/', 'search_reddit', 'reddit'])
-    async def search_get_reddit(self, ctx, keywords):
+    @commands.command(aliases=['r/', 'reddit_search', 'reddit'])
+    async def search_get_reddit(self, ctx, *keywords):
         await ctx.send(
-            embed=await self.get_embedded_search_post(keywords)
+            embed=await self.get_embedded_search_post(" ".join(keywords))
             )
 
 def setup(client):
