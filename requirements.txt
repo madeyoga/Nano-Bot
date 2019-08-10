@@ -8,3 +8,4 @@ pynacl
 youtube_dl
 asyncio
 praw
+aiohttp
