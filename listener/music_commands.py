@@ -94,7 +94,7 @@ class Music(commands.Cog):
     async def handle_url(self, ctx, url):
         """Handle input url, play from given url"""
 
-        search_result = await self.client.loop.run_in_executor(None, lambda: ys.search(keyword))
+        search_result = await self.client.loop.run_in_executor(None, lambda: ys.search(url))
         try:
             search_result[0]
         except:
@@ -137,7 +137,7 @@ class Music(commands.Cog):
         keyword = "".join([word+" " for word in args])
 
         # check if inpuy keyword is url
-        if 'www' in keyword or 'youtu' in keyword:
+        if 'www' in keyword or 'youtu' in keyword or 'http' in keyword:
             # handle url
             await self.handle_url(ctx, keyword)
             return
@@ -147,7 +147,7 @@ class Music(commands.Cog):
         # build embed
         embed = discord.Embed(
             title='Song Selection | Reply the song number to continue',
-            description='prefix: do. | search_limit: 7',
+            description='prefix: n> | search_limit: 7',
             color=discord.Colour(value=11735575).orange()
             )
 
