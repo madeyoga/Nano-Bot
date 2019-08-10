@@ -1,8 +1,21 @@
 import discord
 from discord.ext import commands
 
-commands_string = "**Music**\n`play`, `p`, `search`, `s`, `volume`, `queue`, `q`, `skip`, `stop`, `now_playing`, `now_play`, `nowplay`, `np`, `pause`, `resume`, `repeat`, `loop`, `shuffle`\n"
-commands_string += "**Image**\n`meme` `dank` `anime` `animeme` `anime9` `waifu` `tsun` `aniwallp` `moescape` `fgo` `fgoart` `cosplay` `comic` `rwtf` `wtf` `kpop` `savage`\n"
+commands_string = """
+**Music**
+`play`, `p`, `search`, `s`, `volume`, `queue`, `q`, `skip`, `stop`, `now_playing`, `now_play`, `nowplay`, `np`, `pause`, `resume`, `repeat`, `loop`, `shuffle`
+
+**FGO Image**
+`fgo` `fgoart` `scathach` `raikou` `saber` `abby`
+
+**Image**
+`meme` `dank` `anime` `animeme` `anime9` `waifu` `tsun` `aniwallp` `moescape` `cosplay` `comic` `rwtf` `wtf` `kpop` `savage`
+
+**Reddit Image Search**
+aliases: `reddit` `r/` `reddit_search`
+usage: 
+```n>reddit <keywords>```
+"""
 
 class GeneralListener(commands.Cog):
 
@@ -12,12 +25,12 @@ class GeneralListener(commands.Cog):
     @commands.command()
     async def help(self, ctx):
         embed = discord.Embed(
-            title="Nano-bot's Commands",
+            title="Nano-bot's Command List",
             colour=discord.Colour(value=11735575).orange()
             )
         embed.add_field(
             name=":tools: **Support Dev**",
-            value="Feedback/Report bug, [Join Nano Support Server](https://discord.gg/Y8sB4ay)\nDon't forget to **[Vote]** Nano-Bot :hearts:"
+            value="Feedback/Report bug, [Join Nano Support Server](https://discord.gg/Y8sB4ay)\nDon't forget to **[Vote](https://discordbots.org/bot/458298539517411328/vote)** Nano-Bot :hearts:"
             )
         embed.add_field(
             name=":books: **Commands** | Prefix: **n>**",
@@ -42,6 +55,14 @@ class GeneralListener(commands.Cog):
             colour=discord.Colour(value=11735575).orange()
             )
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def say(self, ctx, *args):
+        await ctx.send(" ".join(args))
+
+    @commands.command()
+    async def set_status(self, ctx, *args):
+        await self.client.change_presence( activity=discord.Game(" ".join(args)) )
 
 def setup(client):
     client.add_cog(GeneralListener(client))
