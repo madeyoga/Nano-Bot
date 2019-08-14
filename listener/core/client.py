@@ -33,11 +33,11 @@ class NanoClient(commands.Bot):
         await self.update_status_on_dbl()
         print("Logged in as {}".format(super(NanoClient, self).user))
     
-    async def on_guild_join(self):
+    async def on_guild_join(self, guild):
         """Updates DBL when client joins a guild"""
         await self.update_status_on_dbl()
 
-    async def on_guild_leave(self):
+    async def on_guild_leave(self, guild):
         """Updates DBL when client leaves a guild"""
         await self.update_status_on_dbl()
 

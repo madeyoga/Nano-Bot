@@ -64,6 +64,18 @@ class GeneralListener(commands.Cog):
     async def set_status(self, ctx, *args):
         await self.client.change_presence( activity=discord.Game(" ".join(args)) )
 
+    @commands.command(aliases=['avatar'])
+    async def ava(self, ctx, *args):
+        """Response mentioned user's avatar"""
+
+        if len(ctx.message.mentions) <= 0:
+            await ctx.send("Please @mention the user")
+            return
+        mentioned_user = ctx.message.mentions[0]
+        embed = discord.Embed(title=mentioned_user.name, type="rich")
+        embed.set_image(url=mentioned_user.avatar_url)
+        await ctx.send(embed=embed)
+
 def setup(client):
     client.add_cog(GeneralListener(client))
     print('GeneralListener is Loaded')
