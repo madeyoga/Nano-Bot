@@ -6,6 +6,7 @@ google-auth-httplib2
 oauth2client
 pynacl
 youtube_dl
-asyncio
 praw
 aiohttp
+asyncio
+
