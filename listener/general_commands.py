@@ -9,7 +9,7 @@ commands_string = """
 `fgo` `fgoart` `scathach` `raikou` `saber` `abby`
 
 **Image**
-`meme` `dank` `anime` `animeme` `anime9` `waifu` `tsun` `aniwallp` `moescape` `cosplay` `comic` `rwtf` `wtf` `kpop` `savage`
+`dank` `anime` `animeme` `anime9` `waifu` `tsun` `aniwallp` `moescape` `rwtf`
 
 **Reddit Image Search**
 aliases: `reddit` `r/` `reddit_search`
