@@ -62,6 +62,8 @@ class GeneralListener(commands.Cog):
 
     @commands.command()
     async def set_status(self, ctx, *args):
+        if ctx.message.author.id != ctx.owner_id:
+            return
         await self.client.change_presence( activity=discord.Game(" ".join(args)) )
 
     @commands.command(aliases=['avatar'])
