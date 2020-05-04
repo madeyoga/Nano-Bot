@@ -5,7 +5,7 @@ google-auth
 google-auth-httplib2
 oauth2client
 pynacl
-youtube_dl==2020.03.24
+youtube_dl==2020.05.03
 praw
 aiohttp
 asyncio
