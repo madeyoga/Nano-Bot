@@ -246,7 +246,7 @@ class GuildVoiceState:
         await self.channel.send(embed=embed, delete_after=15)
 
         self.current = None
-        self.queue = []
+        self.queue.clear()
 
     async def await_for_member(self):
         """Awaiting for any member to join voice channel."""
