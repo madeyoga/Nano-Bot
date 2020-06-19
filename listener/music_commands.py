@@ -29,39 +29,6 @@ class Music(commands.Cog):
             self.guild_states[guild_id] = GuildVoiceState(client=self.client)
         return self.guild_states[guild_id]
 
-    # async def on_voice_state_update(self, member, before, after):
-    #     """Listener for when guild member updates their voice state.
-    #     For memory efficiency.
-    #     State 1:
-    #     If member leave voice channel and then client is the only 1 at voice channel
-    #     Then pause, countdown to leave voice channel if theres no one comin to the voice channel.
-    #
-    #     State 2:
-    #     Else if someone join before countdown finished
-    #     Then resumes.
-    #     """
-    #
-    #     if member.bot:
-    #         return
-    #
-    #     state = self.get_guild_state(member.guild.id)
-    #     if state.current is None or state.channel is None:
-    #         return
-    #
-    #     # theres no one else except client in voice channel.
-    #     if len(state.voice_client.channel.members) <= 1:
-    #         if state.voice_client.is_playing():
-    #             state.voice_client.pause()
-    #             await state.channel.send(':pause_button: | Awaiting for any member to join.')
-    #             state.waiting = asyncio.ensure_future(state.await_for_member())
-    #     else:
-    #         # if someone joins and client at awaiting state.
-    #         if not state.voice_client.is_playing():
-    #             state.voice_client.resume()
-    #             await state.channel.send(':arrow_forward: | Continue playing song.')
-    #             state.waiting.cancel()
-    #             state.waiting = None
-
     async def play(self, ctx, video=None):
         """Plays song from given video"""
 
@@ -110,7 +77,7 @@ class Music(commands.Cog):
         entry = VoiceEntry(
             player = None,
             requester = ctx.message.author,
-            video = search_result[0]
+            video = search_result
             )
 
         state = self.get_guild_state(ctx.guild.id)
@@ -136,6 +103,12 @@ class Music(commands.Cog):
         await ctx.send(embed=state.get_embedded_np())
         return
 
+    @commands.command(name='music_states')
+    async def states_(self, ctx):
+        if ctx.author.id == self.client.owner_id:
+            for guild_id in self.guild_states:
+                print(str(self.guild_states[guild_id]))
+
     # @commands.cooldown(1, 3, commands.BucketType.guild)
     @commands.command(name='search', aliases=['s', 'Search', 'SEARCH', 'play', 'p'])
     async def search_(self, ctx, *args):
@@ -143,6 +116,8 @@ class Music(commands.Cog):
 
         # get keyword from args
         keyword = "".join([word+" " for word in args])
+
+        print(ctx.guild.name, ctx.author.name, keyword)
 
         # check if inpuy keyword is url
         if 'www' in keyword or 'youtu' in keyword or 'http' in keyword:
