@@ -91,6 +91,9 @@ class GuildVoiceState:
         self.repeat = False
         self.waiting = None
 
+    def __str__(self):
+        return "{}/{}/{}queue length/repeat{}".format(self.channel.guild.name,self.channel.name, len(self.queue), self.repeat)
+
     def get_embedded_np(self):
         """Get embbeded 'now playing song'"""
 
