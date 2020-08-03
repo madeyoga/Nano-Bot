@@ -1,11 +1,11 @@
-discord.py==1.2.5
+discord.py==1.3.4
 discord.py[voice]
 google-api-python-client
 google-auth
 google-auth-httplib2
 oauth2client
 pynacl
-youtube_dl==2020.06.16.1
+youtube_dl==2020.07.28
 praw
 aiohttp
 asyncio
