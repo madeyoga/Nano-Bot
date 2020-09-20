@@ -37,6 +37,7 @@ n>reddit <keywords>
 ## Music Commands
 ### play
 Aliases: `p` `search` `s` 
+
 Argument: keywords
 
 `play` command accept `keyword` argument
@@ -59,6 +60,7 @@ Reply the entry number to select which song to play. for example: `1`
 
 ### volume
 Aliases: -
+
 Argument: number
 
 `volume` command accept number as the argument
@@ -70,6 +72,7 @@ n>volume 15
 
 - queue 
 Aliases: `q` 
+
 Argument: -
 
 Shows current queue state
