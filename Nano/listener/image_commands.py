@@ -1,9 +1,8 @@
 import discord
 from discord.ext import commands
-from .core.image import Reddit, Subreddits, Gag, Sections
+from .core.image import Reddit, Subreddits
 
 subreddits = Subreddits()
-sections = Sections()
 
 class ImageListener(commands.Cog):
     """Image listener cogs"""
@@ -11,17 +10,6 @@ class ImageListener(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.reddit = Reddit()
-##        self.gag    = Gag()
-
-##    def get_embedded_gag(self, section):
-##        """Get 9gag post from given section.
-##        Sections : Anime & manga, Kpop, wtf, savage, comic.
-##        """
-##
-##        post = self.gag.get_post_from(section)
-##        embed = discord.Embed(color = discord.Colour(value=11735575).orange())
-##        embed.set_image(url=post.get_media_url())
-##        return embed
 
     async def get_embedded_submission(self, subreddit):
         """Get reddit submission from given subreddit title."""
@@ -38,26 +26,6 @@ class ImageListener(commands.Cog):
         embed = discord.Embed(color = discord.Colour(value=11735575).orange())
         embed.set_image(url=submission.url)
         return embed
-
-##    @commands.command(name='kpop', aliases=['KPOP'])
-##    async def kpop_(self, ctx):
-##        await ctx.send(embed=self.get_embedded_gag(sections.KPOP))
-##
-##    @commands.command(name='anime9', aliases=['ANIME9'])
-##    async def anime_nine(self, ctx):
-##        await ctx.send(embed=self.get_embedded_gag(sections.ANIME_MANGA))
-##
-##    @commands.command(name='wtf', aliases=['WTF'])
-##    async def wtf_nine(self, ctx):
-##        await ctx.send(embed=self.get_embedded_gag(sections.WTF))
-##
-##    @commands.command(name='savage', aliases=['SAVAGE'])
-##    async def savage_nine(self, ctx):
-##        await ctx.send(embed=self.get_embedded_gag(sections.SAVAGE))
-##
-##    @commands.command(name='comic', aliases=['COMIC'])
-##    async def comic_nine(self, ctx):
-##        await ctx.send(embed=self.get_embedded_gag(sections.COMIC))
 
     @commands.command()
     async def meme(self, ctx):

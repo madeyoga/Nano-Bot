@@ -1,6 +1,3 @@
-import logging
-logging.getLogger('googleapiclient.discovery_cache').setLevel(logging.ERROR)
-
 import asyncio
 from async_timeout import timeout
 import discord
