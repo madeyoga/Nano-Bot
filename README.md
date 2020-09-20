@@ -70,7 +70,7 @@ Made Y
 n>volume 15
 ```
 
-- queue 
+### queue 
 - Aliases: `q` 
 
 - Argument: -
