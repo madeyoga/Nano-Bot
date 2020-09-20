@@ -6,7 +6,8 @@ from async_timeout import timeout
 import discord
 from discord.ext import commands
 from .core.music import YTDLSource, GuildVoiceState, VoiceEntry
-from .core.ytpy.ytpy.youtube import YoutubeService, YoutubeVideo, AioYoutubeService
+from ytpy import AioYoutubeService
+from aiohttp import ClientSession
 
 from isodate import parse_duration
 from datetime import timedelta
@@ -14,8 +15,8 @@ from datetime import timedelta
 if not discord.opus.is_loaded():
     discord.opus.load_opus('libopus.so')
 
-ys = YoutubeService()
-ayt = AioYoutubeService()
+session = ClientSession()
+ayt = AioYoutubeService(session)
 
 class Music(commands.Cog):
     def __init__(self, bot):
