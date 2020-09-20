@@ -23,26 +23,26 @@ To use the commands, you have to add prefix `n>` before the command name.
 For example, image command `rwtf` 'd be `n>rwtf`
 
 ### Image Commands: Search Image From Reddit
-Command: `reddit`
+- Command: `reddit`
 
-Aliases: `reddit` `r/` `reddit_search`
+- Aliases: `reddit` `r/` `reddit_search`
 
-Argument: Keywords
+- Argument: Keywords
 
-Usage:
+- Usage:
 ```bash
 n>reddit <keywords>
 ```
 
 ## Music Commands
 ### play
-Aliases: `p` `search` `s` 
+- Aliases: `p` `search` `s` 
 
-Argument: keywords
+- Argument: keywords
 
-`play` command accept `keyword` argument
+- `play` command accept `keyword` argument
 
-Example: Search & select & play song.
+- Example: Search & select & play song.
 ```bash
 Made Y
   n>play naruto opening
@@ -56,72 +56,72 @@ Nano-Bot
 Made Y
   1
 ```
-Reply the entry number to select which song to play. for example: `1`
+- Reply the entry number to select which song to play. for example: `1`
 
 ### volume
-Aliases: -
+- Aliases: -
 
-Argument: number
+- Argument: number
 
-`volume` command accept number as the argument
+- `volume` command accept number as the argument
 
-Example: Change volume to 15%.
+- Example: Change volume to 15%.
 ```bash
 n>volume 15
 ```
 
 - queue 
-Aliases: `q` 
+- Aliases: `q` 
 
-Argument: -
+- Argument: -
 
-Shows current queue state
+- Shows current queue state
 
 ### skip
-Aliases: -
+- Aliases: -
 
-Argument: -
+- Argument: -
 
-Skips current playing song
+- Skips current playing song
 
 ### stop 
-Aliases: -
+- Aliases: -
 
-Argument: -
+- Argument: -
 
-Stops `current playing` song & leaves voice channel
+- Stops `current playing` song & leaves voice channel
 
 ### now_playing 
-Aliases: `now_play` `nowplay` `np` 
+- Aliases: `now_play` `nowplay` `np` 
 
-Argument: -
+- Argument: -
 
-Check now play song data.
+- Check now play song data.
 
 ### pause
-Aliases: - 
+- Aliases: - 
 
-Argument: -
+- Argument: -
 
-Pause current playing song.
+- Pause current playing song.
 
 ### resume 
-Aliases: -
+- Aliases: -
 
-Argument: -
+- Argument: -
 
-Resume paused song
+- Resume paused song
 
 ### repeat 
-Aliases: `loop` 
+- Aliases: `loop` 
 
-Argument: -
+- Argument: -
 
-Put ended song to the last queue entry
+- Put ended song to the last queue entry
 
 ### shuffle
-Aliases: -
+- Aliases: -
 
-Argument: -
+- Argument: -
 
-Shuffles current queue state
+- Shuffles current queue state
