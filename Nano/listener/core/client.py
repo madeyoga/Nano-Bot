@@ -9,8 +9,8 @@ class NanoContext(commands.Context):
         return 'this is my secret'
 
 class NanoClient(commands.Bot):
-    def __init__(self, name='Nano', id='536892183404478483',
-        owner_id='213866895806300161', command_prefix='do.'):
+    def __init__(self, name='Nano', id=536892183404478483,
+        owner_id=213866895806300161, command_prefix='do.'):
         super(NanoClient, self).__init__(command_prefix)
         self.name = name
         self.id = id

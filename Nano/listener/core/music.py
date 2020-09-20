@@ -91,6 +91,9 @@ class GuildVoiceState:
         self.repeat = False
         self.waiting = None
 
+    def __str__(self):
+        return "{}/{}/{}queue length/repeat{}".format(self.channel.guild.name,self.channel.name, len(self.queue), self.repeat)
+
     def get_embedded_np(self):
         """Get embbeded 'now playing song'"""
 
@@ -246,7 +249,7 @@ class GuildVoiceState:
         await self.channel.send(embed=embed, delete_after=15)
 
         self.current = None
-        self.queue = []
+        self.queue.clear()
 
     async def await_for_member(self):
         """Awaiting for any member to join voice channel."""
