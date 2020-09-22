@@ -3,14 +3,16 @@ from async_timeout import timeout
 import discord
 from discord.ext import commands
 from .core.music import YTDLSource, GuildVoiceState, VoiceEntry
-from ytpy import AioYoutubeService
-from aiohttp import ClientSession
 
+from ytpy import AioYoutubeService
+from ytpy.entity import YoutubeVideo
+
+from aiohttp import ClientSession
 from isodate import parse_duration
 from datetime import timedelta
 
 if not discord.opus.is_loaded():
-    discord.opus.load_opus('libopus.so')
+    discord.opus.load_opus("libopus.so")
 
 session = ClientSession()
 ayt = AioYoutubeService(session)
