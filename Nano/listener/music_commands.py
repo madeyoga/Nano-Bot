@@ -11,8 +11,11 @@ from aiohttp import ClientSession
 from isodate import parse_duration
 from datetime import timedelta
 
-if not discord.opus.is_loaded():
-    discord.opus.load_opus("libopus.so")
+import os
+
+if os.name != 'nt':
+    if not discord.opus.is_loaded():
+        discord.opus.load_opus("")
 
 session = ClientSession()
 ayt = AioYoutubeService(session)
