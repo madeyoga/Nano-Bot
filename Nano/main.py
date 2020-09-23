@@ -10,6 +10,8 @@ startup_extensions = [
 ]
 
 client = Client(command_prefix='n>')
+##client = discord.ext.commands.AutoShardedBot("n>>", max_messages=None)
+
 client.remove_command('help')
 
 if __name__ == '__main__':

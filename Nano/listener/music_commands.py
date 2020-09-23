@@ -15,7 +15,7 @@ import os
 
 if os.name != 'nt':
     if not discord.opus.is_loaded():
-        discord.opus.load_opus("")
+        discord.opus.load_opus("libopus.so")
 
 session = ClientSession()
 ayt = AioYoutubeService(session)
