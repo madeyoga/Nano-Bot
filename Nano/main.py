@@ -20,13 +20,7 @@ def configure_memory_usage():
 
     return intents
 
-async def create_aiohttp_client():
-    return aiohttp.ClientSession()
-
-async def close_session(session):
-    await session.close()
-
-def main(session):
+async def main(loop):
 
     startup_extensions = [
         'listener.general_commands',
@@ -46,17 +40,16 @@ def main(session):
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Failed to load extension {}\n{}'.format(extension, exc))
     
+    session = aiohttp.ClientSession()
     client.add_cog(Music(client, session))
     print('MusicListener is Loaded')
 
-    client.run(os.environ['BOT_TOKEN'])
+    try:
+        loop.run_until_complete(await client.start(os.environ['BOT_TOKEN']))
+    except:
+        await session.close()
+        print('Session closed.')
 
-loop = asyncio.new_event_loop()
+loop = asyncio.get_event_loop()
 
-session = loop.run_until_complete(create_aiohttp_client())
-
-main(session)
-
-loop.run_until_complete(close_session(session))
-
-loop.close()
+loop.run_until_complete(main(loop))

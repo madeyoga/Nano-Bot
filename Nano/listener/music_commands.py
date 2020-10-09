@@ -19,12 +19,11 @@ if os.name != 'nt':
     if not discord.opus.is_loaded():
         discord.opus.load_opus("libopus.so")
         
-
 class Music(commands.Cog):
     def __init__(self, bot, session):
         self.client = bot
         self.guild_states = {}
-        self.ayt = AioYoutubeService(session)
+        self.ayt = AioYoutubeService(session, dev_key=os.environ["DEVELOPER_KEY"])
 
     def get_guild_state(self, guild_id):
         """Gets Guild's Voice State"""
@@ -130,6 +129,7 @@ class Music(commands.Cog):
             return
 
         # search video by keyword
+        print(self.ayt.session)
         response = await self.ayt.search(q=keyword)
         search_result = []
         for item in response['items']:

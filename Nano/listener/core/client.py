@@ -12,7 +12,7 @@ class NanoClient(commands.Bot):
     def __init__(self, name='Nano', id=536892183404478483,
         owner_id=213866895806300161, command_prefix='do.', intents=None):
         super(NanoClient, self).__init__(command_prefix=command_prefix,
-                                         max_messages=None, 
+                                         max_messages=None,
                                          intents=intents,
                                          chunk_guilds_at_startup=False)
         self.name = name
