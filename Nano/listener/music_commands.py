@@ -1,7 +1,9 @@
 import asyncio
 from async_timeout import timeout
+
 import discord
 from discord.ext import commands
+
 from .core.music import YTDLSource, GuildVoiceState, VoiceEntry
 
 from ytpy import AioYoutubeService
@@ -16,14 +18,13 @@ import os
 if os.name != 'nt':
     if not discord.opus.is_loaded():
         discord.opus.load_opus("libopus.so")
-
-session = ClientSession()
-ayt = AioYoutubeService(session)
+        
 
 class Music(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot, session):
         self.client = bot
         self.guild_states = {}
+        self.ayt = AioYoutubeService(session)
 
     def get_guild_state(self, guild_id):
         """Gets Guild's Voice State"""
@@ -69,7 +70,7 @@ class Music(commands.Cog):
         """Handle input url, play from given url"""
 
         # search_result = await self.client.loop.run_in_executor(None, lambda: ys.search(url))
-        search_result = await ayt.search(q=url)
+        search_result = await self.ayt.search(q=url)
 
         try:
             search_result = YoutubeVideo().parse(search_result['items'][0])
@@ -129,7 +130,7 @@ class Music(commands.Cog):
             return
 
         # search video by keyword
-        response = await ayt.search(q=keyword)
+        response = await self.ayt.search(q=keyword)
         search_result = []
         for item in response['items']:
             search_result.append(YoutubeVideo().parse(item))
@@ -174,7 +175,7 @@ class Music(commands.Cog):
         # Check duration.
         choosen_video = search_result[int(msg.content) - 1]
         try:
-            content_details = await ayt.get_detail(video_id=choosen_video.id)
+            content_details = await self.ayt.get_video_detail(video_id=choosen_video.id)
         except Exception as e:
             await embedded_list.delete()
             await ctx.send(':x: | Cannot extract content details')
@@ -233,7 +234,7 @@ class Music(commands.Cog):
         if ctx.voice_client.is_playing():
             player = await YTDLSource.from_url(url, loop=self.client.loop, stream=True)
             # video = ys.search(url)[0]
-            video = YoutubeVideo().parse(await ayt.search(q=url))
+            video = YoutubeVideo().parse(await self.ayt.search(q=url))
 
             entry = VoiceEntry(
                 player = player,
@@ -247,7 +248,7 @@ class Music(commands.Cog):
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.client.loop, stream=True)
             ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else state.next())
-            video = YoutubeVideo().parse(await ayt.search(q=url))
+            video = YoutubeVideo().parse(await self.ayt.search(q=url))
             entry = VoiceEntry(
                 player = player,
                 requester = ctx.message.author,
