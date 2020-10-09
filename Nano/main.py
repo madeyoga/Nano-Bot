@@ -35,7 +35,7 @@ def main(session):
 
     intents = configure_memory_usage()
 
-    client = Client(command_prefix='n>>>', intents=intents)
+    client = Client(command_prefix='n>', intents=intents)
 
     client.remove_command('help')
 
