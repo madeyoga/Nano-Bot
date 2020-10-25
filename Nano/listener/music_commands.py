@@ -12,15 +12,15 @@ from ytpy.entity import YoutubeVideo
 from aiohttp import ClientSession
 from isodate import parse_duration
 from datetime import timedelta
-
+import ctypes
 import os
 
 if os.name != 'nt':
     if not discord.opus.is_loaded():
         try:
-            discord.opus.load_opus("opus")
+            ctypes.util.find_library("libopus.so")
         except:
-            discord.opus.load_opus("libopus.so")
+            discord.opus.load_opus("libopus.so.1")
         
 class Music(commands.Cog):
     def __init__(self, bot, session):
