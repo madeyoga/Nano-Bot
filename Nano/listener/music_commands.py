@@ -17,7 +17,10 @@ import os
 
 if os.name != 'nt':
     if not discord.opus.is_loaded():
-        discord.opus.load_opus("libopus.so")
+        try:
+            discord.opus.load_opus("libopus.so")
+        except:
+            discord.opus.load_opus("opus")
         
 class Music(commands.Cog):
     def __init__(self, bot, session):
