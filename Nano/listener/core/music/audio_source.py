@@ -1,5 +1,3 @@
-from abc import ABC
-
 import discord
 import youtube_dl
 import asyncio

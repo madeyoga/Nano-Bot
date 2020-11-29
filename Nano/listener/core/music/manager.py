@@ -1,3 +1,5 @@
+import asyncio
+
 from .audio_event import AudioTrackScheduler
 
 
@@ -8,6 +10,8 @@ class GuildVoiceState:
         self.votes = set()
         self.scheduler = AudioTrackScheduler()
         self.voice_client = None
+        self.waiter = None
+        self.waiting = False
 
 
 class GuildMusicManager:

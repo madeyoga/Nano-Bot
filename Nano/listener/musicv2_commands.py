@@ -18,10 +18,17 @@ class MusicV2Cog(commands.Cog):
     Reimplementation of Music Commands.
     """
 
-    def __init__(self, client):
+    def __init__(self, client, music_manager: GuildMusicManager):
         self.client = client
-        self.music_manager = GuildMusicManager()
+        self.music_manager = music_manager
         self.name = "MusicV2"
+
+    @commands.command(name="join", aliases=["summon"])
+    async def join_command(self, ctx):
+        """Join user's voice channel"""
+
+        connected_channel_name = ctx.channel.name
+        await ctx.send(f":white_check_mark: | Joined :loud_sound: `{connected_channel_name}`")
 
     @commands.command(name="leave", aliases=["stop"])
     async def leave_command(self, ctx):
@@ -60,21 +67,22 @@ class MusicV2Cog(commands.Cog):
             # If there is more sources
             if sources:
                 guild_state.scheduler.queue += sources
-                await ctx.send("Added to queue: " + source.title + f" and {len(sources)} entries")
+                await ctx.send(":musical_note: Added to queue **" + source.title + f"** and {len(sources)} entries")
                 return
 
-            await ctx.send("Added to queue: " + source.title)
+            await ctx.send(":musical_note: Added to queue **" + source.title + "**")
 
         # If voice client is playing
         else:
             guild_state.scheduler.queue += sources
 
             if len(sources) == 1:
-                await ctx.send("Added to queue: " + sources[0].title)
+                await ctx.send(":musical_note: Added to queue **" + sources[0].title + "**")
                 return
 
-            await ctx.send("Added to queue: " + str(len(sources)) + " entries")
+            await ctx.send(f":musical_note: Added to queue **{len(sources)} entries**")
 
+    @join_command.before_invoke
     @play_command.before_invoke
     async def ensure_voice(self, ctx):
         """Do this before invoke commands"""
@@ -85,7 +93,7 @@ class MusicV2Cog(commands.Cog):
                 await ctx.author.voice.channel.connect()
             else:
                 await ctx.send("You are not connected to a voice channel.")
-                # raise commands.CommandError("Author not connected to a voice channel.")
+                raise commands.CommandError("Author not connected to a voice channel.")
         elif ctx.author.voice is None:
             await ctx.send("You are not connected to a voice channel.")
-            # raise commands.CommandError("Author not connected to a voice channel.")
+            raise commands.CommandError("Author not connected to a voice channel.")

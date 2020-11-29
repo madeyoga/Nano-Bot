@@ -1,5 +1,5 @@
 import asyncio
-from discord import AudioSource, VoiceClient
+from discord import VoiceClient
 
 from listener.core.music.audio_source import AudioTrack
 
@@ -24,6 +24,11 @@ class AudioTrackScheduler(AudioEventListener):
         self.repeat = False
 
     def next_track(self, voice_client: VoiceClient):
+        """Play next track"""
+
+        if voice_client is None:
+            return
+
         if voice_client.is_playing():
             voice_client.stop()
             voice_client.source.cleanup()
