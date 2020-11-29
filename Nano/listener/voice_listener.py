@@ -45,16 +45,16 @@ class MemberVoiceListener(commands.Cog, MemberVoiceEventManager):
         # Ignore if move event is from other voice channel to other voice channel
         if before.channel is not None and before.channel.id != self_voice_client.channel.id and \
            after.channel is not None and after.channel.id != self_voice_client.channel.id:
-            print("event from other channel", before.channel.id, self_voice_client.channel.id,
-                  before.channel, self_voice_client.channel)
+            # print("event from other channel", before.channel.id, self_voice_client.channel.id,
+            #       before.channel, self_voice_client.channel)
             return
         # Member leave other voice channel
         elif before.channel is not None and before.channel.id != self_voice_client.channel.id and after.channel is None:
-            print("event from other channel", before.channel, self_voice_client.channel)
+            # print("event from other channel", before.channel, self_voice_client.channel)
             return
         # Member join other voice channel
         elif before.channel is None and after.channel is not None and after.channel.id != self_voice_client.channel.id:
-            print("event from other channel", before.channel, self_voice_client.channel)
+            # print("event from other channel", before.channel, self_voice_client.channel)
             return
 
         # Event is from and to self client voice channel
