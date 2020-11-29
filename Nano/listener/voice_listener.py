@@ -84,7 +84,7 @@ class MemberVoiceListener(commands.Cog, MemberVoiceEventManager):
 
             self_voice_client.resume()
 
-            print("Cancel waiter and resume playing")
+            # print("Cancel waiter and resume playing")
             return
 
         return await super().on_voice_join(self_voice_client, member, voice_state_after)
@@ -100,7 +100,7 @@ class MemberVoiceListener(commands.Cog, MemberVoiceEventManager):
             guild_state.waiter = asyncio.ensure_future(self.wait_for_user(self_voice_client, member.guild))
             guild_state.waiting = True
 
-            print("Pause and wait for user")
+            # print("Pause and wait for user")
             return
 
         return await super().on_voice_leave(self_voice_client, member, voice_state_before)

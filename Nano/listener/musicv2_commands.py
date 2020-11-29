@@ -56,9 +56,7 @@ class MusicV2Cog(commands.Cog):
     async def search_command(self, ctx, *, args):
         """Search and select song to play"""
 
-        print(args)
         videos = await self.youtube_client.search(args, max_results=5)
-        print(videos)
 
         embed = CustomEmbed()
         embed.set_author(name="Song Selection | Reply the song number to continue",
