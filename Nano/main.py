@@ -5,6 +5,7 @@ import json
 import aiohttp
 import discord
 from discord.ext import commands
+from ytpy import YoutubeClient
 
 from listener.core.client import NanoClient
 from listener.core.music.manager import GuildMusicManager
@@ -24,8 +25,6 @@ def load_server_prefixes():
 
     with open("prefixes.json") as f:
         server_prefixes = json.load(f)
-
-    print(server_prefixes)
 
 
 def save_server_prefixes():
@@ -64,11 +63,12 @@ async def main():
     global loop
 
     # ENVIRONMENTS
-    nano_token = os.environ['NR_TOKEN']
+    nano_token = os.environ['BOT_TOKEN']
 
-    # Load Dependency for DI
+    # Load Dependencies for DI
     session = aiohttp.ClientSession()
     music_manager = GuildMusicManager()
+    youtube_client = YoutubeClient(session)
 
     # Load server settings
     load_server_prefixes()
@@ -82,7 +82,7 @@ async def main():
     cogs = [
         GeneralCog(client=client, server_prefixes=server_prefixes),
         ImageCog(client=client),
-        MusicV2Cog(client=client, music_manager=music_manager)
+        MusicV2Cog(client=client, music_manager=music_manager, youtube_client=youtube_client)
     ]
     for command_cog in cogs:
         client.add_cog(command_cog)
