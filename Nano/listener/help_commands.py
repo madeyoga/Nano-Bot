@@ -23,7 +23,12 @@ class HelpCog(commands.Cog):
 
         guild_id = str(ctx.guild.id)
         embed = self.get_embed_builder()
-        embed.description += f"Custom prefix: `{self.server_prefixes.get(guild_id, 'None')}`"
+        custom_prefix = self.server_prefixes.get(guild_id, 'None')
+
+        if custom_prefix != 'None':
+            custom_prefix = custom_prefix[0]
+
+        embed.description += f"Custom prefix: `{custom_prefix}`"
 
         await ctx.send(embed=embed)
 
