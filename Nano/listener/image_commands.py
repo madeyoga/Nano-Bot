@@ -5,12 +5,13 @@ from .core.image import Reddit, Subreddits
 subreddits = Subreddits()
 
 
-class ImageListener(commands.Cog):
+class ImageCog(commands.Cog):
     """Image listener cogs"""
 
     def __init__(self, client):
         self.client = client
         self.reddit = Reddit()
+        self.name = "Image Command"
 
     async def get_embedded_submission(self, subreddit):
         """Get reddit submission from given subreddit title."""
@@ -118,7 +119,7 @@ class ImageListener(commands.Cog):
             embed=await self.get_embedded_search_post("fate abby")
         )
 
-    @commands.command(aliases=['r/', 'reddit_search', 'reddit'])
+    @commands.command(name="reddit_search", aliases=['r', 'reddit'])
     async def search_get_reddit(self, ctx, *keywords):
         await ctx.send(
             embed=await self.get_embedded_search_post(" ".join(keywords))
@@ -126,5 +127,5 @@ class ImageListener(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(ImageListener(client))
+    client.add_cog(ImageCog(client))
     print('ImageListener is Loaded')
