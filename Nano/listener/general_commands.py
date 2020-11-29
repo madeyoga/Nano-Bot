@@ -1,48 +1,26 @@
 import discord
 from discord.ext import commands
 
-commands_string = """
-**Music**
-`play`, `p`, `search`, `s`, `volume`, `queue`, `q`, `skip`, `stop`, `now_playing`, `now_play`, `nowplay`, `np`, `pause`, `resume`, `repeat`, `loop`, `shuffle`
-
-**FGO Image**
-`fgo` `fgoart` `scathach` `raikou` `saber` `abby`
-
-**Image**
-`dank` `anime` `animeme` `anime9` `waifu` `tsun` `aniwallp` `moescape` `rwtf`
-
-**Reddit Image Search**
-aliases: `reddit` `r/` `reddit_search`
-usage: 
-```n>reddit <keywords>```
-"""
-
 
 class GeneralCog(commands.Cog):
 
-    def __init__(self, client):
+    def __init__(self, client, server_prefixes: dict):
         self.client = client
         self.name = "General"
+        self.server_prefixes = server_prefixes
 
-    # @commands.command()
-    # async def help(self, ctx):
-    #     embed = discord.Embed(
-    #         title="Nano-bot's Command List",
-    #         colour=discord.Colour(value=11735575).orange()
-    #     )
-    #     embed.add_field(
-    #         name=":tools: **Support Dev**",
-    #         value="Feedback/Report bug, [Join Nano Support Server](https://discord.gg/Y8sB4ay)\nDon't forget to **["
-    #               "Vote](https://discordbots.org/bot/458298539517411328/vote)** Nano-Bot :hearts: "
-    #     )
-    #     embed.add_field(
-    #         name=":books: **Commands** | Prefix: **n>**",
-    #         value=commands_string,
-    #         inline=False
-    #     )
-    #     nano_bot = self.client.get_user(self.client.user.id)
-    #     embed.set_thumbnail(url=nano_bot.avatar_url)
-    #     await ctx.send(embed=embed)
+    @commands.command(name="set_prefix")
+    async def set_prefix(self, ctx, arg):
+        """Set guild's custom prefix"""
+
+        if arg.startswith('n>'):
+            await ctx.send(":x: | Cannot use prefix that starts with `n>`.")
+            return
+
+        guild_id = str(ctx.guild.id)
+        self.server_prefixes[guild_id] = [arg]
+
+        await ctx.send(f":white_check_mark: | Custom prefix has been set to {arg}, you can test it using {arg}help")
 
     @commands.command()
     async def secret(self, ctx):
