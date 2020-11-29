@@ -9,7 +9,6 @@ from listener.core.custom.embed import CustomEmbed
 from listener.core.music.audio_source import AudioTrack
 from listener.core.music.manager import GuildMusicManager
 
-
 # Check os. If not windows, then try load libopus
 if os.name != 'nt':
     if not discord.opus.is_loaded():
@@ -70,7 +69,7 @@ class MusicV2Cog(commands.Cog):
         for i, video in enumerate(videos):
             video_url = base_url + video['id']
             videos[i]["url"] = video_url
-            search_list += f"[{i+1}]. **[{video['title']}]({video_url})** [{video['duration']}]\n"
+            search_list += f"[{i + 1}]. **[{video['title']}]({video_url})** [{video['duration']}]\n"
 
         embed.add_field(name=f"Search result for `{args}`", value=search_list, inline=False)
 
@@ -112,7 +111,27 @@ class MusicV2Cog(commands.Cog):
     @commands.command(name="queue", aliases=["sq"])
     async def show_queue_command(self, ctx):
         """Show queue entries"""
-        return
+
+        embed = CustomEmbed()
+        embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+        embed.title = f"{ctx.guild.name}'s Queue"
+        embed.set_thumbnail(url=ctx.guild.icon)
+
+        guild_state = self.music_manager.get_guild_state(ctx.guild.id)
+
+        entries = ""
+        for i, entry in enumerate(guild_state.scheduler.queue):
+            entries += f"[{i + 1}]. **{entry.title}** [{entry.duration}]\n"
+            if i >= 6:
+                break
+        embed.add_field(name=":musical_note: Top 7 Songs in Queue", value=entries, inline=False)
+
+        if guild_state.scheduler.queue:
+            embed.set_thumbnail(url=guild_state.scheduler.queue[0].thumbnail)
+        else:
+            embed.set_thumbnail(url=ctx.guild.icon)
+
+        await ctx.send(embed=embed)
 
     @join_command.before_invoke
     @play_command.before_invoke
