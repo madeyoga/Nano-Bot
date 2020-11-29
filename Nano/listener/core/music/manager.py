@@ -4,7 +4,7 @@ from .audio_event import AudioTrackScheduler
 class GuildVoiceState:
 
     def __init__(self):
-        self.volume = 100
+        self.volume = 1.0
         self.votes = set()
         self.scheduler = AudioTrackScheduler()
         self.voice_client = None
