@@ -1,11 +1,36 @@
 import asyncio
 import os
+import json
 
 import aiohttp
 import discord
+from discord.ext import commands
 
 from listener.core.client import NanoClient
+from listener.general_commands import GeneralCog
+from listener.help_commands import HelpCog
+from listener.image_commands import ImageCog
 from listener.musicv2_commands import MusicV2Cog
+
+prefixes = ["n>"]
+default_prefix = "n>"
+server_prefixes = {}
+
+
+def load_server_prefixes():
+    global server_prefixes
+
+    with open("prefixes.json") as f:
+        server_prefixes = json.load(f)
+
+    print(server_prefixes)
+
+
+def save_server_prefixes():
+    global server_prefixes
+
+    with open('prefixes.json', 'w') as fp:
+        json.dump(server_prefixes, fp)
 
 
 def get_memory_config():
@@ -24,33 +49,51 @@ def get_memory_config():
     return intents
 
 
+def get_prefix(bot, message):
+    guild_id = str(message.guild.id)
+
+    if guild_id in server_prefixes:
+        return commands.when_mentioned_or(*server_prefixes[guild_id])(bot, message)
+
+    return commands.when_mentioned_or(*prefixes)(bot, message)
+
+
 async def main():
     global loop
 
     # ENVIRONMENTS
     nano_token = os.environ['NR_TOKEN']
 
+    # Load Dependency for DI
+    session = aiohttp.ClientSession()
+
+    # Load server settings
+    load_server_prefixes()
+
     # Configure client
     intents = get_memory_config()
-    client = NanoClient(command_prefix='n!', intents=intents)
+    client = NanoClient(command_prefix=get_prefix, intents=intents)
     client.remove_command('help')
 
-    # Add Cogs/Commands
-    startup_extensions = [
-        'listener.general_commands',
-        'listener.image_commands',
+    # Load Cogs
+    cogs = [
+        GeneralCog(client=client),
+        ImageCog(client=client),
+        MusicV2Cog(client=client)
     ]
-    # for extension in startup_extensions:
-    #     try:
-    #         client.load_extension(extension)
-    #     except Exception as e:
-    #         exc = '{}: {}'.format(type(e).__name__, e)
-    #         print('Failed to load extension {}\n{}'.format(extension, exc))
 
-    session = aiohttp.ClientSession()
-    # client.add_cog(Music(client, session))
-    client.add_cog(MusicV2Cog(client=client))
-    print('MusicListener is Loaded')
+    # Add Cogs
+    for command_cog in cogs:
+        client.add_cog(command_cog)
+        print(command_cog.name, "is Loaded")
+
+    client.add_cog(HelpCog(client=client, server_prefixes=server_prefixes))
+
+    @client.command()
+    @commands.is_owner()
+    async def shutdown(ctx):
+        save_server_prefixes()
+        await ctx.bot.logout()
 
     # Run Bot
     try:
