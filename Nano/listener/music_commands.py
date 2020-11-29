@@ -1,19 +1,14 @@
-import asyncio
-from async_timeout import timeout
+import ctypes
+import os
+from datetime import timedelta
 
 import discord
 from discord.ext import commands
-
-from .core.music import YTDLSource, GuildVoiceState, VoiceEntry
-
+from isodate import parse_duration
 from ytpy import AioYoutubeService
 from ytpy.entity import YoutubeVideo
 
-from aiohttp import ClientSession
-from isodate import parse_duration
-from datetime import timedelta
-import ctypes
-import os
+from .core.music import YTDLSource, GuildVoiceState, VoiceEntry
 
 if os.name != 'nt':
     if not discord.opus.is_loaded():
@@ -21,7 +16,8 @@ if os.name != 'nt':
             ctypes.util.find_library("libopus.so")
         except:
             discord.opus.load_opus("libopus.so.1")
-        
+
+
 class Music(commands.Cog):
     def __init__(self, bot, session):
         self.client = bot
@@ -44,10 +40,10 @@ class Music(commands.Cog):
         state = self.get_guild_state(ctx.guild.id)
         if ctx.voice_client.is_playing() or state.current is not None:
             entry = VoiceEntry(
-                player = None,
-                requester = ctx.message.author,
-                video = video
-                )
+                player=None,
+                requester=ctx.message.author,
+                video=video
+            )
             state.queue.append(entry)
             await ctx.send('Enqueued ' + video.title)
             return
@@ -58,10 +54,10 @@ class Music(commands.Cog):
             ctx.voice_client.source.volume = state.volume
 
         entry = VoiceEntry(
-            player = player,
-            requester = ctx.message.author,
-            video = video
-            )
+            player=player,
+            requester=ctx.message.author,
+            video=video
+        )
         state.current = entry
         state.voice_client = ctx.voice_client
         state.channel = ctx.message.channel
@@ -81,10 +77,10 @@ class Music(commands.Cog):
             return
 
         entry = VoiceEntry(
-            player = None,
-            requester = ctx.message.author,
-            video = search_result
-            )
+            player=None,
+            requester=ctx.message.author,
+            video=search_result
+        )
 
         state = self.get_guild_state(ctx.guild.id)
         if ctx.voice_client.is_playing() or state.current is not None:
@@ -97,7 +93,7 @@ class Music(commands.Cog):
                 url,
                 loop=self.client.loop,
                 stream=True
-                )
+            )
             ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else state.next())
             ctx.voice_client.source.volume = state.volume
             entry.player = player
@@ -121,7 +117,7 @@ class Music(commands.Cog):
         """Search song by keyword and do start song selection"""
 
         # get keyword from args
-        keyword = "".join([word+" " for word in args])
+        keyword = "".join([word + " " for word in args])
 
         print(ctx.guild.name, ctx.author.name, keyword)
 
@@ -143,38 +139,40 @@ class Music(commands.Cog):
             title='Song Selection | Reply the song number to continue',
             description='prefix: n> | search_limit: 7',
             color=discord.Colour(value=11735575).orange()
-            )
+        )
 
         # Converts search_result into a string
-        song_list = "".join(["{}. **[{}]({})**\n".format(i + 1, video.title, video.url) for i, video in enumerate(search_result)])
+        song_list = "".join(
+            ["{}. **[{}]({})**\n".format(i + 1, video.title, video.url) for i, video in enumerate(search_result)])
 
         # fill embed
         embed.add_field(
             name='search result for ' + keyword,
             value=song_list,
             inline=False
-            )
+        )
         embed.set_thumbnail(url=search_result[0].thumbnails['high']['url'])
         embed.set_footer(text='Song selection | Type the entry number to continue')
         embedded_list = await ctx.send(embed=embed)
 
         # wait for author response
         request_channel = ctx.message.channel
-        request_author  = ctx.author
+        request_author = ctx.author
+
         def check(m):
-            try: # '/^*[0-9][0-9 ]*$/'
+            try:  # '/^*[0-9][0-9 ]*$/'
                 picked_entry_number = int(m.content)
                 return m.channel == request_channel and m.author == request_author
             except:
                 return False
-    
+
         try:
             msg = await self.client.wait_for('message', check=check, timeout=10.0)
         except:
             # TIMEOUT ERROR EXCEPTION
             await embedded_list.delete()
             return
-        
+
         # Check duration.
         choosen_video = search_result[int(msg.content) - 1]
         try:
@@ -185,7 +183,7 @@ class Music(commands.Cog):
             return
 
         duration = parse_duration(content_details['items'][0]['contentDetails']['duration'])
-        
+
         if duration.seconds > 900:
             await ctx.send(':x: | Cannot play video with duration longer than 10 minutes.')
             await embedded_list.delete()
@@ -240,10 +238,10 @@ class Music(commands.Cog):
             video = YoutubeVideo().parse(await self.ayt.search(q=url))
 
             entry = VoiceEntry(
-                player = player,
-                requester = ctx.message.author,
-                video = video
-                )
+                player=player,
+                requester=ctx.message.author,
+                video=video
+            )
             state.queue.append(entry)
             await ctx.send('Enqueued ' + player.title)
             return
@@ -253,10 +251,10 @@ class Music(commands.Cog):
             ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else state.next())
             video = YoutubeVideo().parse(await self.ayt.search(q=url))
             entry = VoiceEntry(
-                player = player,
-                requester = ctx.message.author,
-                video = video
-                )
+                player=player,
+                requester=ctx.message.author,
+                video=video
+            )
         state.voice_client = ctx.voice_client
         state.current = entry
         state.channel = ctx.message.channel
@@ -268,7 +266,7 @@ class Music(commands.Cog):
 
         # set certains guild volume
         state = self.get_guild_state(ctx.guild.id)
-        state.volume = float(volume/100.0)
+        state.volume = float(volume / 100.0)
 
         if ctx.voice_client is None:
             return await ctx.send("Not connected to a voice channel.")
@@ -369,8 +367,10 @@ class Music(commands.Cog):
         """Repeats song after done playing or add to queue"""
 
         state = self.get_guild_state(ctx.guild.id)
-        if state.repeat: state.repeat = False
-        else: state.repeat = True
+        if state.repeat:
+            state.repeat = False
+        else:
+            state.repeat = True
         await ctx.message.add_reaction('🔁')
 
     @commands.command(name='shuffle', aliases=['randq', 'random_queue'])
@@ -407,6 +407,7 @@ class Music(commands.Cog):
         elif ctx.author.voice is None:
             await ctx.send("You are not connected to a voice channel.")
             raise commands.CommandError("Author not connected to a voice channel.")
+
 
 def setup(bot):
     bot.add_cog(Music(bot))

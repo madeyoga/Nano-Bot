@@ -27,16 +27,17 @@ class GeneralListener(commands.Cog):
         embed = discord.Embed(
             title="Nano-bot's Command List",
             colour=discord.Colour(value=11735575).orange()
-            )
+        )
         embed.add_field(
             name=":tools: **Support Dev**",
-            value="Feedback/Report bug, [Join Nano Support Server](https://discord.gg/Y8sB4ay)\nDon't forget to **[Vote](https://discordbots.org/bot/458298539517411328/vote)** Nano-Bot :hearts:"
-            )
+            value="Feedback/Report bug, [Join Nano Support Server](https://discord.gg/Y8sB4ay)\nDon't forget to **["
+                  "Vote](https://discordbots.org/bot/458298539517411328/vote)** Nano-Bot :hearts: "
+        )
         embed.add_field(
             name=":books: **Commands** | Prefix: **n>**",
             value=commands_string,
             inline=False
-            )
+        )
         nano_bot = self.client.get_user(self.client.user.id)
         embed.set_thumbnail(url=nano_bot.avatar_url)
         await ctx.send(embed=embed)
@@ -53,7 +54,7 @@ class GeneralListener(commands.Cog):
             type='rich',
             description=":hourglass_flowing_sand:" + latency,
             colour=discord.Colour(value=11735575).orange()
-            )
+        )
         await ctx.send(embed=embed)
 
     @commands.command()
@@ -64,7 +65,7 @@ class GeneralListener(commands.Cog):
     async def set_status(self, ctx, *args):
         if ctx.message.author.id != ctx.owner_id:
             return
-        await self.client.change_presence( activity=discord.Game(" ".join(args)) )
+        await self.client.change_presence(activity=discord.Game(" ".join(args)))
 
     @commands.command(aliases=['avatar'])
     async def ava(self, ctx, *args):
@@ -77,6 +78,14 @@ class GeneralListener(commands.Cog):
         embed = discord.Embed(title=mentioned_user.name, type="rich")
         embed.set_image(url=mentioned_user.avatar_url)
         await ctx.send(embed=embed)
+
+    @commands.command(aliases=["vcmute", "mute", "mute_all"])
+    async def vc_mute(self, ctx):
+        vc = ctx.author.voice.channel
+
+        for member in vc.members:
+            await member.edit(mute=True)
+
 
 def setup(client):
     client.add_cog(GeneralListener(client))

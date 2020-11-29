@@ -1,8 +1,8 @@
 import asyncio
+from random import shuffle
+
 import discord
 import youtube_dl
-from random import shuffle
-from async_timeout import timeout
 
 # Suppress noise about console usage from errors
 youtube_dl.utils.bug_reports_message = lambda: ''
@@ -42,7 +42,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
     @classmethod
     async def from_url(cls, url, *, loop=None, stream=False):
         loop = loop or asyncio.get_event_loop()
-        # gonna change this later
+
         data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
 
         if 'entries' in data:

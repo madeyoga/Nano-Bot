@@ -1,7 +1,12 @@
-import os
 import random
 import praw
 from . import config
+import random
+
+import praw
+
+from . import config
+
 
 class Sections:
     ANIME_MANGA = 32
@@ -64,6 +69,7 @@ class Subreddits:
     FGOCOMICS       = "FGOcomics"
     FATEPRISMAILLYA = "FatePrismaIllya"
     ILLYASVIEL      = "Illyasviel"
+
 
 class Reddit:
     def __init__(self):
