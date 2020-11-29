@@ -24,5 +24,3 @@ class GuildMusicManager:
             self.guild_voice_states[guild_id] = GuildVoiceState()
 
         return self.guild_voice_states[guild_id]
-
-

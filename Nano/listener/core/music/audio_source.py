@@ -33,11 +33,12 @@ class AudioTrack(discord.PCMVolumeTransformer):
     def __init__(self, source, *, data, volume=1.0):
         super().__init__(source, volume=volume)
 
-        self.title = data.get('title')
-        self.url = data.get('webpage_url')
-        self.duration = parse_duration(int(data.get('duration')))
-        self.thumbnail = data.get('thumbnail')
-        self.extractor = data.get('extractor')
+        self.title = data.get('title', 'None')
+        self.url = data.get('webpage_url', 'None')
+        self.duration = parse_duration(int(data.get('duration', 0)))
+        self.thumbnail = data.get('thumbnail', 'https://gallery.autodesk.com/assets/default%20tile%20thumbnail'
+                                               '-dae75f5694cb3676feff44873695919704be92f0c54785a4ef95e1b750a94645.jpg')
+        self.extractor = data.get('extractor', 'None')
 
     @classmethod
     async def from_url(cls, url, *, loop=None, stream=False):
