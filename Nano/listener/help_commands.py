@@ -44,6 +44,8 @@ class HelpCog(commands.Cog):
         for cog_name in self.client.cogs:
             command_cog = self.client.cogs[cog_name]
 
+            cog_name = cog_name.replace('Cog', ' Commands')
+            
             if cog_name not in temp_dictionary:
                 temp_dictionary[cog_name] = ""
 
