@@ -21,6 +21,7 @@ class MusicV2Cog(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.music_manager = GuildMusicManager()
+        self.name = "MusicV2"
 
     @commands.command(name="leave", aliases=["stop"])
     async def leave_command(self, ctx):
