@@ -7,10 +7,12 @@ import discord
 from discord.ext import commands
 
 from listener.core.client import NanoClient
+from listener.core.music.manager import GuildMusicManager
 from listener.general_commands import GeneralCog
 from listener.help_commands import HelpCog
 from listener.image_commands import ImageCog
 from listener.musicv2_commands import MusicV2Cog
+from listener.voice_listener import MemberVoiceListener
 
 prefixes = ["n>"]
 default_prefix = "n>"
@@ -66,6 +68,7 @@ async def main():
 
     # Load Dependency for DI
     session = aiohttp.ClientSession()
+    music_manager = GuildMusicManager()
 
     # Load server settings
     load_server_prefixes()
@@ -75,19 +78,18 @@ async def main():
     client = NanoClient(command_prefix=get_prefix, intents=intents)
     client.remove_command('help')
 
-    # Load Cogs
+    # Load command Cogs
     cogs = [
         GeneralCog(client=client, server_prefixes=server_prefixes),
         ImageCog(client=client),
-        MusicV2Cog(client=client)
+        MusicV2Cog(client=client, music_manager=music_manager)
     ]
-
-    # Add Cogs
     for command_cog in cogs:
         client.add_cog(command_cog)
         print(command_cog.name, "is Loaded")
 
     client.add_cog(HelpCog(client=client, server_prefixes=server_prefixes))
+    client.add_cog(MemberVoiceListener(client=client, music_manager=music_manager))
 
     @client.command()
     @commands.is_owner()
