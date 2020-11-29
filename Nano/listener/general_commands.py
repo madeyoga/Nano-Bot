@@ -17,30 +17,32 @@ usage:
 ```n>reddit <keywords>```
 """
 
-class GeneralListener(commands.Cog):
+
+class GeneralCog(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+        self.name = "General"
 
-    @commands.command()
-    async def help(self, ctx):
-        embed = discord.Embed(
-            title="Nano-bot's Command List",
-            colour=discord.Colour(value=11735575).orange()
-        )
-        embed.add_field(
-            name=":tools: **Support Dev**",
-            value="Feedback/Report bug, [Join Nano Support Server](https://discord.gg/Y8sB4ay)\nDon't forget to **["
-                  "Vote](https://discordbots.org/bot/458298539517411328/vote)** Nano-Bot :hearts: "
-        )
-        embed.add_field(
-            name=":books: **Commands** | Prefix: **n>**",
-            value=commands_string,
-            inline=False
-        )
-        nano_bot = self.client.get_user(self.client.user.id)
-        embed.set_thumbnail(url=nano_bot.avatar_url)
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def help(self, ctx):
+    #     embed = discord.Embed(
+    #         title="Nano-bot's Command List",
+    #         colour=discord.Colour(value=11735575).orange()
+    #     )
+    #     embed.add_field(
+    #         name=":tools: **Support Dev**",
+    #         value="Feedback/Report bug, [Join Nano Support Server](https://discord.gg/Y8sB4ay)\nDon't forget to **["
+    #               "Vote](https://discordbots.org/bot/458298539517411328/vote)** Nano-Bot :hearts: "
+    #     )
+    #     embed.add_field(
+    #         name=":books: **Commands** | Prefix: **n>**",
+    #         value=commands_string,
+    #         inline=False
+    #     )
+    #     nano_bot = self.client.get_user(self.client.user.id)
+    #     embed.set_thumbnail(url=nano_bot.avatar_url)
+    #     await ctx.send(embed=embed)
 
     @commands.command()
     async def secret(self, ctx):
@@ -88,5 +90,5 @@ class GeneralListener(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(GeneralListener(client))
+    client.add_cog(GeneralCog(client))
     print('GeneralListener is Loaded')
