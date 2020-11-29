@@ -30,7 +30,7 @@ def save_server_prefixes():
     global server_prefixes
 
     with open('prefixes.json', 'w') as fp:
-        json.dump(server_prefixes, fp)
+        json.dump(server_prefixes, fp, indent=2)
 
 
 def get_memory_config():
@@ -53,7 +53,7 @@ def get_prefix(bot, message):
     guild_id = str(message.guild.id)
 
     if guild_id in server_prefixes:
-        return commands.when_mentioned_or(*server_prefixes[guild_id])(bot, message)
+        return commands.when_mentioned_or(*server_prefixes[guild_id] + prefixes)(bot, message)
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
@@ -77,7 +77,7 @@ async def main():
 
     # Load Cogs
     cogs = [
-        GeneralCog(client=client),
+        GeneralCog(client=client, server_prefixes=server_prefixes),
         ImageCog(client=client),
         MusicV2Cog(client=client)
     ]
@@ -99,6 +99,8 @@ async def main():
     try:
         loop.run_until_complete(await client.start(nano_token))
     except Exception as e:
+        save_server_prefixes()
+        print('Saved prefixes')
         await session.close()
         print('Session closed.')
         print(e)
