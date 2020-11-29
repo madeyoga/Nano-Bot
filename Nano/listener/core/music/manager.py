@@ -1,5 +1,3 @@
-import asyncio
-
 from .audio_event import AudioTrackScheduler
 
 
