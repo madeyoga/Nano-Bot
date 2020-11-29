@@ -19,6 +19,8 @@ class HelpCog(commands.Cog):
         if args:
             args = ''.join(args)
             print(args)
+            temp_command = self.command_dict.get(args)
+            await ctx.send(embed=self.get_detail_command_embed(temp_command))
             return
 
         guild_id = str(ctx.guild.id)
@@ -78,4 +80,16 @@ class HelpCog(commands.Cog):
 
         embed.set_footer(text="Thank you for using Nano-Bot! | Have a nice dayy~",
                          icon_url=self.client.user.avatar_url)
+        return embed
+
+    @staticmethod
+    def get_detail_command_embed(command) -> CustomEmbed:
+        embed = CustomEmbed()
+
+        embed.title = ":bookmark: Help | " + command.name
+        embed.description = "Aliases: " + ' '.join([f"`{alias}`" for alias in command.aliases])
+        embed.description += "\n\n" + command.help + command.description
+
+        embed.set_footer(text="For additional help, please contact Made Y#8195 or join the support server")
+
         return embed

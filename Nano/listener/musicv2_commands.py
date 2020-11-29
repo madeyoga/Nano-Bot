@@ -45,7 +45,13 @@ class MusicV2Cog(commands.Cog):
     @commands.command(name="play", aliases=["p"])
     async def play_command(self, ctx, *, query):
         """Load and play source from given query
-        query can be a url or keywords
+        query can be an url or keywords
+
+        **Usage**
+        ```
+        n>play hello world
+        n>play https://someurl/
+        ```
         """
 
         guild_state = self.music_manager.get_guild_state(ctx.guild.id)
