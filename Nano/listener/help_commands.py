@@ -18,7 +18,6 @@ class HelpCog(commands.Cog):
     async def help_command(self, ctx, *args):
         if args:
             args = ''.join(args)
-            print(args)
             temp_command = self.command_dict.get(args)
             await ctx.send(embed=self.get_detail_command_embed(temp_command))
             return
@@ -48,6 +47,9 @@ class HelpCog(commands.Cog):
 
             cog_name = cog_name.replace('Cog', ' Commands')
 
+            if cog_name == 'Owner Commands':
+                continue
+
             if cog_name not in temp_dictionary:
                 temp_dictionary[cog_name] = ""
 
@@ -67,9 +69,12 @@ class HelpCog(commands.Cog):
         embed.description = "Prefix: `n>` | Alternative prefix: `@mention` the bot\n"
 
         for key in self.command_list_dict:
+            if not self.command_list_dict[key]:
+                continue
+            print("Key", key)
             embed.add_field(name=key, value=self.command_list_dict[key], inline=False)
 
-        embed.add_field(name="Detail", value="For more detail, try `n>help <command-name>`")
+        embed.add_field(name="Detail", value="For more detail, try `n>help <command-name>`", inline=False)
         # embed.add_field(name="Image Search Command", value="aliases: reddit r/ reddit_search")
         embed.add_field(name=":tools: Helpful Links",
                         value="[Invite](https://discord.com/oauth2/authorize?client_id=458298539517411328&scope=bot"
@@ -88,8 +93,13 @@ class HelpCog(commands.Cog):
 
         embed.title = ":bookmark: Help | " + command.name
         embed.description = "Aliases: " + ' '.join([f"`{alias}`" for alias in command.aliases])
-        embed.description += "\n\n" + command.help + command.description
 
+        embed.description += "\n\n"
+        if command.help:
+            embed.description += command.help
+        else:
+            embed.description += "*No description*"
+            
         embed.set_footer(text="For additional help, please contact Made Y#8195 or join the support server")
 
         return embed
