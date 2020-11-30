@@ -22,6 +22,7 @@ class MemberVoiceListener(commands.Cog, MemberVoiceEventManager):
 
     def __init__(self, client, music_manager: GuildMusicManager):
         super().__init__()
+        self.name = "MemberVoiceListener"
         self.client = client
         self.music_manager = music_manager
 
