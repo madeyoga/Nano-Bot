@@ -1,3 +1,6 @@
 __pycache__/
 nohup.out
 .vscode
+.idea
+prefixes.json
+*.webm
