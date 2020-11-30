@@ -12,7 +12,7 @@ from listener.core.music.manager import GuildMusicManager
 # Check os. If not windows, then try load libopus
 if os.name != 'nt':
     if not discord.opus.is_loaded():
-        discord.opus.load_opus("libopus.so.1")
+        discord.opus.load_opus("libopus.so")
 
 
 class MusicV2Cog(commands.Cog):
