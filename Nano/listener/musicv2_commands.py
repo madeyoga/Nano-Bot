@@ -2,7 +2,7 @@ import validators
 import discord
 from discord.ext import commands
 import os
-
+import random
 from ytpy import YoutubeClient
 
 from listener.core.custom.embed import CustomEmbed
@@ -28,14 +28,27 @@ class MusicV2Cog(commands.Cog):
 
     @commands.command(name="join", aliases=["summon"])
     async def join_command(self, ctx):
-        """Join user's voice channel"""
+        """Join user's voice channel
+
+        **Usage**
+        ```
+        n>join
+        n>summon
+        """
 
         connected_channel_name = ctx.channel.name
         await ctx.send(f":white_check_mark: | Joined :loud_sound: `{connected_channel_name}`")
 
     @commands.command(name="leave", aliases=["stop"])
     async def leave_command(self, ctx):
-        """Stop playing and leaves voice channel"""
+        """Stop playing and leaves voice channel
+
+        **Usage**
+        ```
+        n>leave
+        n>stop
+        ```
+        """
 
         ctx.voice_client.source.cleanup()
         await ctx.voice_client.disconnect()
@@ -59,7 +72,16 @@ class MusicV2Cog(commands.Cog):
 
     @commands.command(name="search", aliases=["s"])
     async def search_command(self, ctx, *, args):
-        """Search and select song to play"""
+        """Search and select song to play
+
+        **Usage**
+        ```py
+        n>search hello world
+
+        # reply song index
+        1
+        ```
+        """
 
         videos = await self.youtube_client.search(args, max_results=5)
 
@@ -107,16 +129,30 @@ class MusicV2Cog(commands.Cog):
 
     @commands.command(name="now_play", aliases=["np"])
     async def now_play_command(self, ctx):
-        """Show now playing song"""
+        """Show now playing song
+
+        **Usage**
+        ```
+        n>now_play
+        n>np
+        ```
+        """
 
         if ctx.voice_client is None or ctx.voice_client.source is None:
             await ctx.send(":x: | Not playing anything")
         else:
             await ctx.send(f":musical_note: Now playing **{ctx.voice_client.source.title}**")
 
-    @commands.command(name="queue", aliases=["sq"])
+    @commands.command(name="queue", aliases=["q"])
     async def show_queue_command(self, ctx):
-        """Show queue entries"""
+        """Show queue entries
+
+        **Usage**
+        ```
+        n>queue
+        n>q
+        ```
+        """
 
         embed = CustomEmbed()
         embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
@@ -125,11 +161,13 @@ class MusicV2Cog(commands.Cog):
 
         guild_state = self.music_manager.get_guild_state(ctx.guild.id)
 
-        entries = ""
-        for i, entry in enumerate(guild_state.scheduler.queue):
-            entries += f"[{i + 1}]. **{entry.title}** [{entry.duration}]\n"
-            if i >= 6:
-                break
+        entries = "*Empty*"
+        if guild_state.scheduler.queue:
+            entries = ""
+            for i, entry in enumerate(guild_state.scheduler.queue):
+                entries += f"[{i + 1}]. **{entry.title}** [{entry.duration}]\n"
+                if i >= 6:
+                    break
         embed.add_field(name=":musical_note: Top 7 Songs in Queue", value=entries, inline=False)
 
         if guild_state.scheduler.queue:
@@ -138,6 +176,76 @@ class MusicV2Cog(commands.Cog):
             embed.set_thumbnail(url=ctx.guild.icon)
 
         await ctx.send(embed=embed)
+
+    @commands.command(name="repeat", aliases= ["loop"])
+    async def repeat_command(self, ctx):
+        """Re-enqueue the song after it finished playing
+
+        **Usage**
+        ```
+        n>repeat
+        n>loop
+        ```
+        """
+
+        guild_state = self.music_manager.get_guild_state(ctx.guild.id)
+        if guild_state.scheduler.repeat:
+            guild_state.scheduler.repeat = False
+            await ctx.message.add_reaction('\u21AA')
+        else:
+            guild_state.scheduler.repeat = True
+            await ctx.message.add_reaction('\uD83D\uDD01')
+
+    @commands.command(name="pause")
+    async def pause_command(self, ctx):
+        """Pause or resume current song
+
+        **Usage**
+        ```
+        n>pause
+        ```
+        """
+
+        if ctx.voice_client is not None:
+            if ctx.voice_client.is_paused():
+                ctx.voice_client.resume()
+                await ctx.message.add_reaction('\u25B6')
+            elif ctx.voice_client.is_playing():
+                ctx.voice_client.pause()
+                await ctx.message.add_reaction('\u23F8')
+            else:
+                await ctx.send(":x: | Not playing anything")
+        else:
+            await ctx.send(":x: | Not playing anything")
+
+    @commands.command(name="resume")
+    async def resume_command(self, ctx):
+        """Resume paused song, if any
+
+        **Usage**
+        ```
+        n>resume
+        ```
+        """
+
+        if ctx.voice_client is not None and ctx.voice_client.is_paused():
+            ctx.voice_client.resume()
+            await ctx.message.add_reaction('\u25B6')
+
+    @commands.command(name="shuffle", aliases="shuffle_queue")
+    async def shuffle_command(self, ctx):
+        """Shuffles songs in queue
+
+        **Usage**
+        ```
+        n>shuffle
+        n>shuffle_queue
+        ```
+        """
+
+        guild_state = self.music_manager.get_guild_state(ctx.guild.id)
+        if guild_state.scheduler.queue:
+            random.shuffle(guild_state.scheduler.queue)
 
     @join_command.before_invoke
     @play_command.before_invoke
