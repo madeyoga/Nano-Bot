@@ -116,7 +116,7 @@ class MusicV2Cog(commands.Cog):
             message = await self.client.wait_for('message',
                                                  check=lambda m: self.check(m, request_channel, request_author),
                                                  timeout=10.0)
-        except:
+        except TimeoutError as e:
             # TIMEOUT ERROR EXCEPTION
             await embedded_list.delete()
             return
@@ -249,6 +249,9 @@ class MusicV2Cog(commands.Cog):
         guild_state = self.music_manager.get_guild_state(ctx.guild.id)
         if guild_state.scheduler.queue:
             random.shuffle(guild_state.scheduler.queue)
+            await self.show_queue_command(ctx=ctx)
+        else:
+            await ctx.send(":x: | Queue is empty.")
 
     @commands.command(name="skip")
     async def skip_command(self, ctx):
@@ -332,7 +335,7 @@ class MusicV2Cog(commands.Cog):
     @staticmethod
     def check(m, request_channel, request_author):
         try:  # '/^*[0-9][0-9 ]*$/'
-            picked_entry_number = int(m.content)
+            int(m.content)
             return m.channel == request_channel and m.author == request_author
-        except:
+        except ValueError as e:
             return False

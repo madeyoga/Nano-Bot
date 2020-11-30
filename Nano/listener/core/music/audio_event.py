@@ -28,7 +28,8 @@ class AudioTrackScheduler(AudioEventListener):
     def next_track(self, voice_client: VoiceClient):
         """Play next track"""
 
-        if voice_client is None:
+        if not voice_client.is_connected():
+            self.queue.clear()
             return
 
         if self.queue:
