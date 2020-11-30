@@ -283,7 +283,7 @@ class MusicV2Cog(commands.Cog):
     async def ensure_voice(self, ctx):
         """Do this before invoke commands"""
 
-        # If bot voice is not connected to voice
+        # If bot is not connected to voice
         if ctx.voice_client is None:
             if ctx.author.voice:
                 await ctx.author.voice.channel.connect()
@@ -293,6 +293,8 @@ class MusicV2Cog(commands.Cog):
         elif ctx.author.voice is None:
             await ctx.send("You are not connected to a voice channel.")
             raise commands.CommandError("Author not connected to a voice channel.")
+        else:
+            await ctx.author.voice.channel.connect()
 
     @staticmethod
     async def load_and_play(ctx, query, guild_state):
