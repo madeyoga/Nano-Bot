@@ -4,7 +4,7 @@ from discord.ext import commands
 import os
 import random
 from ytpy import YoutubeClient
-
+import ctypes
 from listener.core.custom.embed import CustomEmbed
 from listener.core.music.audio_source import AudioTrack
 from listener.core.music.manager import GuildMusicManager
@@ -12,7 +12,10 @@ from listener.core.music.manager import GuildMusicManager
 # Check os. If not windows, then try load libopus
 if os.name != 'nt':
     if not discord.opus.is_loaded():
-        discord.opus.load_opus("libopus.so")
+        try:
+            ctypes.util.find_library("libopus.so")
+        except:
+            discord.opus.load_opus("libopus.so.1")
 
 
 class MusicV2Cog(commands.Cog):
