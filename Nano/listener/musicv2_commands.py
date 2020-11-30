@@ -297,7 +297,8 @@ class MusicV2Cog(commands.Cog):
             await ctx.send("You are not connected to a voice channel.")
             raise commands.CommandError("Author not connected to a voice channel.")
         else:
-            await ctx.author.voice.channel.connect()
+            if not ctx.voice_client.channel.id != ctx.author.voice.channel.id:
+                await ctx.author.voice.channel.connect()
 
     @staticmethod
     async def load_and_play(ctx, query, guild_state):
