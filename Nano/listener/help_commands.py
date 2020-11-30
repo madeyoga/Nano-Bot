@@ -9,7 +9,7 @@ class HelpCog(commands.Cog):
     def __init__(self, client, server_prefixes: dict):
         self.client = client
         self.name = "Help"
-        self.command_list_dict = self.load_command_details()
+        self.command_list_dict = self.load_command_strings()
         self.command_dict = {}
         self.load_command_dict()
         self.server_prefixes = server_prefixes
@@ -23,7 +23,7 @@ class HelpCog(commands.Cog):
             return
 
         guild_id = str(ctx.guild.id)
-        embed = self.get_embed_builder()
+        embed = self.get_default_help_embed()
         custom_prefix = self.server_prefixes.get(guild_id, 'None')
 
         if custom_prefix != 'None':
@@ -40,7 +40,7 @@ class HelpCog(commands.Cog):
             for alias in command.aliases:
                 self.command_dict[alias] = command
 
-    def load_command_details(self) -> dict:
+    def load_command_strings(self) -> dict:
         temp_dictionary = {}
         for cog_name in self.client.cogs:
             command_cog = self.client.cogs[cog_name]
@@ -58,7 +58,7 @@ class HelpCog(commands.Cog):
 
         return temp_dictionary
 
-    def get_embed_builder(self) -> CustomEmbed:
+    def get_default_help_embed(self) -> CustomEmbed:
         embed = CustomEmbed()
 
         embed.title = "Nano-Bot's Command List"
@@ -71,7 +71,6 @@ class HelpCog(commands.Cog):
         for key in self.command_list_dict:
             if not self.command_list_dict[key]:
                 continue
-            print("Key", key)
             embed.add_field(name=key, value=self.command_list_dict[key], inline=False)
 
         embed.add_field(name="Detail", value="For more detail, try `n>help <command-name>`", inline=False)
