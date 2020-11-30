@@ -50,7 +50,10 @@ class MusicV2Cog(commands.Cog):
         ```
         """
 
-        ctx.voice_client.source.cleanup()
+        if ctx.voice_client.is_playing():
+            ctx.voice_client.source.cleanup()
+            ctx.voice_client.stop()
+
         await ctx.voice_client.disconnect()
 
         del self.music_manager.guild_voice_states[ctx.guild.id]
@@ -173,7 +176,7 @@ class MusicV2Cog(commands.Cog):
         if guild_state.scheduler.queue:
             embed.set_thumbnail(url=guild_state.scheduler.queue[0].thumbnail)
         else:
-            embed.set_thumbnail(url=ctx.guild.icon)
+            embed.set_thumbnail(url=ctx.guild.icon_url)
 
         await ctx.send(embed=embed)
 
@@ -194,7 +197,7 @@ class MusicV2Cog(commands.Cog):
             await ctx.message.add_reaction('\u21AA')
         else:
             guild_state.scheduler.repeat = True
-            await ctx.message.add_reaction('\uD83D\uDD01')
+            await ctx.message.add_reaction('\u21AA')
 
     @commands.command(name="pause")
     async def pause_command(self, ctx):
@@ -232,7 +235,7 @@ class MusicV2Cog(commands.Cog):
             ctx.voice_client.resume()
             await ctx.message.add_reaction('\u25B6')
 
-    @commands.command(name="shuffle", aliases="shuffle_queue")
+    @commands.command(name="shuffle", aliases=["shuffle_queue"])
     async def shuffle_command(self, ctx):
         """Shuffles songs in queue
 
@@ -247,9 +250,33 @@ class MusicV2Cog(commands.Cog):
         if guild_state.scheduler.queue:
             random.shuffle(guild_state.scheduler.queue)
 
+    @commands.command(name="skip")
+    async def skip_command(self, ctx):
+        """Skips current playing song
+        Only song requester can skip the song
+
+        **Usage**
+        ```
+        n>skip
+        ```
+        """
+
+        if ctx.voice_client.source is None:
+            await ctx.send(":x: | Not playing anything")
+            return
+
+        # guild_state = self.music_manager.get_guild_state(ctx.guild.id)
+        if ctx.author.id == ctx.voice_client.source.requester.id:
+            ctx.voice_client.stop()
+            await ctx.message.add_reaction('\u23ED')
+        return
+
     @join_command.before_invoke
+    @leave_command.before_invoke
     @play_command.before_invoke
     @search_command.before_invoke
+    @repeat_command.before_invoke
+    @skip_command.before_invoke
     async def ensure_voice(self, ctx):
         """Do this before invoke commands"""
 
@@ -268,9 +295,9 @@ class MusicV2Cog(commands.Cog):
     async def load_and_play(ctx, query, guild_state):
         # If valid url
         if validators.url(query):
-            sources = await AudioTrack.from_url(query, stream=True)
+            sources = await AudioTrack.from_url(query, stream=True, requester=ctx.author)
         else:
-            sources = await AudioTrack.from_keywords(query, stream=True)
+            sources = await AudioTrack.from_keywords(query, stream=True, requester=ctx.author)
 
         if not ctx.voice_client.is_playing():
 
@@ -290,14 +317,14 @@ class MusicV2Cog(commands.Cog):
                 await ctx.send(":musical_note: Added to queue **" + source.title + f"** and {len(sources)} entries")
                 return
 
-            await ctx.send(":musical_note: Added to queue **" + source.title + "**")
+            await ctx.send(":musical_note: Added to queue **" + source.title + "** : **" + source.uploader + "**")
 
         # If voice client is playing
         else:
             guild_state.scheduler.queue += sources
 
             if len(sources) == 1:
-                await ctx.send(":musical_note: Added to queue **" + sources[0].title + "**")
+                await ctx.send(f":musical_note: Added to queue **{sources[0].title}** : **{sources[0].uploader}**")
                 return
 
             await ctx.send(f":musical_note: Added to queue **{len(sources)} entries**")

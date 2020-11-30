@@ -2,6 +2,8 @@ import discord
 import youtube_dl
 import asyncio
 
+from discord import User
+
 from .utilities import parse_duration
 
 # Suppress noise about console usage from errors
@@ -30,18 +32,20 @@ ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
 
 class AudioTrack(discord.PCMVolumeTransformer):
-    def __init__(self, source, *, data, volume=1.0):
+    def __init__(self, source, *, data, volume=1.0, requester: User = ""):
         super().__init__(source, volume=volume)
 
         self.title = data.get('title', 'None')
+        self.uploader = data.get('uploader', 'None')
         self.url = data.get('webpage_url', 'None')
         self.duration = parse_duration(int(data.get('duration', 0)))
         self.thumbnail = data.get('thumbnail', 'https://gallery.autodesk.com/assets/default%20tile%20thumbnail'
                                                '-dae75f5694cb3676feff44873695919704be92f0c54785a4ef95e1b750a94645.jpg')
         self.extractor = data.get('extractor', 'None')
+        self.requester = requester
 
     @classmethod
-    async def from_url(cls, url, *, loop=None, stream=False):
+    async def from_url(cls, url, *, loop=None, stream=False, requester: User = ""):
         loop = loop or asyncio.get_event_loop()
         # gonna change this later
         data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
@@ -50,16 +54,16 @@ class AudioTrack(discord.PCMVolumeTransformer):
             list_of_source = []
             for each_data in data['entries']:
                 filename = each_data['url']
-                source = cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=each_data)
+                source = cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=each_data, requester=requester)
                 list_of_source.append(source)
 
             return list_of_source
 
         filename = data['url'] if stream else ytdl.prepare_filename(data)
-        return [cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)]
+        return [cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data, requester=requester)]
 
     @classmethod
-    async def from_keywords(cls, keywords, *, loop=None, stream=False):
+    async def from_keywords(cls, keywords, *, loop=None, stream=False, requester: User = ""):
         loop = loop or asyncio.get_event_loop()
         # gonna change this later
         data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch:{keywords}", download=not stream))
@@ -69,5 +73,4 @@ class AudioTrack(discord.PCMVolumeTransformer):
             data = data['entries'][0]
 
         filename = data['url'] if stream else ytdl.prepare_filename(data)
-        return [cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)]
-
+        return [cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data, requester=requester)]

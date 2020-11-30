@@ -19,19 +19,17 @@ class AudioEventListener:
 
 class AudioTrackScheduler(AudioEventListener):
 
-    def __init__(self):
+    def __init__(self, client):
+        self.client = client
         self.queue = []
         self.repeat = False
+        self.votes = set()
 
     def next_track(self, voice_client: VoiceClient):
         """Play next track"""
 
         if voice_client is None:
             return
-
-        if voice_client.is_playing():
-            voice_client.stop()
-            voice_client.source.cleanup()
 
         if self.queue:
             source = self.queue.pop(0)
@@ -46,13 +44,17 @@ class AudioTrackScheduler(AudioEventListener):
     def on_track_end(self, audio_source, error, voice_client):
         super().on_track_end(audio_source, error, voice_client)
 
+        if error:
+            print("Track ends with error: ", error)
+            return
+
         audio_source.cleanup()
 
         if self.repeat:
             # Reload source
             future = asyncio.run_coroutine_threadsafe(
-                AudioTrack.from_url(audio_source.url),
-                asyncio.get_event_loop()
+                AudioTrack.from_url(audio_source.url, stream=True,  requester=audio_source.requester),
+                self.client.loop
             )
             sources = future.result()
             if sources:
