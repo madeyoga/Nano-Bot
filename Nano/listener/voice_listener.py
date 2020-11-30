@@ -32,10 +32,13 @@ class MemberVoiceListener(commands.Cog, MemberVoiceEventManager):
 
         # Ignore if member is bot
         if member.bot:
+            self_voice_client = member.guild.voice_client
+            if member.id == self.client.user.id:
+                await self.on_voice_join(self_voice_client, member, after)
             return
 
-        # Ignore if self voice client is None
         self_voice_client = member.guild.voice_client
+        # Ignore if self voice client is None
         if self_voice_client is None:
             return
 
@@ -81,9 +84,10 @@ class MemberVoiceListener(commands.Cog, MemberVoiceEventManager):
         if guild_state.waiting or guild_state.waiter is not None:
             # Resume
             guild_state.waiter.cancel()
+            guild_state.waiter = None
             guild_state.waiting = False
 
-            self_voice_client.resume()
+            member.guild.voice_client.resume()
 
             # print("Cancel waiter and resume playing")
             return
@@ -119,7 +123,10 @@ class MemberVoiceListener(commands.Cog, MemberVoiceEventManager):
 
         await voice_client.disconnect()
 
-        del self.music_manager.guild_voice_states[guild.id]
+        try:
+            del self.music_manager.guild_voice_states[guild.id]
+        except KeyError as e:
+            pass
 
     @staticmethod
     def there_is_user_in_voice(channel: VoiceChannel):

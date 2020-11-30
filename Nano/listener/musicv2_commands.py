@@ -39,7 +39,7 @@ class MusicV2Cog(commands.Cog):
         n>summon
         """
 
-        connected_channel_name = ctx.channel.name
+        connected_channel_name = ctx.voice_client.channel.name
         await ctx.send(f":white_check_mark: | Joined :loud_sound: `{connected_channel_name}`")
 
     @commands.command(name="leave", aliases=["stop"])
@@ -53,13 +53,18 @@ class MusicV2Cog(commands.Cog):
         ```
         """
 
+        if ctx.voice_client is None or not ctx.voice_client.is_connected():
+            return
+
         if ctx.voice_client.is_playing():
             ctx.voice_client.source.cleanup()
             ctx.voice_client.stop()
 
         await ctx.voice_client.disconnect()
-
-        del self.music_manager.guild_voice_states[ctx.guild.id]
+        try:
+            del self.music_manager.guild_voice_states[ctx.guild.id]
+        except KeyError as e:
+            pass
 
     @commands.command(name="play", aliases=["p"])
     async def play_command(self, ctx, *, query):
@@ -278,7 +283,6 @@ class MusicV2Cog(commands.Cog):
         return
 
     @join_command.before_invoke
-    @leave_command.before_invoke
     @play_command.before_invoke
     @search_command.before_invoke
     @repeat_command.before_invoke
@@ -297,8 +301,8 @@ class MusicV2Cog(commands.Cog):
             await ctx.send("You are not connected to a voice channel.")
             raise commands.CommandError("Author not connected to a voice channel.")
         else:
-            if not ctx.voice_client.channel.id != ctx.author.voice.channel.id:
-                await ctx.author.voice.channel.connect()
+            if ctx.voice_client.channel.id != ctx.author.voice.channel.id:
+                await ctx.voice_client.move_to(ctx.author.voice.channel)
 
     @staticmethod
     async def load_and_play(ctx, query, guild_state):
