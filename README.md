@@ -7,16 +7,50 @@
     <img src="https://top.gg/api/widget/458298539517411328.svg" alt="Nano" />
 </a>
 
-Feel free to invite & test [Nano-Rewrite](https://discordapp.com/oauth2/authorize?client_id=458298539517411328&scope=bot&permissions=1567734903). 
-
-I would really appreciate some feedback/ideas/suggestions/contributions, contact me via discord group chat (@tag me)/DM (invite me @ SomeLikeItHot#8195) or join nano-bot support server, or you can also contact me via email.
-
-Thanks!
-
 ## Profile
 Nano-bot is designed for image sharing & music.
 - Deployed on Heroku cloud platform (Free).
 - Prefix: `n>`. To have Nano-Bot to response to your command, you need to use the prefix before the command name.
+
+## Update v2.2.0 (2020/11/30)
+- Added custom prefix
+- Added new help command
+- Reimplement music commands
+
+### Custom Prefix
+You can now set a custom prefix using `set_prefix` command
+
+Example usage
+```
+n>set_prefix n!
+```
+
+### New Help Command (new)
+- Added detail
+
+To check the command list use `n>help` without any arguments. For command description and usage, provide command name as the argument.
+
+Example usage
+```python
+# To show list of command name
+n>help
+
+# To get command description & usage
+n>help <command-name>
+n>help play
+n>help search
+n>help now_play
+```
+
+### New Music
+Music has been reimplemented! Following Rythm bot user experience. Here are the new command names. 
+
+`join` `leave` `play` `search` `now_play` `queue` `repeat` `pause` `resume` `shuffle` `skip`
+
+You can also check their description and usage with the new help command. 
+```
+n>help play
+```
 
 ## Image Command: Names
 `dank` `anime` `animeme` `waifu` `tsun` `aniwallp` `moescape` `rwtf` `fgo` `fgoart` `scathach` `raikou` `saber` `abby` 
@@ -37,101 +71,3 @@ For example, image command `rwtf` 'd be `n>rwtf`
 ```bash
 n>reddit <keywords>
 ```
-
-## Music Commands
-### play
-- Aliases: `p` `search` `s` 
-
-- Argument: keywords
-
-- `play` command accept `keyword` argument
-
-- Example: Search & select & play song.
-```bash
-Made Y
-  n>play naruto opening
-
-Nano-Bot
-  Song list
-  1. .........
-  2. .........
-  3. .........
-  
-Made Y
-  1
-```
-- Reply the entry number to select which song to play. for example: `1`
-
-### volume
-- Aliases: -
-
-- Argument: number
-
-- `volume` command accept number as the argument
-
-- Example: Change volume to 15%.
-```bash
-n>volume 15
-```
-
-### queue 
-- Aliases: `q` 
-
-- Argument: -
-
-- Shows current queue state
-
-### skip
-- Aliases: -
-
-- Argument: -
-
-- Skips current playing song
-
-### stop 
-- Aliases: -
-
-- Argument: -
-
-- Stops `current playing` song & leaves voice channel
-
-### now_playing 
-- Aliases: `now_play` `nowplay` `np` 
-
-- Argument: -
-
-- Check now play song data.
-
-### pause
-- Aliases: - 
-
-- Argument: -
-
-- Pause current playing song.
-
-### resume 
-- Aliases: -
-
-- Argument: -
-
-- Resume paused song
-
-### repeat 
-- Aliases: `loop` 
-
-- Argument: -
-
-- Put ended song to the last queue entry
-
-### shuffle
-- Aliases: -
-
-- Argument: -
-
-- Shuffles current queue state
-
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
