@@ -28,14 +28,24 @@ class AudioTrackScheduler(AudioEventListener):
     def next_track(self, voice_client: VoiceClient):
         """Play next track"""
 
-        if not voice_client.is_connected():
-            self.queue.clear()
+        if voice_client is None:
+            self.cleanup()
             return
 
-        if self.queue:
+        if not voice_client.is_connected():
+            self.cleanup()
+            return
+
+        if voice_client.is_connected() and self.queue:
             source = self.queue.pop(0)
             voice_client.play(source, after=lambda error: self.on_track_end(source, error, voice_client))
             self.on_track_start(audio_source=source)
+
+    def cleanup(self):
+        """Clears queue"""
+
+        for source in self.queue:
+            source.cleanup()
 
     def on_track_start(self, audio_source):
         super().on_track_start(audio_source)
