@@ -109,9 +109,10 @@ class ImageCog(commands.Cog):
 
     @commands.command()
     async def raikou(self, ctx):
-        await ctx.send(
-            embed=await self.get_embedded_submission(subreddits.MAMARAIKOU)
-        )
+        if ctx.channel.is_nsfw():
+            await ctx.send(embed=await self.get_embedded_submission(subreddits.MAMARAIKOU))
+        else:
+            await ctx.send(":x: | This command can only be used in nsfw channel.")
 
     @commands.command()
     async def abby(self, ctx):
@@ -124,6 +125,11 @@ class ImageCog(commands.Cog):
         await ctx.send(
             embed=await self.get_embedded_search_post(" ".join(keywords))
         )
+
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error):
+        if isinstance(error, commands.errors.NSFWChannelRequired):
+            return await ctx.send(":x: | This command is potentially nsfw and can only be used in nsfw channel.")
 
 
 def setup(client):
