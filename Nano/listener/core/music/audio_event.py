@@ -47,6 +47,8 @@ class AudioTrackScheduler(AudioEventListener):
         for source in self.queue:
             source.cleanup()
 
+        print("Cleanup queue")
+
     def on_track_start(self, audio_source):
         super().on_track_start(audio_source)
 

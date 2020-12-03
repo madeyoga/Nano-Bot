@@ -10,6 +10,14 @@ class GuildVoiceState:
         self.waiter = None
         self.waiting = False
 
+    def cleanup(self):
+        """Clears queue"""
+
+        for source in self.scheduler.queue:
+            source.cleanup()
+
+        print("Cleanup queue")
+
 
 class GuildMusicManager:
 
