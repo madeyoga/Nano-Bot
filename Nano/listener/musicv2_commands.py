@@ -94,7 +94,7 @@ class MusicV2Cog(commands.Cog):
         ```
         """
 
-        videos = await self.youtube_client.search(args, max_results=5)
+        videos = await self.youtube_client.search(args, max_results=5, language="en")
 
         embed = CustomEmbed()
         embed.set_author(name="Song Selection | Reply the song number to continue",
