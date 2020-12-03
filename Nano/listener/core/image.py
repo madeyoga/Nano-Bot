@@ -47,6 +47,8 @@ class Reddit:
         return self.reddit.subreddit('all').search(keyword)
 
     def search_get_post(self, keyword):
+        # REGEX FOR IMAGE URL
+        # (?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*\.(?:jpg|gif|png))(?:\?([^#]*))?(?:#(.*))?
         submissions = list(self.reddit.subreddit('all').search(keyword))
         while True:
             submission = random.choice(submissions)
