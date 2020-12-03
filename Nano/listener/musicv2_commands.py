@@ -62,8 +62,10 @@ class MusicV2Cog(commands.Cog):
 
         await ctx.voice_client.disconnect()
         try:
+            self.music_manager.guild_voice_states[ctx.guild.id].cleanup()
             del self.music_manager.guild_voice_states[ctx.guild.id]
         except KeyError as e:
+            print(e)
             pass
 
     @commands.command(name="play", aliases=["p"])

@@ -124,8 +124,10 @@ class MemberVoiceListener(commands.Cog, MemberVoiceEventManager):
         await voice_client.disconnect()
 
         try:
+            self.music_manager.guild_voice_states[guild.id].cleanup()
             del self.music_manager.guild_voice_states[guild.id]
         except KeyError as e:
+            print(e)
             pass
 
     @staticmethod
