@@ -112,7 +112,7 @@ class ImageCog(commands.Cog):
         if ctx.channel.is_nsfw():
             await ctx.send(embed=await self.get_embedded_submission(subreddits.MAMARAIKOU))
         else:
-            await ctx.send(":x: | This command can only be used in nsfw channel.")
+            await ctx.send(":x: | This command is potentially nsfw and can only be used in nsfw channel.")
 
     @commands.command()
     async def abby(self, ctx):
