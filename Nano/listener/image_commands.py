@@ -91,9 +91,12 @@ class ImageCog(commands.Cog):
 
     @commands.command()
     async def scathach(self, ctx):
-        await ctx.send(
-            embed=await self.get_embedded_submission(subreddits.SCATHACH)
-        )
+        if ctx.channel.is_nsfw():
+            await ctx.send(
+                embed=await self.get_embedded_submission(subreddits.SCATHACH)
+            )
+        else:
+            await ctx.send(":x: | This command is potentially nsfw and can only be used in nsfw channel.")
 
     @commands.command()
     async def moescape(self, ctx):
