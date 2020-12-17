@@ -6,3 +6,4 @@ prefixes.json
 *.webm
 logs/
 *prefix*.json
+Nano/listener/cache/*.json

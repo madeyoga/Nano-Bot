@@ -129,11 +129,6 @@ class ImageCog(commands.Cog):
             embed=await self.get_embedded_search_post(" ".join(keywords))
         )
 
-    @commands.Cog.listener()
-    async def on_command_error(self, ctx, error):
-        if isinstance(error, commands.errors.NSFWChannelRequired):
-            return await ctx.send(":x: | This command is potentially nsfw and can only be used in nsfw channel.")
-
 
 def setup(client):
     client.add_cog(ImageCog(client))

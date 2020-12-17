@@ -99,6 +99,6 @@ class HelpCog(commands.Cog):
         else:
             embed.description += "*No description*"
 
-        embed.set_footer(text="For additional help, please contact Made Y#8195 or join the support server")
+        embed.set_footer(text="For additional help, please contact Made Y#8195")
 
         return embed

@@ -1,10 +1,16 @@
 discord.py==1.5.1
 discord.py[voice]
 pynacl
+<<<<<<< HEAD
 youtube_dl
+=======
+youtube_dl==2020.12.14
+>>>>>>> 38d22c8ac997da2271d49ed34a9b058607e6a928
 praw
 aiohttp
 asyncio
 isodate
 ytpy==2020.12.1
 validators
+pixivpy-async
+asyncpraw
