@@ -4,3 +4,5 @@ nohup.out
 .idea
 prefixes.json
 *.webm
+logs/
+*prefix*.json
