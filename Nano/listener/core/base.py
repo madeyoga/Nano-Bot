@@ -9,6 +9,7 @@ class BaseImageCog(commands.Cog):
         self.pools = {}
 
     def load_pools(self, subreddits):
+        self.pools.clear()
         for key, subreddit_name in subreddits.items():
             cache_filepath = f"listener/cache/{subreddit_name}.json"
             if not os.path.exists(cache_filepath):
