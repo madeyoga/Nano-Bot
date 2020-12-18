@@ -4,7 +4,6 @@ import json
 
 import aiohttp
 import discord
-from asyncprawcore import Requestor
 from discord.ext import commands
 from pixivpy_async import PixivClient
 from ytpy import YoutubeClient
@@ -16,7 +15,6 @@ from listener.error_listener import ErrorListener
 from listener.fgo_image_commands import FgoImageCog
 from listener.general_commands import GeneralCog
 from listener.help_commands import HelpCog
-from listener.image_commands import ImageCog
 from listener.musicv2_commands import MusicV2Cog
 from listener.other_image_commands import OtherImageCog
 from listener.owner_commands import OwnerCog
