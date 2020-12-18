@@ -137,3 +137,33 @@ class FgoImageCog(commands.Cog):
         submission = choice(self.fgo_pools["FGOCOMICS"])
 
         await ctx.send(submission.get('url'))
+
+    @commands.cooldown(1, 1, commands.BucketType.guild)
+    @commands.command(name="rin")
+    async def rin_command(self, ctx):
+        """Get random comics from  /r/OneTrueTohsaka
+
+        **Usage**
+        ```
+        n>rin
+        ```
+        """
+
+        submission = choice(self.fgo_pools["ONETRUETOHSAKA"])
+
+        await ctx.send(submission.get('url'))
+
+    @commands.cooldown(1, 1, commands.BucketType.guild)
+    @commands.command(name="jeanne")
+    async def jeanne_command(self, ctx):
+        """Get random comics from  /r/ChurchOfJeanne
+
+        **Usage**
+        ```
+        n>jeanne
+        ```
+        """
+
+        submission = choice(self.fgo_pools["CHURCHOFJEANNE"])
+
+        await ctx.send(submission.get('url'))

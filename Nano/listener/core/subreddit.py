@@ -41,7 +41,9 @@ subreddit_dictionary = {
     "FATEPRISMAILLYA": "FatePrismaIllya",
     "ILLYASVIEL": "Illyasviel",
     "HOLOLIVE": "Hololive",
-    "HOLOLIVEMEMES": "hololivememes"
+    "HOLOLIVEMEMES": "hololivememes",
+    "ONETRUETOHSAKA": "OneTrueTohsaka",
+    "CHURCHOFJEANNE": "ChurchOfJeanne"
 }
 
 fgo_subreddits = {

@@ -1,8 +1,7 @@
-from Nano.listener.core.subreddit import subreddit_dictionary
+from listener.core.subreddit import subreddit_dictionary
 import praw
 import os
 import json
-import time
 from random import shuffle
 
 

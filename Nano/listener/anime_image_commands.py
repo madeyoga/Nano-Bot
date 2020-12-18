@@ -109,3 +109,33 @@ class AnimeImageCog(BaseImageCog):
         submission = choice(self.pools["AWWNIME"])
 
         await ctx.send(submission.get('url'))
+
+    @commands.cooldown(1, 1, commands.BucketType.guild)
+    @commands.command(name="hololive")
+    async def hololive_command(self, ctx):
+        """Get random awwnime from /r/Hololive
+
+        **Usage**
+        ```
+        n>hololive
+        ```
+        """
+
+        submission = choice(self.pools["HOLOLIVE"])
+
+        await ctx.send(submission.get('url'))
+
+    @commands.cooldown(1, 1, commands.BucketType.guild)
+    @commands.command(name="hololivememes")
+    async def hololive_memes_command(self, ctx):
+        """Get random awwnime from /r/hololivememes
+
+        **Usage**
+        ```
+        n>hololivememes
+        ```
+        """
+
+        submission = choice(self.pools["HOLOLIVEMEMES"])
+
+        await ctx.send(submission.get('url'))
