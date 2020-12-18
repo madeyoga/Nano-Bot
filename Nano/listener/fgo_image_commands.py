@@ -2,6 +2,7 @@ from discord.ext import commands
 import json
 from .core.subreddit import fgo_subreddits
 from random import choice
+import os
 
 
 class FgoImageCog(commands.Cog):
@@ -14,6 +15,8 @@ class FgoImageCog(commands.Cog):
     def load_pools(self):
         for key, subreddit_name in fgo_subreddits.items():
             cache_filepath = f"listener/cache/{subreddit_name}.json"
+            if not os.path.exists(cache_filepath):
+                continue
             with open(cache_filepath, 'r') as json_file:
                 self.fgo_pools[key] = json.loads(json_file.read())
 

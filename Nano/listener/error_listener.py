@@ -14,5 +14,4 @@ class ErrorListener(commands.Cog):
         if isinstance(error, commands.errors.CommandOnCooldown):
             return await ctx.send(":x: | You are on cooldown. Try again in 1 second")
         else:
-            traceback.print_exc()
             print(error)

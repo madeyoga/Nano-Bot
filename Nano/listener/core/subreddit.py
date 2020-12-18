@@ -39,7 +39,9 @@ subreddit_dictionary = {
     "SABER": "Saber",
     "FGOCOMICS": "FGOcomics",
     "FATEPRISMAILLYA": "FatePrismaIllya",
-    "ILLYASVIEL": "Illyasviel"
+    "ILLYASVIEL": "Illyasviel",
+    "HOLOLIVE": "Hololive",
+    "HOLOLIVEMEMES": "hololivememes"
 }
 
 fgo_subreddits = {
@@ -50,7 +52,9 @@ fgo_subreddits = {
     "ILLYASVIEL": "Illyasviel",
     "SCATHACH": "scathach",
     "FGOFANART": "FGOfanart",
-    "GRANDORDER": "grandorder"
+    "GRANDORDER": "grandorder",
+    "ONETRUETOHSAKA": "OneTrueTohsaka",
+    "CHURCHOFJEANNE": "ChurchOfJeanne"
 }
 
 other_subreddits = {
@@ -67,4 +71,6 @@ anime_subreddits = {
     "AZURELANE": "AzureLane",
     "ANIMEWALLPAPER": "Animewallpaper",  # ANIME WALLPAPER ARTS
     "MOESCAPE": "Moescape",  # ANIME WALLPAPER ARTS
+    "HOLOLIVE": "Hololive",
+    "HOLOLIVEMEMES": "hololivememes"
 }
