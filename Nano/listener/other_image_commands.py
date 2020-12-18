@@ -13,6 +13,12 @@ class OtherImageCog(BaseImageCog):
         self.load_pools(other_subreddits)
         self.reddit = reddit_client
 
+    @commands.is_owner()
+    @commands.command(name="reload_other_pool")
+    async def reload_other_pool_command(self, ctx):
+        self.load_pools(other_subreddits)
+        await ctx.send(":white_check_mark: | Reloaded, other image pools!")
+
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="memes", aliases=["meme"])
     async def memes_command(self, ctx):

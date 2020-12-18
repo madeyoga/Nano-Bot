@@ -12,6 +12,13 @@ class AnimeImageCog(BaseImageCog):
         self.name = "Anime Image"
         self.load_pools(anime_subreddits)
 
+    @commands.command(name="reload_anime_pool")
+    @commands.is_owner()
+    async def reload_anime_pool_command(self, ctx):
+        self.load_pools(anime_subreddits)
+        await ctx.send(":white_check_mark: | Reloaded, other image pools!")
+        return
+
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="moescape")
     async def moescape_command(self, ctx):

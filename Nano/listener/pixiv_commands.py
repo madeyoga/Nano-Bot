@@ -17,9 +17,9 @@ class PixivCog(commands.Cog):
         self.name = "Pixiv"
         self.client = client
         self.aapi = AppPixivAPI(client=pixiv_client.start())
-        self.day_pool = None
-        self.day_male_pool = None
-        self.day_female_pool = None
+        self.day_pool = {}
+        self.day_male_pool = {}
+        self.day_female_pool = {}
         self.base_url = 'https://www.pixiv.net/en/artworks/'
         asyncio.ensure_future(self.load_pools_async())
 
@@ -30,11 +30,12 @@ class PixivCog(commands.Cog):
         self.day_male_pool = await self.aapi.illust_ranking("day_male")
         self.day_female_pool = await self.aapi.illust_ranking("day_female")
 
-    @commands.command("pixiv_reload_pools")
-    async def reload_pool_command(self, ctx):
-        self.day_pool = None
-        self.day_male_pool = None
-        self.day_female_pool = None
+    @commands.is_owner()
+    @commands.command(name="reload_pixiv_pool")
+    async def reload_pixiv_pool_command(self, ctx):
+        self.day_pool.clear()
+        self.day_male_pool.clear()
+        self.day_female_pool.clear()
         await self.load_pools_async()
 
         await ctx.send(":white_check_mark: | Reloaded, pixiv pools")

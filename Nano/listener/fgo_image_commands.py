@@ -20,6 +20,14 @@ class FgoImageCog(commands.Cog):
             with open(cache_filepath, 'r') as json_file:
                 self.fgo_pools[key] = json.loads(json_file.read())
 
+    @commands.is_owner()
+    @commands.command(name="reload_fgo_pool")
+    async def reload_fgo_pool_command(self, ctx):
+        self.fgo_pools.clear()
+        self.load_pools()
+
+        await ctx.send(":white_check_mark: | Reloaded, fgo pools!")
+
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="fgo")
     async def fgo_command(self, ctx):
