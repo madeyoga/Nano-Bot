@@ -6,8 +6,8 @@ class OwnerCog(commands.Cog):
     def __init__(self):
         self.name = "Owner"
 
-    @commands.command(name="shutdown")
     @commands.is_owner()
+    @commands.command(name="shutdown")
     async def shutdown(self, ctx):
         """Owner only"""
 

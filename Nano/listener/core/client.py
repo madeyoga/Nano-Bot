@@ -19,7 +19,7 @@ class NanoClient(commands.AutoShardedBot):
                                          chunk_guilds_at_startup=False)
         self.name = name
         self.id = id
-        self.owner_id = owner_id
+        # self.owner_id = owner_id
         self.command_prefix = command_prefix
 
         # Discord Bot List updates.

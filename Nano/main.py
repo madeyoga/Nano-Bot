@@ -4,16 +4,23 @@ import json
 
 import aiohttp
 import discord
+from asyncprawcore import Requestor
 from discord.ext import commands
+from pixivpy_async import PixivClient
 from ytpy import YoutubeClient
-
+import asyncpraw
+from listener.anime_image_commands import AnimeImageCog
 from listener.core.client import NanoClient
 from listener.core.music.manager import GuildMusicManager
+from listener.error_listener import ErrorListener
+from listener.fgo_image_commands import FgoImageCog
 from listener.general_commands import GeneralCog
 from listener.help_commands import HelpCog
 from listener.image_commands import ImageCog
 from listener.musicv2_commands import MusicV2Cog
+from listener.other_image_commands import OtherImageCog
 from listener.owner_commands import OwnerCog
+from listener.pixiv_commands import PixivCog
 from listener.voice_listener import MemberVoiceListener
 
 prefixes = ["n>"]
@@ -78,15 +85,25 @@ async def main():
     session = aiohttp.ClientSession()
     youtube_client = YoutubeClient(session)
     music_manager = GuildMusicManager(client=client)
+    reddit_client = asyncpraw.Reddit(client_id=os.environ['REDDIT_CLIENT_ID'],
+                                     client_secret=os.environ['REDDIT_CLIENT_SECRET'],
+                                     user_agent=os.environ['REDDIT_USER_AGENT'])
+
+    pixiv_client = PixivClient()
 
     # Load command Cogs
     cogs = [
         GeneralCog(client=client, server_prefixes=server_prefixes),
-        ImageCog(client=client),
         MusicV2Cog(client=client, music_manager=music_manager, youtube_client=youtube_client),
         MemberVoiceListener(client=client, music_manager=music_manager),
-        OwnerCog(),
+        FgoImageCog(),
+        AnimeImageCog(),
+        OtherImageCog(reddit_client),
+        ErrorListener(),
+        PixivCog(client, pixiv_client),
+        OwnerCog()
     ]
+
     for command_cog in cogs:
         client.add_cog(command_cog)
         print(command_cog.name, "is Loaded")
@@ -98,12 +115,13 @@ async def main():
     try:
         loop.run_until_complete(await client.start(nano_token))
     except Exception as e:
-        save_server_prefixes()
-        print('Saved prefixes')
-        await session.close()
-        print('Session closed.')
         print(e)
 
+    save_server_prefixes()
+    print('Saved prefixes')
+    await session.close()
+    await pixiv_client.close()
+    print('Session closed.')
 
 loop = asyncio.get_event_loop()
 

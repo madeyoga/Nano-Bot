@@ -2,6 +2,7 @@ from discord.ext import commands
 import json
 from .core.subreddit import fgo_subreddits
 from random import choice
+import os
 
 
 class FgoImageCog(commands.Cog):
@@ -14,8 +15,18 @@ class FgoImageCog(commands.Cog):
     def load_pools(self):
         for key, subreddit_name in fgo_subreddits.items():
             cache_filepath = f"listener/cache/{subreddit_name}.json"
+            if not os.path.exists(cache_filepath):
+                continue
             with open(cache_filepath, 'r') as json_file:
                 self.fgo_pools[key] = json.loads(json_file.read())
+
+    @commands.is_owner()
+    @commands.command(name="reload_fgo_pool")
+    async def reload_fgo_pool_command(self, ctx):
+        self.fgo_pools.clear()
+        self.load_pools()
+
+        await ctx.send(":white_check_mark: | Reloaded, fgo pools!")
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="fgo")
@@ -124,5 +135,35 @@ class FgoImageCog(commands.Cog):
         """
 
         submission = choice(self.fgo_pools["FGOCOMICS"])
+
+        await ctx.send(submission.get('url'))
+
+    @commands.cooldown(1, 1, commands.BucketType.guild)
+    @commands.command(name="rin")
+    async def rin_command(self, ctx):
+        """Get random comics from  /r/OneTrueTohsaka
+
+        **Usage**
+        ```
+        n>rin
+        ```
+        """
+
+        submission = choice(self.fgo_pools["ONETRUETOHSAKA"])
+
+        await ctx.send(submission.get('url'))
+
+    @commands.cooldown(1, 1, commands.BucketType.guild)
+    @commands.command(name="jeanne")
+    async def jeanne_command(self, ctx):
+        """Get random comics from  /r/ChurchOfJeanne
+
+        **Usage**
+        ```
+        n>jeanne
+        ```
+        """
+
+        submission = choice(self.fgo_pools["CHURCHOFJEANNE"])
 
         await ctx.send(submission.get('url'))
