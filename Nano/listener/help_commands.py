@@ -35,6 +35,8 @@ class HelpCog(commands.Cog):
 
     def load_command_dict(self):
         for command in self.client.commands:
+            if command.name.startswith("reload"):
+                continue
             # Process command dict.
             self.command_dict[command.name] = command
             for alias in command.aliases:
@@ -54,6 +56,8 @@ class HelpCog(commands.Cog):
                 temp_dictionary[cog_name] = ""
 
             for command in command_cog.get_commands():
+                if command.name.startswith("reload"):
+                    continue
                 temp_dictionary[cog_name] += f"`{command.name}` "
 
         return temp_dictionary
