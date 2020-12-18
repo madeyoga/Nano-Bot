@@ -98,7 +98,7 @@ async def main():
         AnimeImageCog(),
         OtherImageCog(reddit_client),
         ErrorListener(),
-        PixivCog(client, pixiv_client),
+        # PixivCog(client, pixiv_client),
         OwnerCog()
     ]
 
