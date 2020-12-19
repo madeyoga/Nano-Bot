@@ -2,6 +2,8 @@ from discord.ext import commands
 import json
 import os
 
+from listener.core.submission import embed_submission
+
 
 class BaseImageCog(commands.Cog):
 
@@ -16,3 +18,10 @@ class BaseImageCog(commands.Cog):
                 continue
             with open(cache_filepath, 'r') as json_file:
                 self.pools[key] = json.loads(json_file.read())
+
+    @staticmethod
+    async def reply_context(ctx, submission):
+        if submission.get('post_hint') == 'image':
+            await ctx.send(embed=embed_submission(submission))
+        else:
+            await ctx.send(submission.get('url'))
