@@ -1,3 +1,7 @@
+import time
+
+from prawcore import NotFound
+
 from listener.core.subreddit import subreddit_dictionary
 import praw
 import os
@@ -20,6 +24,11 @@ for key in subreddit_dictionary:
     dump_list = []
     for submission in submissions:
         temp = submission.__dict__
+
+        post_hint = temp.get('post_hint')
+        if post_hint != 'image':
+            continue
+
         if submission.author is not None:
             author = submission.author.name
         else:
@@ -31,11 +40,13 @@ for key in subreddit_dictionary:
             'title': submission.title,
             'author': author,
             'subreddit_name_prefixed': temp.get('subreddit_name_prefixed'),
-            'post_hint': temp.get('post_hint'),
+            'post_hint': post_hint,
             'url': temp.get('url'),
             'url_overridden_by_dest': temp.get('url_overridden_by_dest'),
             'over_18': submission.over_18,
-            'permalink': f"https://www.reddit.com{permalink}"
+            'permalink': f"https://www.reddit.com{permalink}",
+            'score': submission.score,
+            'original_content': submission.is_original_content
         }
         dump_list.append(submission_dict)
 
@@ -44,3 +55,5 @@ for key in subreddit_dictionary:
         json.dump(dump_list, fp=file, indent=2)
 
     print(key, "dumped to", filepath)
+
+    time.sleep(2)
