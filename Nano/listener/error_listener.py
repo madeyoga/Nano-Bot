@@ -1,5 +1,6 @@
 from discord.ext import commands
 import traceback
+import sys
 
 
 class ErrorListener(commands.Cog):
@@ -17,5 +18,8 @@ class ErrorListener(commands.Cog):
             return await ctx.send(":x: | You are on cooldown. Try again in 1 second")
         if isinstance(error, commands.errors.NotOwner):
             return await ctx.send(":x: | You do not own this bot, ok?")
-        traceback.print_stack()
-        traceback.print_exc()
+
+        # ignore all other exception types, but print them to stderr
+        print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
+
+        traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
