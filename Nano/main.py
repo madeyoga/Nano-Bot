@@ -87,7 +87,7 @@ async def main():
                                      client_secret=os.environ['REDDIT_CLIENT_SECRET'],
                                      user_agent=os.environ['REDDIT_USER_AGENT'])
 
-    pixiv_client = PixivClient()
+    # pixiv_client = PixivClient()
 
     # Load command Cogs
     cogs = [
@@ -115,11 +115,11 @@ async def main():
     except Exception as e:
         print(e)
 
-    save_server_prefixes()
-    print('Saved prefixes')
-    await session.close()
-    await pixiv_client.close()
-    print('Session closed.')
+        save_server_prefixes()
+        print('Saved prefixes')
+        await session.close()
+        await client.close()
+        print('Session closed.')
 
 loop = asyncio.get_event_loop()
 
