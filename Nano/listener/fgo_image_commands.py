@@ -1,5 +1,7 @@
 from discord.ext import commands
 import json
+
+from .core.submission import embed_submission
 from .core.subreddit import fgo_subreddits
 from random import choice
 import os
@@ -19,6 +21,13 @@ class FgoImageCog(commands.Cog):
                 continue
             with open(cache_filepath, 'r') as json_file:
                 self.fgo_pools[key] = json.loads(json_file.read())
+
+    @staticmethod
+    async def reply_context(ctx, submission):
+        if submission.get('post_hint') == 'image':
+            await ctx.send(embed=embed_submission(submission))
+        else:
+            await ctx.send(submission.get('url'))
 
     @commands.is_owner()
     @commands.command(name="reload_fgo_pool")
@@ -40,9 +49,7 @@ class FgoImageCog(commands.Cog):
         """
 
         submission = choice(self.fgo_pools["GRANDORDER"])
-
-        if submission['over_18'] is False:
-            await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="fgoart")
@@ -56,8 +63,7 @@ class FgoImageCog(commands.Cog):
         """
 
         submission = choice(self.fgo_pools["FGOFANART"])
-
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="saber")
@@ -72,7 +78,7 @@ class FgoImageCog(commands.Cog):
 
         submission = choice(self.fgo_pools["SABER"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="raikou")
@@ -87,7 +93,7 @@ class FgoImageCog(commands.Cog):
 
         if ctx.channel.is_nsfw():
             submission = choice(self.fgo_pools["MAMARAIKOU"])
-            await ctx.send(submission.get('url'))
+            await self.reply_context(ctx=ctx, submission=submission)
         else:
             await ctx.send(":x: | This command is potentially nsfw and can only be used in nsfw channel.")
 
@@ -104,7 +110,7 @@ class FgoImageCog(commands.Cog):
 
         if ctx.channel.is_nsfw():
             submission = choice(self.fgo_pools["SCATHACH"])
-            await ctx.send(submission.get('url'))
+            await self.reply_context(ctx=ctx, submission=submission)
         else:
             await ctx.send(":x: | This command is potentially nsfw and can only be used in nsfw channel.")
 
@@ -121,7 +127,7 @@ class FgoImageCog(commands.Cog):
 
         submission = choice(self.fgo_pools["ILLYASVIEL"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="fgocomics", aliases=["fgo_comics"])
@@ -136,7 +142,7 @@ class FgoImageCog(commands.Cog):
 
         submission = choice(self.fgo_pools["FGOCOMICS"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="rin")
@@ -151,7 +157,7 @@ class FgoImageCog(commands.Cog):
 
         submission = choice(self.fgo_pools["ONETRUETOHSAKA"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="jeanne")
@@ -164,6 +170,8 @@ class FgoImageCog(commands.Cog):
         ```
         """
 
-        submission = choice(self.fgo_pools["CHURCHOFJEANNE"])
-
-        await ctx.send(submission.get('url'))
+        if ctx.channel.is_nsfw():
+            submission = choice(self.fgo_pools["CHURCHOFJEANNE"])
+            await self.reply_context(ctx=ctx, submission=submission)
+        else:
+            await ctx.send(":x: | This command is potentially nsfw and can only be used in nsfw channel.")

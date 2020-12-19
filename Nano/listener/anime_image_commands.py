@@ -32,7 +32,7 @@ class AnimeImageCog(BaseImageCog):
 
         submission = choice(self.pools["MOESCAPE"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="tsun")
@@ -47,7 +47,7 @@ class AnimeImageCog(BaseImageCog):
 
         submission = choice(self.pools["TSUNDERES"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="aniwallp")
@@ -62,7 +62,7 @@ class AnimeImageCog(BaseImageCog):
 
         submission = choice(self.pools["ANIMEWALLPAPER"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="animeme", aliases=["animemes"])
@@ -78,7 +78,7 @@ class AnimeImageCog(BaseImageCog):
 
         submission = choice(self.pools["ANIMEMES"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="waifu")
@@ -93,7 +93,7 @@ class AnimeImageCog(BaseImageCog):
 
         submission = choice(self.pools["WAIFU"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="awwnime", aliases=["awnime"])
@@ -108,7 +108,7 @@ class AnimeImageCog(BaseImageCog):
 
         submission = choice(self.pools["AWWNIME"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="hololive")
@@ -123,7 +123,7 @@ class AnimeImageCog(BaseImageCog):
 
         submission = choice(self.pools["HOLOLIVE"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="hololivememes")
@@ -138,4 +138,4 @@ class AnimeImageCog(BaseImageCog):
 
         submission = choice(self.pools["HOLOLIVEMEMES"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)

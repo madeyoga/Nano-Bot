@@ -32,7 +32,7 @@ class OtherImageCog(BaseImageCog):
 
         submission = choice(self.pools["MEMES"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="wtf", aliases=["rwtf"])
@@ -47,7 +47,7 @@ class OtherImageCog(BaseImageCog):
 
         submission = choice(self.pools["WTF"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="dank")
@@ -62,7 +62,7 @@ class OtherImageCog(BaseImageCog):
 
         submission = choice(self.pools["DANKMEMES"])
 
-        await ctx.send(submission.get('url'))
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="reddit_search", aliases=["reddit", "r", "r/"])
@@ -84,7 +84,7 @@ class OtherImageCog(BaseImageCog):
 
         random_index = randint(0, 24)
         current_index = 0
-        async for submission in subreddit.search(keywords, limit=25):
+        async for submission in subreddit.search(keywords, limit=10):
             if current_index == random_index:
                 await ctx.send(submission.url)
                 break
