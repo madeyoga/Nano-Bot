@@ -111,15 +111,15 @@ async def main():
 
     # Run Bot
     try:
-        loop.run_until_complete(await client.start(nano_token))
+        await client.start(nano_token)
     except Exception as e:
         print(e)
 
-        save_server_prefixes()
-        print('Saved prefixes')
-        await session.close()
-        await client.close()
-        print('Session closed.')
+    save_server_prefixes()
+    print('Saved prefixes')
+    await session.close()
+    await client.close()
+    print('Session closed.')
 
 loop = asyncio.get_event_loop()
 
