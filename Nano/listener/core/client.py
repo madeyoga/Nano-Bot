@@ -12,14 +12,13 @@ class NanoContext(commands.Context):
 
 class NanoClient(commands.AutoShardedBot):
     def __init__(self, name='Nano', id=536892183404478483,
-                 owner_id=213866895806300161, command_prefix='n>', intents=None):
+                 command_prefix='n>', intents=None):
         super(NanoClient, self).__init__(command_prefix=command_prefix,
                                          max_messages=None,
                                          intents=intents,
                                          chunk_guilds_at_startup=False)
         self.name = name
         self.id = id
-        # self.owner_id = owner_id
         self.command_prefix = command_prefix
 
         # Discord Bot List updates.
