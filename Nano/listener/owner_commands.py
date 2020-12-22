@@ -13,3 +13,4 @@ class OwnerCog(commands.Cog):
 
         await ctx.send("Shutting down...")
         await ctx.bot.logout()
+        await ctx.bot.close()
