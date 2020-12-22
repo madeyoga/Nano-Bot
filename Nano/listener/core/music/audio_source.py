@@ -25,7 +25,7 @@ ytdl_format_options = {
 
 ffmpeg_options = {
     'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
-    'options': '-vn -nostats -loglevel 0'
+    'options': '-vn -nostats -loglevel 0 -b:a 196K'
 }
 
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
@@ -60,7 +60,7 @@ class AudioTrack(discord.PCMVolumeTransformer):
             return list_of_source
 
         filename = data['url'] if stream else ytdl.prepare_filename(data)
-        return [cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data, requester=requester)]
+        return [cls(discord.FFmpegPCMAudio(source=filename, **ffmpeg_options), data=data, requester=requester)]
 
     @classmethod
     async def from_keywords(cls, keywords, *, loop=None, stream=False, requester: User = ""):
@@ -73,4 +73,4 @@ class AudioTrack(discord.PCMVolumeTransformer):
             data = data['entries'][0]
 
         filename = data['url'] if stream else ytdl.prepare_filename(data)
-        return [cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data, requester=requester)]
+        return [cls(discord.FFmpegPCMAudio(source=filename, **ffmpeg_options), data=data, requester=requester)]
