@@ -12,6 +12,8 @@ class ErrorListener(commands.Cog):
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.errors.CommandNotFound):
             return
+        if isinstance(error, commands.errors.CommandError):
+            return
         if isinstance(error, commands.errors.NSFWChannelRequired):
             return await ctx.send(":x: | This command is potentially nsfw and can only be used in nsfw channel.")
         if isinstance(error, commands.errors.CommandOnCooldown):
