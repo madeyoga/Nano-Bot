@@ -24,8 +24,8 @@ ytdl_format_options = {
 }
 
 ffmpeg_options = {
-    'before_options': '-re -reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
-    'options': '-vn -nostats -loglevel 0 -b:a 196K'
+    'before_options': '-use_wallclock_as_timestamps 1 -reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
+    'options': '-vn -nostats -loglevel 0'
 }
 
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
