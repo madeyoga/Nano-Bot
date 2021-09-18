@@ -20,9 +20,7 @@ Example usage
 n>set_prefix n!
 ```
 
-## New Help Command (new)
-- Added detail
-
+## Help Command
 To check the command list use `n>help` without any arguments. For command description and usage, provide command name as the argument.
 
 Example usage
@@ -37,8 +35,8 @@ n>help search
 n>help now_play
 ```
 
-## New Music
-Music has been reimplemented! Following Rythm bot user experience. Here are the new command names. 
+## Music Commands
+Music has been reimplemented! Here are the new command names. 
 
 `join` `leave` `play` `search` `now_play` `queue` `repeat` `pause` `resume` `shuffle` `skip`
 
@@ -47,7 +45,9 @@ You can also check their description and usage with the new help command.
 n>help play
 ```
 
-## Image Command: Names
+## Image Commands
+Command names:
+
 `dank` `anime` `animeme` `waifu` `tsun` `aniwallp` `moescape` `rwtf` `fgo` `fgoart` `scathach` `raikou` `saber` `abby` 
 
 ### Usage
