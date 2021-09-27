@@ -1,5 +1,5 @@
 import discord
-import youtube_dl
+import yt_dlp as youtube_dl
 import asyncio
 
 from discord import User
@@ -25,24 +25,37 @@ ytdl_format_options = {
 
 ffmpeg_options = {
     'before_options': '-re -reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
-    'options': '-vn -nostats -loglevel 0'
+    'options': '-vn -nostats -loglevel 0 -use_wallclock_as_timestamps 1'
 }
 
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
 
-class AudioTrack(discord.PCMVolumeTransformer):
-    def __init__(self, source, *, data, volume=1.0, requester: User = ""):
-        super().__init__(source, volume=volume)
+class AudioTrack(discord.AudioSource):
+    def __init__(self, original, *, data, requester: User = ""):
+        self.original = original
 
         self.title = data.get('title', 'None')
         self.uploader = data.get('uploader', 'None')
         self.url = data.get('webpage_url', 'None')
+        self.source_url = data.get('url', None)
         self.duration = parse_duration(int(data.get('duration', 0)))
         self.thumbnail = data.get('thumbnail', 'https://gallery.autodesk.com/assets/default%20tile%20thumbnail'
                                                '-dae75f5694cb3676feff44873695919704be92f0c54785a4ef95e1b750a94645.jpg')
         self.extractor = data.get('extractor', 'None')
         self.requester = requester
+
+    def read(self):
+        return self.original.read()
+
+    def cleanup(self):
+        self.original.cleanup()
+
+    def is_opus(self):
+        return self.original.is_opus()
+
+    async def load_source(self):
+        self.original = await discord.FFmpegOpusAudio.from_probe(self.source_url, **ffmpeg_options)
 
     @classmethod
     async def from_url(cls, url, *, loop=None, stream=False, requester: User = ""):
@@ -54,13 +67,19 @@ class AudioTrack(discord.PCMVolumeTransformer):
             list_of_source = []
             for each_data in data['entries']:
                 filename = each_data['url']
-                source = cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=each_data, requester=requester)
+                source = cls(original=None,
+                             data=each_data,
+                             requester=requester)
                 list_of_source.append(source)
 
             return list_of_source
 
         filename = data['url'] if stream else ytdl.prepare_filename(data)
-        return [cls(discord.FFmpegPCMAudio(source=filename, **ffmpeg_options), data=data, requester=requester)]
+        return [
+            cls(original=None,
+                data=data,
+                requester=requester)
+        ]
 
     @classmethod
     async def from_keywords(cls, keywords, *, loop=None, stream=False, requester: User = ""):
@@ -73,4 +92,8 @@ class AudioTrack(discord.PCMVolumeTransformer):
             data = data['entries'][0]
 
         filename = data['url'] if stream else ytdl.prepare_filename(data)
-        return [cls(discord.FFmpegPCMAudio(source=filename, **ffmpeg_options), data=data, requester=requester)]
+        return [
+            cls(original=None,
+                data=data,
+                requester=requester)
+        ]
