@@ -1,13 +1,12 @@
-discord.py==1.5.1
+discord.py
 discord.py[voice]
 pynacl
-youtube_dl==2020.12.14
 praw
 aiohttp
 asyncio
 isodate
-ytpy==2020.8.17
+ytpy
 validators
 pixivpy-async
 asyncpraw
-wavelink
+yt-dlp
