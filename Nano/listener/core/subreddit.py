@@ -56,7 +56,8 @@ fgo_subreddits = {
     "FGOFANART": "FGOfanart",
     "GRANDORDER": "grandorder",
     "ONETRUETOHSAKA": "OneTrueTohsaka",
-    "CHURCHOFJEANNE": "ChurchOfJeanne"
+    "CHURCHOFJEANNE": "ChurchOfJeanne",
+    "MUSASHI_CHAN": "Musashi_chan"
 }
 
 other_subreddits = {
@@ -74,5 +75,7 @@ anime_subreddits = {
     "ANIMEWALLPAPER": "Animewallpaper",  # ANIME WALLPAPER ARTS
     "MOESCAPE": "Moescape",  # ANIME WALLPAPER ARTS
     "HOLOLIVE": "Hololive",
-    "HOLOLIVEMEMES": "hololivememes"
+    "HOLOLIVEMEMES": "hololivememes",
+    "BIKINIMOE": "BikiniMoe",
+    "CHURCHOFBOOTY": "ChurchofBooty"
 }
