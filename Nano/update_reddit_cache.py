@@ -25,7 +25,7 @@ for key in subreddit_dictionary:
 
     dump_list = []
     for submission in submissions:
-        if not submission.over_18:
+        if not submission.over_18 or subreddit_name == 'MamaRaikou':
             temp = submission.__dict__
 
             post_hint = temp.get('post_hint')

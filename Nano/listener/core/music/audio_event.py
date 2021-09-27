@@ -25,7 +25,7 @@ class AudioTrackScheduler(AudioEventListener):
         self.repeat = False
         self.votes = set()
 
-    def next_track(self, voice_client: VoiceClient):
+    async def next_track(self, voice_client: VoiceClient):
         """Play next track"""
 
         if voice_client is None:
@@ -38,6 +38,7 @@ class AudioTrackScheduler(AudioEventListener):
 
         if voice_client.is_connected() and self.queue:
             source = self.queue.pop(0)
+            await source.load_source()
             voice_client.play(source, after=lambda error: self.on_track_end(source, error, voice_client))
             self.on_track_start(audio_source=source)
 
@@ -52,7 +53,7 @@ class AudioTrackScheduler(AudioEventListener):
     def on_track_start(self, audio_source):
         super().on_track_start(audio_source)
 
-        print("playing ", audio_source.title, audio_source.url)
+        print("playing", audio_source.title, audio_source.url)
 
     def on_track_end(self, audio_source, error, voice_client):
         super().on_track_end(audio_source, error, voice_client)
@@ -73,7 +74,11 @@ class AudioTrackScheduler(AudioEventListener):
             if sources:
                 self.queue.append(sources.pop(0))
 
-        self.next_track(voice_client)
+        asyncio.run_coroutine_threadsafe(
+            self.next_track(voice_client),
+            self.client.loop
+        )
+        # self.next_track(voice_client)
 
     def on_track_error(self, audio_source, error, voice_client):
         super().on_track_error(audio_source, error, voice_client)

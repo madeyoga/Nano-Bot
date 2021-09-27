@@ -26,7 +26,7 @@ class MusicV2Cog(commands.Cog):
     def __init__(self, client, music_manager: GuildMusicManager, youtube_client: YoutubeClient):
         self.client = client
         self.music_manager = music_manager
-        self.name = "MusicV2"
+        self.name = "Music"
         self.youtube_client = youtube_client
 
     @commands.command(name="join", aliases=["summon"])
@@ -42,7 +42,7 @@ class MusicV2Cog(commands.Cog):
         connected_channel_name = ctx.voice_client.channel.name
         await ctx.send(f":white_check_mark: | Joined :loud_sound: `{connected_channel_name}`")
 
-    @commands.command(name="leave", aliases=["stop"])
+    @commands.command(name="stop", aliases=["leave"])
     async def leave_command(self, ctx):
         """Stop playing and leaves voice channel
 
@@ -320,7 +320,7 @@ class MusicV2Cog(commands.Cog):
                 await ctx.send(":x: | Cannot sources load from `" + query + "`")
 
             source = sources.pop(0)
-
+            await source.load_source()
             ctx.voice_client.play(source,
                                   after=lambda error: guild_state.scheduler.on_track_end(source, error,
                                                                                          ctx.voice_client))

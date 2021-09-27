@@ -95,7 +95,7 @@ class FgoImageCog(commands.Cog):
             submission = choice(self.fgo_pools["MAMARAIKOU"])
             await self.reply_context(ctx=ctx, submission=submission)
         else:
-            await ctx.send(":x: | This command is potentially nsfw and can only be used in nsfw channel.")
+            await ctx.send(":x: | This command can be used only in nsfw channel.")
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="scathach")
@@ -108,11 +108,8 @@ class FgoImageCog(commands.Cog):
         ```
         """
 
-        if ctx.channel.is_nsfw():
-            submission = choice(self.fgo_pools["SCATHACH"])
-            await self.reply_context(ctx=ctx, submission=submission)
-        else:
-            await ctx.send(":x: | This command is potentially nsfw and can only be used in nsfw channel.")
+        submission = choice(self.fgo_pools["SCATHACH"])
+        await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
     @commands.command(name="illya", aliases=["illyasviel"])
@@ -126,7 +123,6 @@ class FgoImageCog(commands.Cog):
         """
 
         submission = choice(self.fgo_pools["ILLYASVIEL"])
-
         await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
@@ -141,7 +137,6 @@ class FgoImageCog(commands.Cog):
         """
 
         submission = choice(self.fgo_pools["FGOCOMICS"])
-
         await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
@@ -156,7 +151,6 @@ class FgoImageCog(commands.Cog):
         """
 
         submission = choice(self.fgo_pools["ONETRUETOHSAKA"])
-
         await self.reply_context(ctx=ctx, submission=submission)
 
     @commands.cooldown(1, 1, commands.BucketType.guild)
@@ -169,9 +163,5 @@ class FgoImageCog(commands.Cog):
         n>jeanne
         ```
         """
-
-        if ctx.channel.is_nsfw():
-            submission = choice(self.fgo_pools["CHURCHOFJEANNE"])
-            await self.reply_context(ctx=ctx, submission=submission)
-        else:
-            await ctx.send(":x: | This command is potentially nsfw and can only be used in nsfw channel.")
+        submission = choice(self.fgo_pools["CHURCHOFJEANNE"])
+        await self.reply_context(ctx=ctx, submission=submission)
