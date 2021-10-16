@@ -19,7 +19,7 @@ class ErrorListener(commands.Cog):
         if isinstance(error, commands.errors.CommandOnCooldown):
             return await ctx.send(":x: | You are on cooldown. Try again in 1 second")
         if isinstance(error, commands.errors.NotOwner):
-            return await ctx.send(":x: | You do not own this bot, ok?")
+            return await ctx.send(":x: | You are not owner")
 
         # ignore all other exception types, but print them to stderr
         print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
