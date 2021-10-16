@@ -324,7 +324,6 @@ class MusicV2Cog(commands.Cog):
             ctx.voice_client.play(source,
                                   after=lambda error: guild_state.scheduler.on_track_end(source, error,
                                                                                          ctx.voice_client))
-            guild_state.scheduler.on_track_start(audio_source=source)
 
             # If there is more sources
             if sources:

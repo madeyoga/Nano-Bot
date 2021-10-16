@@ -46,14 +46,13 @@ class AudioTrackScheduler(AudioEventListener):
         """Clears queue"""
 
         for source in self.queue:
-            source.cleanup()
+            if source is not None:
+                source.cleanup()
 
-        print("Cleanup queue")
+        print("Cleaned up queue")
 
     def on_track_start(self, audio_source):
-        super().on_track_start(audio_source)
-
-        print("playing", audio_source.title, audio_source.url)
+        return
 
     def on_track_end(self, audio_source, error, voice_client):
         super().on_track_end(audio_source, error, voice_client)
@@ -67,7 +66,7 @@ class AudioTrackScheduler(AudioEventListener):
         if self.repeat:
             # Reload source
             future = asyncio.run_coroutine_threadsafe(
-                AudioTrack.from_url(audio_source.url, stream=True,  requester=audio_source.requester),
+                AudioTrack.from_url(audio_source.url, stream=True, requester=audio_source.requester),
                 self.client.loop
             )
             sources = future.result()
@@ -77,7 +76,7 @@ class AudioTrackScheduler(AudioEventListener):
         asyncio.run_coroutine_threadsafe(
             self.next_track(voice_client),
             self.client.loop
-        )
+        ).result()
         # self.next_track(voice_client)
 
     def on_track_error(self, audio_source, error, voice_client):
