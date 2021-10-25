@@ -28,6 +28,8 @@ Command names:
 
 To use these commands, simply add prefix `n>` before the command name. 
 
+## Contributing
+Pull request are very welcome. If you find a flaw in my logic, please open an issue or a PR and let's sort things out.
 
 ## Support
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B02OE0Z)
