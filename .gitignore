@@ -11,6 +11,8 @@ Nano/listener/cache/*.json
 # From https://github.com/github/gitignore/blob/master/Gradle.gitignore
 .gradle
 /build/
+build/
+Nano-java/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
