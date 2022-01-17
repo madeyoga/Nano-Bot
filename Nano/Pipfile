@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+"discord.py" = {extras = ["voice"], version = "*"}
+praw = "*"
+aiohttp = "*"
+asyncio = "*"
+isodate = "*"
+ytpy = "*"
+validators = "*"
+asyncpraw = "*"
+yt-dlp = "*"
+PyNaCl = "*"
+PixivPy-Async = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
