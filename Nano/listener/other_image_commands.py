@@ -9,7 +9,7 @@ class OtherImageCog(BaseImageCog):
 
     def __init__(self, reddit_client):
         super().__init__()
-        self.name = "Other Image"
+        self.name = "Image Commands"
         self.load_pools(other_subreddits)
         self.reddit = reddit_client
 

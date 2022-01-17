@@ -9,7 +9,7 @@ class AnimeImageCog(BaseImageCog):
 
     def __init__(self):
         super().__init__()
-        self.name = "Anime Image"
+        self.name = "Anime Commands"
         self.load_pools(anime_subreddits)
 
     @commands.command(name="reload_anime_pool")

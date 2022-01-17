@@ -10,7 +10,7 @@ import os
 class FgoImageCog(commands.Cog):
 
     def __init__(self):
-        self.name = "FGO"
+        self.name = "FGO Commands"
         self.fgo_pools = {}
         self.load_pools()
 

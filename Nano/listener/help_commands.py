@@ -46,10 +46,10 @@ class HelpCog(commands.Cog):
         temp_dictionary = {}
         for cog_name in self.client.cogs:
             command_cog = self.client.cogs[cog_name]
+            cog_name = command_cog.name
+            # cog_name = cog_name.replace('Cog', ' Commands')
 
-            cog_name = cog_name.replace('Cog', ' Commands')
-
-            if cog_name == 'Owner Commands':
+            if cog_name == 'Owner':
                 continue
 
             if cog_name not in temp_dictionary:
