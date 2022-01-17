@@ -72,8 +72,8 @@ async def main(loop, server_prefixes, prefixes, default_prefix):
     # Load command Cogs
     cogs = [
         GeneralCog(client=client, server_prefixes=server_prefixes),
-        FgoImageCog(),
         AnimeImageCog(),
+        FgoImageCog(),
         OtherImageCog(reddit_client),
         ErrorListener(),
         OwnerCog()

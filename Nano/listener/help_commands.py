@@ -60,6 +60,8 @@ class HelpCog(commands.Cog):
                     continue
                 temp_dictionary[cog_name] += f"`{command.name}` "
 
+        temp_dictionary['Audio Commands'] = "Audio commands can only be used using `slash command`, please use `/help` to get started."
+
         return temp_dictionary
 
     def get_default_help_embed(self) -> CustomEmbed:
@@ -86,7 +88,7 @@ class HelpCog(commands.Cog):
                               "[Vote](https://top.gg/bot/458298539517411328/vote)",
                         inline=False)
 
-        embed.set_footer(text="Thank you for using Nano-Bot! | Have a nice dayy~",
+        embed.set_footer(text="For additional help, please contact Made Y#8195",
                          icon_url=self.client.user.avatar_url)
         return embed
 
@@ -103,6 +105,6 @@ class HelpCog(commands.Cog):
         else:
             embed.description += "*No description*"
 
-        embed.set_footer(text="For additional help, please contact Made Y#8195")
+        embed.set_footer(text="Thanks for using Nano!")
 
         return embed

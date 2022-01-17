@@ -1,6 +1,4 @@
 discord.py
-discord.py[voice]
-pynacl
 praw
 aiohttp
 asyncio
@@ -9,4 +7,3 @@ ytpy
 validators
 pixivpy-async
 asyncpraw
-yt-dlp
