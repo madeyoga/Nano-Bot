@@ -82,8 +82,7 @@ class HelpCog(commands.Cog):
         embed.add_field(name="Detail", value="For more detail, try `n>help <command-name>`", inline=False)
         # embed.add_field(name="Image Search Command", value="aliases: reddit r/ reddit_search")
         embed.add_field(name=":tools: Helpful Links",
-                        value="[Invite](https://discord.com/oauth2/authorize?client_id=458298539517411328&scope=bot"
-                              "&permissions=36883776) - "
+                        value="[Invite](https://discord.com/api/oauth2/authorize?client_id=458298539517411328&permissions=8&scope=applications.commands%20bot) - "
                               "[Support Server](https://discord.gg/Y8sB4ay) - "
                               "[Vote](https://top.gg/bot/458298539517411328/vote)",
                         inline=False)
