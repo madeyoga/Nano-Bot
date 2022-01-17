@@ -57,7 +57,7 @@ def get_prefix(bot, message):
 async def main(loop, server_prefixes, prefixes, default_prefix):
 
     # ENVIRONMENTS
-    nano_token = os.environ['NR_TOKEN']
+    nano_token = os.environ['BOT_TOKEN']
 
     # Configure client
     intents = get_memory_config()
