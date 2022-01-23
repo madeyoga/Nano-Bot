@@ -7,19 +7,15 @@
     <img src="https://top.gg/api/widget/458298539517411328.svg" alt="Nano" />
 </a>
 
+Audio commands can only be used using `Slash Command` feature. Since discord.py is no longer maintained, Slash command feature will be implemented using Java JDA.
+
 ## Profile
 Nano-bot is a totally free and open source discord bot designed for image sharing & music.
 - Prefix: `n>`. To have Nano-Bot to response to your command, add the prefix before the command name.
 
-## Music Commands
-Command names:
+## Audio Commands
+Audio commands can only be used using `Slash Command` feature. Checkout the source code here [https://github.com/madeyoga/Nano-jda](https://github.com/madeyoga/Nano-jda)
 
-`join` `leave` `play` `search` `now_play` `queue` `repeat` `pause` `resume` `shuffle` `skip`
-
-You can also check their description and usage with help command. 
-```
-n>help play
-```
 
 ## Image Commands
 Command names:
